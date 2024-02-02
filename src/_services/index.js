@@ -1,0 +1,7 @@
+export * from './account.service'
+export * from './categorie.service'
+export * from './formation.service'
+export * from './qcm.service'
+export * from './discution.service'
+export * from './temoin.service'
+export * from './video.service'
