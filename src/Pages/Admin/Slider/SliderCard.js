@@ -1,18 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React from 'react'
-import { Link } from 'react-router-dom'
-
-import toast from 'react-hot-toast';
 import axios from 'axios';
+import React from 'react'
+import toast from 'react-hot-toast';
 import { BASE } from '../../../_services/caller.service';
-import { categorieService } from '../../../_services';
+import { Link } from 'react-router-dom';
 
-export default function CategorieCard({categorie}) {
-
+export default function SliderCard({slider}) {
     const useQuery = useQueryClient();
     const mutation = useMutation({
-        mutationFn: (categorie) => {
-        return categorieService.deleteCategorie(categorie);
+        mutationFn: (slider) => {
+        return axios.post(`http://localhost:8000/formation/categorie/del`,slider);
         },
         onError: (error) => {
         toast.error("Une erreur est survenue0");
@@ -22,24 +19,24 @@ export default function CategorieCard({categorie}) {
         toast.success("Categorie supprimée avec succès");
         },
     });
-    const handleDelete = (categorie) => {
-        mutation.mutate(categorie);
+    const handleDelete = (slider) => {
+        mutation.mutate(slider);
       };
 
-      let url = BASE(categorie.image)
+      let url = BASE(slider.image)
   return (
     <>
     <tr>
         <td>
         <div className="d-flex align-items-center">
             <div>
-            <Link to={`/admin/formation/sous-categorie/${categorie.slug}`}>
+            <Link to={`/admin/formation/sous-categorie/${slider.slug}`}>
                 <img src={url} alt="course" className="rounded img-4by3-lg" />
             </Link>
             </div>
             <div className="ms-3">
             <h4 className="mb-1 h5">
-                <a href="#" className="text-inherit">{categorie.nom}</a>
+                <a href="#" className="text-inherit">{slider.nom}</a>
             </h4>
             </div>
         </div>
@@ -56,7 +53,7 @@ export default function CategorieCard({categorie}) {
                 <i className="fe fe-edit dropdown-item-icon" />
                 Edit
             </a>
-            <button className="dropdown-item" onClick={()=>handleDelete(categorie)}>
+            <button className="dropdown-item" onClick={()=>handleDelete(slider)}>
                 <i className="fe fe-trash dropdown-item-icon" />
                 Remove
             </button>

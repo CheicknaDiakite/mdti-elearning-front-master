@@ -30,8 +30,8 @@ export default function AcceuilCard({post}) {
                 </ul>
                 <div className="mt-3 d-flex align-baseline lh-1">
                     
-                    <span className="text-warning mx-1">4.5</span>
-                    <span className="fs-6">(9,300)</span>
+                    <span className="text-warning mx-1">Publier le</span>
+                    <span className="fs-6">{post.date}</span>
                 </div>
             </div>
             {/* <!-- Card footer --> */}

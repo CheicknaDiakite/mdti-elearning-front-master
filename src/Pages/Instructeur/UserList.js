@@ -78,8 +78,8 @@ export default function Userlist() {
           <div className="border-bottom pb-3 mb-3 d-flex justify-content-between align-items-center">
             <div className="mb-2 mb-lg-0">
               <h1 className="mb-1 h2 fw-bold">
-                Students
-                <span className="fs-5">(1,22,105 )</span>
+                Le nombre d'inscrit 
+                <span className="fs-5">  {tous.length}</span>
               </h1>
               {/* Breadcrumb  */}
               <nav aria-label="breadcrumb">

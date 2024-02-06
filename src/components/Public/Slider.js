@@ -1,12 +1,13 @@
 import React from 'react'
+import Slid from './Test/Slid'
 
 export default function Slider() {
   return (
     <>
     {/*<-- Page Content <--*/}
-    <section class="bg-primary">
+    {/* <section class="bg-primary">
             <div class="container">
-               {/*<-- Hero Section <--*/}
+               
                 <div class="row align-items-center g-0">
                     <div class="col-xl-5 col-lg-6 col-md-12">
                         <div class="py-7 py-lg-0">
@@ -21,7 +22,10 @@ export default function Slider() {
                     </div>
                 </div>
             </div>
-        </section>
+    </section> */}
+
+    <Slid />
+
     </>
   )
 }

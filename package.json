@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://CheicknaDiakite.github.io/mdti-elearning-front-master",
   "dependencies": {
     "@editorjs/editorjs": "^2.29.0",
     "@emotion/react": "^11.11.3",
@@ -20,6 +21,7 @@
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.49.3",
     "react-hot-toast": "^2.4.1",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
     "react-video-js-player": "^1.1.1",
@@ -31,7 +33,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +56,7 @@
     ]
   },
   "devDependencies": {
-    "@types/video-react": "^0.15.5"
+    "@types/video-react": "^0.15.5",
+    "gh-pages": "^6.1.1"
   }
 }

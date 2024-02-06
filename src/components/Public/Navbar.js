@@ -211,13 +211,13 @@ export default function Navbar({user}) {
             </li>
             
           </ul>
-          <form className="mt-3 mt-lg-0 ms-lg-3 d-flex align-items-center">
+          {/* <form className="mt-3 mt-lg-0 ms-lg-3 d-flex align-items-center">
             <span className="position-absolute ps-3 search-icon">
               <i className="fe fe-search" />
             </span>
             <label htmlFor="search" className="visually-hidden" />
             <input type="search" id="search" className="form-control ps-6" placeholder="Search Courses" />
-          </form>
+          </form> */}
         </div>
       </div>
     </nav>

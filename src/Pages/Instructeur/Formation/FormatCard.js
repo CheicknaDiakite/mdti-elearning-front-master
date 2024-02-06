@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { formationService } from '../../../_services';
+import { BASE } from '../../../_services/caller.service';
 
 export default function FormatCard({formation, user}) {
 
@@ -11,18 +12,30 @@ export default function FormatCard({formation, user}) {
     const mutation = useMutation({
         mutationFn: (formation) => {
         return formationService.deleteFormation(formation)
+        .then(res => {
+            if(res.data.etat===true){
+    
+              console.log("test uu",res.data.donnee)
+            //   setSous(res.data.donnee);
+            } else {
+              toast.error(res.data.message);
+            }
+          })
         },
         onError: (error) => {
         toast.error("Une erreur est survenue0");
         },
         onSuccess: () => {
         useQuery.invalidateQueries("formations");
-        toast.success("formations supprimée avec succès");
+        // toast.success("formations supprimée avec succès");
         },
     });
     const handleDelete = (formation) => {
         mutation.mutate(formation);
       };
+
+      let url = BASE(formation.miniature)
+    //   let url = `http://127.0.0.1:8000/${formation.miniature}`
     
   return (
     <>
@@ -31,7 +44,7 @@ export default function FormatCard({formation, user}) {
         <div className="d-flex align-items-center">
             <div>
             <Link to={`/dashboard/formation/chapitre-qcm/${formation.slug}`}>
-                <img src={`http://127.0.0.1:8000/${formation.miniature}`} alt="course" className="rounded img-4by3-lg" />
+                <img src={url} alt="course" className="rounded img-4by3-lg" />
             </Link>
             </div>
             <div className="ms-3">
@@ -56,7 +69,7 @@ export default function FormatCard({formation, user}) {
             <span className="dropdown-menu" aria-labelledby="courseDropdown1">
             <span className="dropdown-header">Setting</span>
             <Link className="dropdown-item" to={`/dashboard/formation/modif/${formation.slug}`}>
-                <i className="fe fe-edit dropdown-item-icon" />
+                <i className="fe fe-edit dropdown-item-icon"></i>
                 Edit
             </Link>
             <button className="dropdown-item" onClick={()=>handleDelete(formation)}>

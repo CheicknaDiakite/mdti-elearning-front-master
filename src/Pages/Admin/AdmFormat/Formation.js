@@ -10,6 +10,7 @@ export default function Formation({user}) {
   const userID = localStorage.getItem('token')
 
   const [formations, setFormations] = useState([]);
+  const [search, setSearch] = useState("");
     
   const {
     // data: categorie,
@@ -27,6 +28,13 @@ export default function Formation({user}) {
   if (isLoading) {
     return <div>Chargement...</div>;
   }
+
+  const handleSearch = (e) => {
+    let value = e.target.value;
+    value.length > 2 && setSearch(value)
+  }
+
+  console.log('ttt',search)
   return (
     <>      
      
@@ -37,9 +45,9 @@ export default function Formation({user}) {
           <div className="col-lg-12 col-md-12 col-12">
             <div className="border-bottom pb-3 mb-3 d-md-flex align-items-center justify-content-between">
               <div className="mb-3 mb-md-0">
-                <h1 className="mb-1 h2 fw-bold">Courses Category</h1>
+                <h1 className="mb-1 h2 fw-bold">Liste des formations</h1>
                 {/* Breadcrumb */}
-                <nav aria-label="breadcrumb">
+                {/* <nav aria-label="breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
                       <a href="../dashboard/admin-dashboard.html">Dashboard</a>
@@ -49,7 +57,7 @@ export default function Formation({user}) {
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">Courses Category</li>
                   </ol>
-                </nav>
+                </nav> */}
               </div>
               <div>
                 <a href="#" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newCatgory">Add New Category</a>
@@ -68,7 +76,7 @@ export default function Formation({user}) {
                   <span className="position-absolute ps-3 search-icon">
                     <i className="fe fe-search" />
                   </span>
-                  <input type="search" className="form-control ps-6" placeholder="Search Course Category" />
+                  <input type="search" className="form-control ps-6" onChange={handleSearch} placeholder="Search Course formation" />
                 </form>
               </div>
               {/* Table */}
@@ -88,7 +96,10 @@ export default function Formation({user}) {
      
                 
                   {
-                  formations.map((formation) => {
+                  formations
+                  .filter((val) => {
+                    return val.nom.toLowerCase().includes(search.toLowerCase());
+                  }).map((formation) => {
                     return <CardFormation formation={formation} />
                   })}
                     

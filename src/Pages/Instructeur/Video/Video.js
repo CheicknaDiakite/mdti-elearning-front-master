@@ -74,8 +74,7 @@ export default function Videos() {
             {/* <th>ID</th> */}
             <th>Nom</th>
             <th>Status</th>
-            <th>Amount</th>
-            <th>Date</th>
+            
             <th />
             </tr>
         </thead>
@@ -89,14 +88,12 @@ export default function Videos() {
                 <label className="form-check-label" htmlFor="withdrawTwo" />
                 </div>
             </td>
-            {/* <td>#1060</td> */}
-            <Link to={``}></Link>
+            
             <td>{post.nom}</td>
             <td>
                 <span className="badge bg-warning">Pending</span>
             </td>
-            <td>$1200</td>
-            <td>Sept 15, 2020</td>
+          
             <td>
                 <span className="dropdown dropstart">
                 <a className="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" id="paymentDropdown" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false">

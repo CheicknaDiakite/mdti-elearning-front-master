@@ -118,38 +118,7 @@ export default function SeanceTravail({user}) {
             </div>
         </div>
         </div>
-        {/* <div className="pt-5">
-        <div className="row mb-4">
-            <div className="col mb-2 mb-lg-0">
-            <span className="d-block">
-                <span className="h4">Free Plan</span>
-                <span className="badge bg-danger ms-2">Expired</span>
-            </span>
-            <p className="mb-0 fs-6">Subscription ID: #100010001</p>
-            </div>
-            <div className="col-auto">
-            <a href="#" className="btn btn-light btn-sm disabled">Disabled</a>
-            </div>
-        </div>
-        <div className="row">
-            <div className="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
-            <span className="fs-6">Started On</span>
-            <h6 className="mb-0">Sept 1, 2020</h6>
-            </div>
-            <div className="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
-            <span className="fs-6">Price</span>
-            <h6 className="mb-0">Free - Trial a Month</h6>
-            </div>
-            <div className="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
-            <span className="fs-6">Access</span>
-            <h6 className="mb-0">Access All Courses</h6>
-            </div>
-            <div className="col-lg-3 col-md-3 col-6 mb-2 mb-lg-0">
-            <span className="fs-6">Billing Date</span>
-            <h6 className="mb-0">Next Billing on Oct 1, 2020</h6>
-            </div>
-        </div>
-        </div> */}
+        
     </div>
     </div>
 
@@ -186,7 +155,7 @@ export default function SeanceTravail({user}) {
                       Date de la reunion du seance
                       <span className="text-danger">*</span>
                     </label>
-                  <input type="date" name='date_de_la_reunion' onChange={onChange} className="form-control" value={cour.nom} />
+                  <input type="date" name='date_de_la_reunion' onChange={onChange} className="form-control" />
             
                       <div className="invalid-feedback">Please enter valid type_compte.</div>
                   </div>

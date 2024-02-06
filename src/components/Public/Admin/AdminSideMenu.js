@@ -47,9 +47,9 @@ export default function AdminSideMenu() {
                   <li className="nav-item">
                     <a className="nav-link" href="/admin/user/index">Liste</a>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <a className="nav-link" href="/admin/user/add">Ajouter</a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </li>
@@ -65,9 +65,9 @@ export default function AdminSideMenu() {
                     <a className="nav-link active" href="/admin/formation/index">Liste des formations</a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link active" href="/admin/formation/qcm">Qcm</a>
+                    <a className="nav-link active" href="/admin/formation/slider">Slider</a>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <a className="nav-link" href="/admin/chapitre-0/index">Liste Pour modifier</a>
                   </li>
                   <li className="nav-item">
@@ -75,12 +75,12 @@ export default function AdminSideMenu() {
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="#">Category</a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </li>
             {/* Nav item */}
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navProject" aria-expanded="false" aria-controls="navProject">
                 <i className="nav-icon fe fe-file me-2" />
                 Project
@@ -123,9 +123,9 @@ export default function AdminSideMenu() {
                   </li>
                 </ul>
               </div>
-            </li>
+            </li> */}
             {/* Nav item */}
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navAuthentication" aria-expanded="false" aria-controls="navAuthentication">
                 <i className="nav-icon fe fe-lock me-2" />
                 Authentication
@@ -149,9 +149,9 @@ export default function AdminSideMenu() {
                   </li>
                 </ul>
               </div>
-            </li>
+            </li> */}
             {/* Nav item */}
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navecommerce" aria-expanded="false" aria-controls="navecommerce">
                 <i className="nav-icon fe fe-shopping-bag me-2" />
                 Ecommerce
@@ -212,9 +212,9 @@ export default function AdminSideMenu() {
                   </li>
                 </ul>
               </div>
-            </li>
+            </li> */}
             {/* Nav item */}
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navlayouts" aria-expanded="false" aria-controls="navlayouts">
                 <i className="nav-icon fe fe-layout me-2" />
                 Layouts
@@ -232,15 +232,15 @@ export default function AdminSideMenu() {
                   </li>
                 </ul>
               </div>
-            </li>
+            </li> */}
             {/* Nav item */}
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <div className="nav-divider" />
-            </li>
+            </li> */}
             
           </ul>
           {/* Card */}
-          <div className="card bg-dark-primary shadow-none text-center mx-4 my-8">
+          {/* <div className="card bg-dark-primary shadow-none text-center mx-4 my-8">
             <div className="card-body py-6">
               <img src="../../assets/images/background/giftbox.png" alt />
               <div className="mt-4">
@@ -249,7 +249,7 @@ export default function AdminSideMenu() {
                 <a href="#" className="btn btn-white btn-sm mt-2">Upgrade Now</a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </nav>
 

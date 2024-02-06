@@ -11,6 +11,7 @@ import Userlist from '../Instructeur/UserList';
 import Categorie from './Categorie/Categorie';
 import SousCate from './Sous-Categorie/SousCate';
 import UserProfil from '../Instructeur/UserProfil';
+import Slider from './Slider/Slider';
 
 export default function AdminRouter() {
   const user = accountService.getToken()
@@ -23,6 +24,7 @@ export default function AdminRouter() {
 
         <Route path='formation'>
           <Route path='index' element={<Formation user={user}/>} />
+          <Route path='slider' element={<Slider user={user}/>} />
           <Route path='edit/:slug' element={<FormaEdit user={user} />} />
           <Route path='categorie' element={<Categorie user={user} />}/>
           <Route path='sous-categorie/:slug' element={<SousCate user={user} />} />

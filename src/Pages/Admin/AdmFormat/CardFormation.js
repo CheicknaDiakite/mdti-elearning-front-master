@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { accountService, sousCatService } from '../../../_services';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { BASE } from '../../../_services/caller.service';
 
 export default function CardFormation({formation}) {
 
@@ -99,7 +100,7 @@ export default function CardFormation({formation}) {
             console.error('Error:', error);
           });
       };
-      
+      let url = BASE(formation.miniature)
 
   return (
     <>
@@ -112,7 +113,7 @@ export default function CardFormation({formation}) {
               {formation.nom}
             </Link>
           </td>
-          <td><img src={`http://127.0.0.1:8000/${formation.miniature}`} alt="" class="img-4by3-lg rounded" /></td>
+          <td><img src={url} alt="" class="img-4by3-lg rounded" /></td>
           
           <td>
           <span className="badge bg-success">Live</span>

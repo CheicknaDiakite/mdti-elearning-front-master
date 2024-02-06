@@ -47,12 +47,12 @@ export default function SideMenu({user}) {
                 </li>}
                 
                 {/* Nav item */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link" href="invoice.html">
                     <i className="fe fe-clipboard nav-icon" />
                     Invoice
                     </a>
-                </li>
+                </li> */}
                 
                 </ul>
                 {/* Navbar header */}
@@ -66,54 +66,54 @@ export default function SideMenu({user}) {
                     </a>
                 </li>
                 {/* Nav item */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link" href="security.html">
                     <i className="fe fe-user nav-icon" />
                     Security
                     </a>
-                </li>
+                </li> */}
                 {/* Nav item */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link" href="social-profile.html">
                     <i className="fe fe-refresh-cw nav-icon" />
                     Social Profiles
                     </a>
-                </li>
+                </li> */}
                 {/* Nav item */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link" href="notifications.html">
                     <i className="fe fe-bell nav-icon" />
                     Notifications
                     </a>
-                </li>
+                </li> */}
                 {/* Nav item */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link" href="profile-privacy.html">
                     <i className="fe fe-lock nav-icon" />
                     Profile Privacy
                     </a>
-                </li>
+                </li> */}
                 {/* Nav item */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link" href="delete-profile.html">
                     <i className="fe fe-trash nav-icon" />
                     Delete Profile
                     </a>
-                </li>
+                </li> */}
                 {/* Nav item */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link" href="linked-accounts.html">
                     <i className="fe fe-user nav-icon" />
                     Linked Accounts
                     </a>
-                </li>
+                </li> */}
                 {/* Nav item */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <a className="nav-link" href="../index.html">
                     <i className="fe fe-power nav-icon" />
                     Sign Out
                     </a>
-                </li>
+                </li> */}
                 </ul>
             </div>
             </div>

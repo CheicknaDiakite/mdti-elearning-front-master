@@ -4,6 +4,7 @@ import { courService } from '../../../_services';
 import toast from 'react-hot-toast';
 
 import { Link } from 'react-router-dom';
+import { BASE } from '../../../_services/caller.service';
 
 export default function CourCard({cour, slug}) {
     const top = {        
@@ -26,6 +27,7 @@ export default function CourCard({cour, slug}) {
     const handleDelete = (cour) => {
         del.mutate(cour);
       };
+    let url = BASE(cour.apprenant_avatar)
   return (
     <>
         {/* contact item */}
@@ -36,7 +38,7 @@ export default function CourCard({cour, slug}) {
                 <Link to={`/dashboard/formation/discution/${cour.apprenant_id}/${slug}`}>
                 <div className="d-flex">
                     <div className="avatar avatar-md avatar-indicators avatar-online">
-                    <img src={`http://127.0.0.1:8000/${cour.apprenant_avatar}`} alt className="rounded-circle" />
+                    <img src={url} alt className="rounded-circle" />
                     </div>
                     {/* media body */}
                     <div className="ms-2">

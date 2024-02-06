@@ -20,6 +20,6 @@ Axios.interceptors.request.use(request => {
 
 export default Axios;
 
-export const BASE = {
-    Base:'http://127.0.0.1:8000'
+export const BASE = (img) => {
+    return `http://127.0.0.1:8000/${img}`
 };

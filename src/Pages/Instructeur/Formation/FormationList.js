@@ -10,6 +10,7 @@ export default function FormationList({user}) {
   // Pour la recuperation de la clé etranger (sous-categorie)
   const [sous, setSous] = useState([]);
   const [sous_categorie_slug, setSouscat] = useState('');
+  const [search, setSearch] = useState("");
 
   const useText = useQueryClient();
 
@@ -90,6 +91,11 @@ export default function FormationList({user}) {
   
   // fin
 
+  const handleSearch = (e) => {
+    let value = e.target.value;
+    value.length > 2 && setSearch(value)
+  }
+
       
   const onSubmit = (e) => {
     e.preventDefault();
@@ -126,6 +132,16 @@ export default function FormationList({user}) {
           
         </div>
       </div>
+      {/* Card header */}
+      <div className="card-header border-bottom-0">
+        {/* Form */}
+        <form className="d-flex align-items-center">
+          <span className="position-absolute ps-3 search-icon">
+            <i className="fe fe-search" />
+          </span>
+          <input type="search" className="form-control ps-6" onChange={handleSearch} placeholder="Search Course formation" />
+        </form>
+      </div>
       {/* Table */}
       <div className="table-responsive overflow-y-hidden">
         <table className="table mb-0 text-nowrap table-hover table-centered text-nowrap">
@@ -140,7 +156,9 @@ export default function FormationList({user}) {
           <tbody>
             
             {formations?.length > 0 ? 
-              formations.map((post)=> {
+              formations.filter((val) => {
+                return val.nom.toLowerCase().includes(search.toLowerCase());
+              }).map((post)=> {
                 
                 return <FormatCard user={user} formation={post} />
               })

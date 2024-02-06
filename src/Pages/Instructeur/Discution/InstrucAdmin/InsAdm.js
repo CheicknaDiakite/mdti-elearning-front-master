@@ -28,7 +28,7 @@ export default function InsAdm({post}) {
             <div className="d-flex w-lg-40">
             {/* media body */}
             <div className="me-3 text-end">
-                <small>09:39</small>
+                <small>{post.date}</small>
                 <div className="d-flex">
                 <div className="me-2 mt-2">
                     {/* dropdown */}

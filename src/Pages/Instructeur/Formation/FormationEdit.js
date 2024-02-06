@@ -526,46 +526,7 @@ export default function FormationEdit({user}) {
 
     </div>
 
-      <div className="card">
-        {/* Card header */}
-        <div className="card-header card-header-height d-flex justify-content-between align-items-center">
-          <div>
-            <Link className="dropdown-item" to={`/formation/video/${slug}`}>
-              
-            <h4 className="mb-0">Les Different Chapitres</h4>
-            </Link>
-          </div>
-          <div><Link to={`/admin/formation/qcm/${slug}`}>Ajout QCM</Link></div>
-        </div>
-        {/* Card body */}
-        <div className="card-body">
-          {/* List group */}
-          <ul className="list-group list-group-flush list-timeline-activity">
-            {chapitres?.length > 0 ? 
-             chapitres.map((post) => (
-              <li className="list-group-item px-0 pt-0 border-0 pb-6">
-                 <div className="row position-relative">
-                   <div className="col-auto">
-                     <div className="icon-shape icon-md bg-light-primary text-primary rounded-circle">
-                       <i className="fe fe-check" />
-                     </div>
-                   </div>
-                   <div className="col ms-n3">
-                     <h4 className="mb-0 h5"> {post.nom}</h4>
-                     {/* <p className="mb-0 text-body">Paula finished figma task</p> */}
-                   </div>
-                  
-                 </div>
-              </li>
-            ))
-             : 
-            "Pas de chapitre"
-            }
-          </ul>
-        </div>
-      </div>
-
-
+      
     </section>
 
     {/* Modal */}
