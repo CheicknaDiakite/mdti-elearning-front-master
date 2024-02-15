@@ -4,10 +4,7 @@ import Dash from '../Public/Dash';
 import Dashboard from '../Public/Dashboard';
 import Error from '../../_utils/Error';
 import FormationList from './Formation/FormationList';
-import { accountService } from '../../_services';
 
-import SousCate from '../Admin/Sous-Categorie/SousCate';
-import Categorie from '../Admin/Categorie/Categorie';
 import FormQcmChapit from './Formation/FormQcmChapit';
 import Discut from './Formation_Cours/Discut';
 import Question from './Question/Question';
@@ -20,7 +17,7 @@ import Videos from './Video/Video';
 import SeanceTravail from './SeanceTravail/SeanceTravail';
 
 export default function InstructerRouter() {
-  const user = accountService.getToken()
+  
   return (
     <>
     <Routes>
@@ -29,19 +26,19 @@ export default function InstructerRouter() {
             {/* <Route path='dashboard' element={<Dashboard />}/> */}
 
             <Route path='formation'>
-              <Route index element={<FormationList user={user} />}/>
+              <Route index element={<FormationList />}/>
               
-              <Route path='chapitre-qcm/:slug' element={<FormQcmChapit user={user}/>} />
-              <Route path='video/:id' element={<Videos user={user}/>} />
+              <Route path='chapitre-qcm/:slug' element={<FormQcmChapit />} />
+              <Route path='video/:id' element={<Videos />} />
               <Route path='question/:id' element={<Question />} />
               <Route path='reponse/:id' element={<Reponse />} />
-              <Route path='discution/:id/:slug' element={<Discut user={user} />} />
+              <Route path='discution/:id/:slug' element={<Discut />} />
               <Route path='modif/:slug' element={<FormationEdit />} />
-              <Route path='qcm/detail/:slug' element={<QcmDetail user={user} />} />
-              <Route path='seanceTravail/:slug' element={<SeanceTravail user={user} />} />
+              <Route path='qcm/detail/:slug' element={<QcmDetail />} />
+              <Route path='seanceTravail/:slug' element={<SeanceTravail />} />
             </Route>
             <Route path='user'>
-              <Route path='profil' element={<UserProfil user={user}/>} />
+              <Route path='profil' element={<UserProfil />} />
               <Route path='index' element={<Userlist/>} />
 
             </Route>

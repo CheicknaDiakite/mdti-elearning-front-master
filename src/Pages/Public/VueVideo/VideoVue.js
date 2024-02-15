@@ -1,13 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { accountService, formationChapitre, formationService } from '../../../_services';
 import toast from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
 import VueChapitre from './VueChapitre';
-import Axios, { BASE } from '../../../_services/caller.service';
+import Axios, { BASE, Base } from '../../../_services/caller.service';
+import FormationContext from '../../../components/UseContext/formation.context';
 
-export default function VideoVue({user}) {
+export default function VideoVue() {
   let {slug} = useParams()
+  const { user } = useContext(FormationContext)
   const sluger = {
     "formation_slug": slug
   }
@@ -213,7 +215,7 @@ export default function VideoVue({user}) {
                           '<video title="Wildlife" preload="auto" autoplay controls>'
                         )
                         // alert(url)
-                        let url = BASE.Base + post.video_url;
+                        let url = Base.baseURL + post.video_url;
                         document.querySelector('#video_container').innerHTML = `<video title="Wildlife" preload="auto" autoplay controls>
                         <source src=${url} type="video/ogg"/>
                         <p>Wildlife</p>

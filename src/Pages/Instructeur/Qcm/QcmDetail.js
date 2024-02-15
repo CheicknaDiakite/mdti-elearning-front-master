@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 
 import toast from 'react-hot-toast';
 
@@ -7,10 +7,12 @@ import { Box, Button, Paper, Step, StepContent, StepLabel, Stepper, Typography }
 import { examenService, qcmService } from '../../../_services';
 import QcmCard from './QcmCard';
 import { useParams } from 'react-router-dom';
+import FormationContext from '../../../components/UseContext/formation.context';
 
 
 
-export default function QcmDetail({user}) {
+export default function QcmDetail() {
+  const { user } = useContext(FormationContext)
   let {slug} = useParams()
   const [examen, setExamen] = useState([]);
   const [messa, setMessa] = useState([]);

@@ -2,27 +2,26 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Error from '../../_utils/Error';
 import Layout from './Layout';
-import Index from './Accueil';
+import Accueil from './Accueil';
 import FormationDetail from '../Instructeur/Formation/FormationDetail';
-import { accountService } from '../../_services';
-import QcmDetail from '../Instructeur/Qcm/QcmDetail';
-import VideoVue from './VueVideo/VideoVue';
-import Editor from '../../components/Editor';
-import Vid from '../../components/VideoApp';
-import VideoApp from '../../components/VideoApp';
-export default function PublicRoute() {
 
-  const user = accountService.getToken()
+import VideoVue from './VueVideo/VideoVue';
+
+import VideoApp from '../../components/VideoApp';
+import NavCard from '../../components/Public/NavCard';
+
+export default function PublicRoute() {
 
   return (
     
     <Routes>
         <Route element={<Layout/>}>
-          <Route index element={<Index />} />
+          <Route index element={<Accueil />} />
 
           <Route path='formation'>
-            <Route path='detail/:slug' element={<FormationDetail user={user} />} />
-            <Route path='vue-video/:slug' element={<VideoVue user={user} />} />
+            <Route path='detail/:slug' element={<FormationDetail />} />
+            <Route path='categorie/:id' element={<NavCard />} />
+            <Route path='vue-video/:slug' element={<VideoVue />} />
             <Route path='test' element={<VideoApp />} />
           </Route>            
 

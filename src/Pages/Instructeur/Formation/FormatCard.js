@@ -1,29 +1,27 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Link } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { formationService } from '../../../_services';
 import { BASE } from '../../../_services/caller.service';
+import CatForma from './CatForma';
+import FormationContext from '../../../components/UseContext/formation.context';
 
-export default function FormatCard({formation, user}) {
-
+export default function FormatCard({formation}) {
+    const { user } = useContext(FormationContext)
     const useQuery = useQueryClient();
     const mutation = useMutation({
         mutationFn: (formation) => {
         return formationService.deleteFormation(formation)
         .then(res => {
-            if(res.data.etat===true){
-    
-              console.log("test uu",res.data.donnee)
-            //   setSous(res.data.donnee);
-            } else {
+            if(res.data.etat!==true){
               toast.error(res.data.message);
-            }
+            } 
           })
         },
         onError: (error) => {
-        toast.error("Une erreur est survenue0");
+        toast.error("Une erreur est survenue",error);
         },
         onSuccess: () => {
         useQuery.invalidateQueries("formations");
@@ -57,8 +55,11 @@ export default function FormatCard({formation, user}) {
             </div>
         </div>
         </td>
+        <td>
+            {formation.publier===true ? <span className="badge bg-info">Yes</span> : <span className="badge bg-danger">No</span>}
+        </td>
     
-        <td>{formation.publier===true ? <span className="badge bg-info">Yes</span> : <span className="badge bg-danger">No</span>}</td>
+        {/* <CatForma formation={formation.sous_categorie_slug} /> */}
         <td>
         {user===String(formation.instructeur_id) && <>
 

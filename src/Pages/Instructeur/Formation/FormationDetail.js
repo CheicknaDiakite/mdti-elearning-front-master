@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast';
 import { Link, useParams } from 'react-router-dom';
 import { accountService, formationService } from '../../../_services';
@@ -11,9 +11,12 @@ import Chapitre from '../Chapitre/Chapitre';
 import { useQuery } from '@tanstack/react-query';
 import AbonCour from '../../Public/AbonCour/AbonCour';
 import FormationQcm from '../Qcm/FormationQcm';
+import FormationContext from '../../../components/UseContext/formation.context';
 
-export default function FormationDetail({user}) {
+export default function FormationDetail() {
     let {slug} = useParams()
+
+    const { user } = useContext(FormationContext)
 
     const [post, setPost] = useState([]);
     const flag = useRef(false)
@@ -45,7 +48,7 @@ export default function FormationDetail({user}) {
         error,
         isLoading,
       } = useQuery({
-        queryKey: ["formations"],
+        queryKey: ["formations", slug],
         queryFn: () =>
         formationService.unFormation(slug)
           .then((res) => res.data),
@@ -56,7 +59,7 @@ export default function FormationDetail({user}) {
       }
       const cour = formation.donnee
 
-      console.log('hhbbjj',cour)
+    //   console.log('ok je ',user)
       // fin
     
   return (
@@ -149,14 +152,14 @@ export default function FormationDetail({user}) {
                         </div>
                         <div className="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                         {/* Discution */}
-                        <DiscutionChat user={user} slug={slug} />
+                        <DiscutionChat slug={slug} />
                         <hr className="my-5" />
                         
                         </div>
 
                         <div className="tab-pane fade" id="temoin" role="tabpanel" aria-labelledby="temoin-tab">
                             {/* Temoin */}                            
-                            <TemoinFormation user={user} slug={slug} />
+                            <TemoinFormation slug={slug} />
                         </div>
                         <div className="tab-pane fade" id="transcript" role="tabpanel" aria-labelledby="transcript-tab">
                         
@@ -190,7 +193,7 @@ export default function FormationDetail({user}) {
                     </div>
                     <div className="d-grid">
                         <Link to={`/dashboard/formation/seanceTravail/${slug}`} className="btn btn-primary mb-2">Seance de travail</Link>
-                        <AbonCour slug={slug} user={user} cour={cour} />
+                        <AbonCour slug={slug} cour={cour} />
                     </div>
                     </div>
                 </div>                

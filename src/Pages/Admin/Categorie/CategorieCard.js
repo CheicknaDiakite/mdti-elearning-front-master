@@ -1,31 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { BASE } from '../../../_services/caller.service';
 import { categorieService } from '../../../_services';
+import FormationContext from '../../../components/UseContext/formation.context';
 
 export default function CategorieCard({categorie}) {
+    const { deleteFormation } = useContext(FormationContext)
 
-    const useQuery = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: (categorie) => {
-        return categorieService.deleteCategorie(categorie);
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue0");
-        },
-        onSuccess: () => {
-        useQuery.invalidateQueries("Categorie");
-        toast.success("Categorie supprimée avec succès");
-        },
-    });
-    const handleDelete = (categorie) => {
-        mutation.mutate(categorie);
-      };
-
+      
       let url = BASE(categorie.image)
   return (
     <>
@@ -52,11 +38,11 @@ export default function CategorieCard({categorie}) {
             </a>
             <span className="dropdown-menu" aria-labelledby="courseDropdown1">
             <span className="dropdown-header">Setting</span>
-            <a className="dropdown-item" href="#">
+            <Link to={`/admin/formation/categorie/${categorie.id}`} className="dropdown-item" >
                 <i className="fe fe-edit dropdown-item-icon" />
                 Edit
-            </a>
-            <button className="dropdown-item" onClick={()=>handleDelete(categorie)}>
+            </Link>
+            <button className="dropdown-item" onClick={()=>deleteFormation(categorie)}>
                 <i className="fe fe-trash dropdown-item-icon" />
                 Remove
             </button>
@@ -64,6 +50,7 @@ export default function CategorieCard({categorie}) {
         </span>
         </td>
     </tr>
+
     </>
   )
 }

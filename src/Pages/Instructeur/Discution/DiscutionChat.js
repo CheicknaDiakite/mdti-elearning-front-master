@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 
 import toast from 'react-hot-toast';
 import axios from 'axios';
@@ -6,8 +6,10 @@ import { accountService, discutionService } from '../../../_services';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import ApChat from './Apprenant/ApChat';
 import InsAdm from './InstrucAdmin/InsAdm';
+import FormationContext from '../../../components/UseContext/formation.context';
 
-export default function DiscutionChat({user, slug}) {
+export default function DiscutionChat({slug}) {
+    const { user } = useContext(FormationContext)
     const sluger = {
         "formation_slug": slug,
         "apprenant_id": user,

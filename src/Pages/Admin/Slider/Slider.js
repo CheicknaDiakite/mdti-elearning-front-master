@@ -81,8 +81,8 @@ export default function Slider() {
     <div className="card mb-4">
       {/* Card header */}
       <div className="card-header">
-        <h3 className="mb-0">Categorie</h3>
-        <span>Manage your courses and its update like live, draft and insight.</span>
+        <h3 className="mb-0">Slider</h3>
+        {/* <span>Manage your courses and its update like live, draft and insight.</span> */}
       </div>
       {/* Card body */}
       <div className="card-body">
@@ -102,7 +102,7 @@ export default function Slider() {
         <table className="table mb-0 text-nowrap table-hover table-centered text-nowrap">
           <thead className="table-light">
             <tr>
-              <th>Categorie</th>
+              <th>Nom du slider</th>
              
               <th />
             </tr>
@@ -134,36 +134,36 @@ export default function Slider() {
                   <div className="mb-3 mb-2">
                     <label className="form-label" htmlFor="title">
                       Nom
-                      <span className="text-danger">*</span>
+                      {/* <span className="text-danger">*</span> */}
                     </label>
                     
-                    <input type="text" name='nom' onChange={onChange} className="form-control" placeholder="Write a Category" required />
-                    <small>Field must contain a unique value</small>
-                    <div className="invalid-feedback">Please enter category.</div>
+                    <input type="text" name='nom' onChange={onChange} className="form-control" placeholder="Le nom du slide" required />
+                    {/* <small>Field must contain a unique value</small>
+                    <div className="invalid-feedback">Please enter category.</div> */}
                   </div>
                   <div className="mb-3 mb-2">
                     <label className="form-label" htmlFor="title">
                       description
-                      <span className="text-danger">*</span>
+                      {/* <span className="text-danger">*</span> */}
                     </label>
                     
-                    <input type="text" name='description' onChange={onChange} className="form-control" placeholder="Write a Category" required />
-                    <small>Field must contain a unique value</small>
-                    <div className="invalid-feedback">Please enter category.</div>
+                    <input type="text" name='description' onChange={onChange} className="form-control" placeholder="Description du slide" required />
+                    {/* <small>Field must contain a unique value</small>
+                    <div className="invalid-feedback">Please enter category.</div> */}
                   </div>
                   <div className="mb-3 mb-2">
                     <label className="form-label" htmlFor="title">
                       Image
-                      <span className="text-danger">*</span>
+                      {/* <span className="text-danger">*</span> */}
                     </label>
-                    <input type="file" onChange={handleFileChange} className="form-control" placeholder="Write a Category" required />
-                    <small>Field must contain a unique value</small>
-                    <div className="invalid-feedback">Please enter category.</div>
+                    <input type="file" onChange={handleFileChange} className="form-control" required />
+                    {/* <small>Field must contain a unique value</small>
+                    <div className="invalid-feedback">Please enter category.</div> */}
                   </div>
                   
                   <div>
-                    <button type="submit" className="btn btn-primary">Add New Category</button>
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" className="btn btn-primary">Add New Slide</button>
+                    <button type="button" className="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
                   </div>
 
                   

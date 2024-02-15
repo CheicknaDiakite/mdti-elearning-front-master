@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { courService } from '../../../_services';
 import toast from 'react-hot-toast';
+import FormationContext from '../../../components/UseContext/formation.context';
 
-export default function AbonCour({slug, user, cour}) {
+export default function AbonCour({slug, cour}) {
+  const { user } = useContext(FormationContext)
     const [nom, setName] = useState('');
     const [ok, setOk] = useState('');
 

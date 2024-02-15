@@ -31,6 +31,9 @@ export default function Slid() {
         infiniteLoop
         showStatus={false}
         showArrows={false}
+        showIndicators={false}
+        thumbWidth={553*408}
+        showThumbs={false}
         >
         {slides.map((formation) => (
             <section class="bg-primary">
@@ -51,7 +54,6 @@ export default function Slid() {
                     </div>
                 </div>
             </section>
-
         ))}
         </Carousel>
     </>

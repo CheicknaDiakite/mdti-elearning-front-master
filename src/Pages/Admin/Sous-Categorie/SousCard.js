@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react'
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 
 export default function SousCard({sous_cat}) {
@@ -21,6 +22,8 @@ export default function SousCard({sous_cat}) {
     const handleDelete = (sous_cat) => {
         mutation.mutate(sous_cat);
       };
+
+      
   return (
     <>
     <tr>
@@ -47,10 +50,10 @@ export default function SousCard({sous_cat}) {
             </a>
             <span className="dropdown-menu" aria-labelledby="courseDropdown1">
             <span className="dropdown-header">Setting</span>
-            <a className="dropdown-item" href="#">
+            <Link to={`/admin/formation/sous/modif/${sous_cat.id}`} className="dropdown-item">
                 <i className="fe fe-edit dropdown-item-icon" />
                 Edit
-            </a>
+            </Link>
             <button className="dropdown-item" onClick={()=>handleDelete(sous_cat)}>
                 <i className="fe fe-trash dropdown-item-icon" />
                 Remove

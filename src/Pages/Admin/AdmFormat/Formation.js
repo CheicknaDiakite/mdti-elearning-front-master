@@ -1,40 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { formationService, sousCatService } from '../../../_services';
 import CardFormation from './CardFormation';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import FormationContext from '../../../components/UseContext/formation.context';
 
-export default function Formation({user}) {
+export default function Formation() {
 
-  const userID = localStorage.getItem('token')
-
-  const [formations, setFormations] = useState([]);
+  const {formations} = useContext(FormationContext)
+  
   const [search, setSearch] = useState("");
-    
-  const {
-    // data: categorie,
-    error,
-    isLoading,
-  } = useQuery({
-    queryKey: ["formations"],
-    queryFn: () =>
-      formationService.tousFormation()
-      .then((res) => {
-        setFormations(res.data.donnee);
-      }),
-    onerror: (error) => console.log(error),
-  });
-  if (isLoading) {
-    return <div>Chargement...</div>;
-  }
 
   const handleSearch = (e) => {
     let value = e.target.value;
     value.length > 2 && setSearch(value)
   }
 
-  console.log('ttt',search)
   return (
     <>      
      

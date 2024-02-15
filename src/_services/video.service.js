@@ -37,7 +37,7 @@ let updateVideo = (nom) => {
  * Suppression d'un utilsateur
  */
 let deleteVideo = (categorie) => {
-    return Axios.post(`formation/categorie/del`,categorie)
+    return Axios.post(`formation/video/del`,categorie)
 }
 
 // Décaraltion des esrvices pour import

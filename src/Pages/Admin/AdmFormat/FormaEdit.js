@@ -1,12 +1,16 @@
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import toast from 'react-hot-toast';
-import { accountService, formationChapitre, formationService, sousCatService } from '../../../_services';
+import { accountService, formationChapitre, formationService } from '../../../_services';
 import { useQuery } from '@tanstack/react-query';
+import FormationContext from '../../../components/UseContext/formation.context';
 
-export default function FormaEdit({user}) {
+export default function FormaEdit() {
+  const { user, sous_categories } = useContext(FormationContext)
+
+  console.log("soouuss_catego ...",sous_categories)
   let {slug} = useParams()
 
   const [publier, setPublier] = useState(false);
@@ -23,7 +27,7 @@ export default function FormaEdit({user}) {
   
     
     const [base64Image, setBase64Image] = useState('');
-    const [souscat, setSouscat] = useState([]);
+    
     const [chapitres, setChapitre] = useState([]);
     // user
     const userID = accountService.getToken()
@@ -102,28 +106,6 @@ export default function FormaEdit({user}) {
       }
   
       return () => flag.current = true;;;
-  
-    },[]);
-    // fin
-
-    // Pour la recuperation de la clé etranger (sous-categorie)
-    useEffect(()=>{
-      const getPosts = async () =>{
-
-        sousCatService.allSousCat()
-        .then((res) => {
-          
-          setSouscat(res.data.donnee);
-          console.log("Sous-Cat",res.data)
-          
-          // Faire quelque chose avec la réponse
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-
-      };
-      getPosts();
   
     },[]);
     // fin
@@ -339,7 +321,6 @@ export default function FormaEdit({user}) {
   const onSubmitSousCat = (e) => {
     e.preventDefault();
 
-    console.log("SousCate ", scat)
     scat["slug"]=slug
     formationService.updateFormation(scat)
       .then((response) => {
@@ -435,7 +416,7 @@ export default function FormaEdit({user}) {
         <select className="form-select" disabled>
           <option selected disabled >{nom.sous_categorie_slug}</option>
 
-          {souscat.map((post) => (
+          {sous_categories.map((post) => (
             <option value={post.slug}>{post.nom}</option>
 
           ))}
@@ -850,7 +831,7 @@ export default function FormaEdit({user}) {
                   <select class="form-select" name='sous_categorie_slug' onChange={onChangeScat} >
                       <option selected>SousCat</option>
                       <option >..</option>
-                      {souscat.map((post) => (
+                      {sous_categories.map((post) => (
 
                           <option value={post.slug}>{post.nom}</option>
                       ))}

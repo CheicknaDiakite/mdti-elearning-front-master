@@ -54,6 +54,10 @@ let allSousCat = () => {
 let getSousCat = (sluger) => {
     return Axios.post(`formation/sous-categorie/get`,sluger)
 }
+let unSousCat = (id) => {
+    // console.log("id ...",id)
+    return Axios.get(`formation/sous-categorie/get/${id}`)
+}
 
 /**
  * Ajout d'un utilisateur
@@ -78,5 +82,5 @@ let deleteSousCat = (post) => {
 
 // Décaraltion des esrvices pour import
 export const sousCatService = {
-    allSousCat, getSousCat, addSousCat, updateSousCat, deleteSousCat
+    allSousCat, getSousCat, addSousCat, updateSousCat, deleteSousCat, unSousCat
 }

@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { formationService } from '../../../_services/formation.service';
 import FormatCard from './FormatCard';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { sousCatService } from '../../../_services';
 
-export default function FormationList({user}) {
+import FormationContext from '../../../components/UseContext/formation.context';
+
+export default function FormationList() {
+  const { user, sous_categories } = useContext(FormationContext)
 
   // Pour la recuperation de la clé etranger (sous-categorie)
-  const [sous, setSous] = useState([]);
+  
   const [sous_categorie_slug, setSouscat] = useState('');
   const [search, setSearch] = useState("");
 
@@ -29,22 +31,6 @@ export default function FormationList({user}) {
     },
   });
   
-  useEffect(()=>{
-    const getPosts = async () =>{
-
-      sousCatService.allSousCat()      
-      .then((res) => {        
-        setSous(res.data.donnee);
-        console.log("sous cat",res)
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-    };
-    getPosts();
-
-},[]);
 // fin
 
   // Pour recuperer tous les données de la formation
@@ -116,7 +102,7 @@ export default function FormationList({user}) {
       {/* Card header */}
       <div className="card-header">
         <h3 className="mb-0">Ajout des Formations</h3>
-        <span>Manage your courses and its update like live, draft and insight.</span>
+        {/* <span>Manage your courses and its update like live, draft and insight.</span> */}
       </div>
       {/* Card body */}
       <div className="card-body">
@@ -147,9 +133,9 @@ export default function FormationList({user}) {
         <table className="table mb-0 text-nowrap table-hover table-centered text-nowrap">
           <thead className="table-light">
             <tr>
-              <th>Courses</th>
+              <th>Formation</th>
               
-              <th>Status</th>
+              <th>Status (Publier/Non)</th>
               <th />
             </tr>
           </thead>
@@ -160,7 +146,7 @@ export default function FormationList({user}) {
                 return val.nom.toLowerCase().includes(search.toLowerCase());
               }).map((post)=> {
                 
-                return <FormatCard user={user} formation={post} />
+                return <FormatCard formation={post} />
               })
               : 'Pas de chapitre'
               }
@@ -220,7 +206,7 @@ export default function FormationList({user}) {
                 <select class="form-select" onChange={(e) => setSouscat(e.target.value)} >
                   <option selected>Categorie de la formation</option>
                   <option >..</option>
-                  {sous?.map((post) => (
+                  {sous_categories?.map((post) => (
                     <option value={post.slug}>{post.nom}</option>
                   ))}
                     

@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import CategorieCard from './CategorieCard'
 import { categorieService } from '../../../_services';
 import toast from 'react-hot-toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import EditorJsComponent from '../../../components/Editor';
+import FormationContext from '../../../components/UseContext/formation.context';
 
 export default function Categorie() {
+
+  const {categories}= useContext(FormationContext)
     
     const [base64Image, setBase64Image] = useState('');
     const [nom, setNom] = useState([]);
@@ -61,22 +64,6 @@ export default function Categorie() {
     // nom["image"]=base64Image
     mutation.mutate(nom)
   };
-
-  const {
-    data: categorie,
-    error,
-    isLoading,
-  } = useQuery({
-    queryKey: ["Categorie"],
-    queryFn: () =>
-      categorieService.allCategorie()
-      .then((res) => res.data),
-    onerror: (error) => console.log(error),
-  });
-  if (isLoading) {
-    return <div>Chargement...</div>;
-  }
-  const categories = categorie.donnee
   return (
     <>
     {/* Categorie */}
@@ -84,7 +71,7 @@ export default function Categorie() {
       {/* Card header */}
       <div className="card-header">
         <h3 className="mb-0">Categorie</h3>
-        <span>Manage your courses and its update like live, draft and insight.</span>
+        {/* <span>Manage your courses and its update like live, draft and insight.</span> */}
       </div>
       {/* Card body */}
       <div className="card-body">
@@ -128,34 +115,34 @@ export default function Categorie() {
         <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content">
             <div className="modal-header">
-                <h4 className="modal-title mb-0" id="newCatgoryLabel">Create New QCM</h4>
+                <h4 className="modal-title mb-0" id="newCatgoryLabel">Create New Categorie</h4>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
             </div>
             <div className="modal-body">
             <form className="needs-validation" onSubmit={onSubmit}>
                   <div className="mb-3 mb-2">
                     <label className="form-label" htmlFor="title">
-                      Title
-                      <span className="text-danger">*</span>
+                      Nom
+                      {/* <span className="text-danger">*</span> */}
                     </label>
                     
-                    <input type="text" name='nom' onChange={onChange} className="form-control" placeholder="Write a Category" required />
-                    <small>Field must contain a unique value</small>
-                    <div className="invalid-feedback">Please enter category.</div>
+                    <input type="text" name='nom' onChange={onChange} className="form-control" placeholder="Donnez le nom de le categorie" required />
+                    {/* <small>Field must contain a unique value</small>
+                    <div className="invalid-feedback">Please enter category.</div> */}
                   </div>
                   <div className="mb-3 mb-2">
                     <label className="form-label" htmlFor="title">
                       Image
-                      <span className="text-danger">*</span>
+                      {/* <span className="text-danger">*</span> */}
                     </label>
-                    <input type="file" onChange={handleFileChange} className="form-control" placeholder="Write a Category" required />
-                    <small>Field must contain a unique value</small>
-                    <div className="invalid-feedback">Please enter category.</div>
+                    <input type="file" onChange={handleFileChange} className="form-control" required />
+                    {/* <small>Field must contain a unique value</small>
+                    <div className="invalid-feedback">Please enter category.</div> */}
                   </div>
                   
                   <div>
                     <button type="submit" className="btn btn-primary">Add New Category</button>
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" className="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
                   </div>
 
                   

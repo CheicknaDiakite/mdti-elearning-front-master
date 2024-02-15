@@ -35,7 +35,7 @@ export default function Chapitre({slug}) {
                     chapitres.map((post)=> (
                     <>
                     <Link className="h4 mb-0 d-flex align-items-center" data-bs-toggle="collapse" to={`#${post.id}`} aria-expanded="true" aria-controls={post.id}>
-                        <div className="me-auto">Introduction to {post.nom}</div>
+                        <div className="me-auto">{post.nom}</div>
                         {/* Chevron */}
                         <span className="chevron-arrow ms-4">
                         <i className="fe fe-chevron-down fs-4" />

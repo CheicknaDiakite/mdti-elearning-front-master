@@ -6,7 +6,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { sousCatService } from '../../../_services';
 import toast from 'react-hot-toast';
 
-export default function SousCate({user}) {
+export default function SousCate() {
     let {slug} = useParams()
     const sluger = {
     "categorie_slug": slug
@@ -86,8 +86,8 @@ export default function SousCate({user}) {
     <div className="card mb-4">
       {/* Card header */}
       <div className="card-header">
-        <h3 className="mb-0">Courses</h3>
-        <span>Manage your courses and its update like live, draft and insight.</span>
+        <h3 className="mb-0">Sous Categorie</h3>
+        {/* <span>Manage your courses and its update like live, draft and insight.</span> */}
       </div>
       {/* Card body */}
       <div className="card-body">
@@ -96,7 +96,8 @@ export default function SousCate({user}) {
           <div className="col-lg-9 col-md-7 col-12 mb-lg-0 mb-2">
             {/* <input type="search" className="form-control" placeholder="Search Your Courses" /> */}
             <button className="btn btn-outline-secondary btn-icon" data-bs-toggle="modal" data-bs-target="#newFormat">
-              <i className="fe fe-download" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+
             </button>
           </div>
           {/* <div className="col-lg-3 col-md-5 col-12">
@@ -115,7 +116,7 @@ export default function SousCate({user}) {
         <table className="table mb-0 text-nowrap table-hover table-centered text-nowrap">
           <thead className="table-light">
             <tr>
-              <th>Courses</th>
+              <th>Sous-Categorie</th>
               
               <th />
             </tr>
@@ -140,28 +141,28 @@ export default function SousCate({user}) {
         <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content">
             <div className="modal-header">
-                <h4 className="modal-title mb-0" id="newCatgoryLabel">Create New QCM</h4>
+                <h4 className="modal-title mb-0" id="newCatgoryLabel">Create New Sous-Categorie</h4>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
             </div>
             <div className="modal-body">
               <form className="needs-validation" onSubmit={onSubmit}>
                 <div className="mb-3 mb-2">
                   <label className="form-label" htmlFor="title">
-                    Title
+                    Nom
                     <span className="text-danger">*</span>
                   </label>
-                  <input type="text" name='nom' onChange={onChange} className="form-control" placeholder="Write a Category" required />
-                  <small>Field must contain a unique value</small>
-                  <div className="invalid-feedback">Please enter category.</div>
+                  <input type="text" name='nom' onChange={onChange} className="form-control" placeholder="Donnez le nom de la sous-categorie" required />
+                  {/* <small>Field must contain a unique value</small> */}
+                  {/* <div className="invalid-feedback">Please enter category.</div> */}
                 </div>
                 <div className="mb-3 mb-2">
                   <label className="form-label" htmlFor="title">
                     Image
                     <span className="text-danger">*</span>
                   </label>
-                  <input type="file" onChange={handleFileChange} className="form-control" placeholder="Write a Category" required />
-                  <small>Field must contain a unique value</small>
-                  <div className="invalid-feedback">Please enter category.</div>
+                  <input type="file" onChange={handleFileChange} className="form-control" required />
+                  {/* <small>Field must contain a unique value</small> */}
+                  {/* <div className="invalid-feedback">Please enter category.</div> */}
                 </div>
                 
                 <div>

@@ -1,12 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import toast from 'react-hot-toast';
 import { courService } from '../../../_services';
 import CourCard from './CourCard';
+import FormationContext from '../../../components/UseContext/formation.context';
 
 
-export default function CourFormat({slug, user}) {
+export default function CourFormat({slug}) {
+    const { user } = useContext(FormationContext)
      // pour ajouter
      const [post, setCour] = useState([])
     const [delet, setPosts] = useState([]);

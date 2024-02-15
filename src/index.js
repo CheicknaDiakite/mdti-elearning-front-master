@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { FormationContextProvider } from './components/UseContext/formation.context';
 
 const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,7 +14,9 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>      
       <Toaster/>
-      <App />
+      <FormationContextProvider>
+        <App />
+      </FormationContextProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>

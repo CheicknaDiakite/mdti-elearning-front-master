@@ -1,12 +1,14 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast';
 import { accountService } from '../../_services';
+import FormationContext from '../../components/UseContext/formation.context';
 
 
-export default function UserProfil({user}) {
+export default function UserProfil() {
   // pour recuperer les infos de l'utilisateur
   const [post, setPost] = useState([]);
+  const { user } = useContext(FormationContext)
   const flag = useRef(false)
   
   useEffect(()=>{

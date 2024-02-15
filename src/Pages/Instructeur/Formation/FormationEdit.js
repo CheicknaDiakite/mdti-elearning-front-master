@@ -1,13 +1,16 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import toast from 'react-hot-toast';
-import { accountService, formationChapitre, formationService, sousCatService } from '../../../_services';
+import { accountService, formationService } from '../../../_services';
+import FormationContext from '../../../components/UseContext/formation.context';
 
 
-export default function FormationEdit({user}) {
+export default function FormationEdit() {
   let {slug} = useParams()
+
+  const {user, sous_categories} = useContext(FormationContext)
 
   
   const [ajout_terminer, setTerminer] = useState(false);
@@ -15,142 +18,89 @@ export default function FormationEdit({user}) {
   const Ajout_Terminer = () => {
     ajout_terminer ? setTerminer(false) : setTerminer(true)
   }
-  
-    
-    const [base64Image, setBase64Image] = useState('');
-    const [souscat, setSouscat] = useState([]);
-    const [chapitres, setChapitre] = useState([]);
-    // user
-    const userID = accountService.getToken()
-    const [post, setPost] = useState([]);
-    // console.log("okkkkk",slug)
-    useEffect(()=>{
 
-      if(flag.current===false){
-        accountService.getUser(userID)
+  const [base64Image, setBase64Image] = useState('');
+  
+  // user
+  
+  const [post, setPost] = useState([]);
+  // console.log("okkkkk",slug)
+  useEffect(()=>{
+
+    if(flag.current===false){
+      accountService.getUser(user)
+    .then(res => {
+        if(res.data.etat===true){
+            
+            setPost(res.data.donnee);
+            
+        } else {
+            toast.error("Les identifiants sont incorrects");
+        }
+    })
+    .catch(error => 
+        toast.error("Erreur connexion")
+        )
+    }
+
+    return () => flag.current = true;;;
+
+  },[]);
+
+    
+  // fin
+
+  // pour recuperer la formations
+  const [nom, setName] = useState([]);
+  
+  
+  const flag = useRef(false)
+  // pour une formation  
+
+  useEffect(()=>{
+    console.log('text 0')
+    
+    if(flag.current===false){
+      axios.get(`http://127.0.0.1:8000/formation/get/${slug}`)
       .then(res => {
-          if(res.data.etat===true){
-              
-              setPost(res.data.donnee);
-              
-          } else {
-              toast.error("Les identifiants sont incorrects");
-          }
+        if(res.data.etat===true){
+
+          console.log("Formation",res.data.donnee)
+          setName(res.data.donnee);
+        } else {
+          toast.error("Nom trouver");
+        }
       })
-      .catch(error => 
-          toast.error("Erreur connexion")
-          )
-      }
-  
-      return () => flag.current = true;;;
-  
-    },[]);
-
+      .catch(err => console.log(err))
+    }
+    return () => flag.current = true;;;
     
-    // fin
+  },[]);
+  // fin
 
-    // pour recuperer la formations
-    const [nom, setName] = useState([]);
-    
-    
-    
-   // Pour la recuperation de la clé etranger (chapitre)
-   useEffect(()=>{
-    const getPosts = async () =>{
+  // Pour user
+  useEffect(()=>{
 
-      const sluger = {
-        "formation_slug": slug
-      }
+    if(flag.current===false){
+      accountService.getUser(user)
+    .then(res => {
+        if(res.data.etat===true){
+            
+            setPost(res.data.donnee);
+            
+        } else {
+            toast.error("Les identifiants sont incorrects");
+        }
+    })
+    .catch(error => 
+        toast.error("Erreur connexion")
+        )
+    }
 
-      console.log("tesssss",sluger)
-
-      formationChapitre.allChapitre(sluger)
-      .then((res) => {
-        
-        setChapitre(res.data.donnee);
-        console.log("chapitre",res.data)
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-
-    };
-    getPosts();
+    return () => flag.current = true;;;
 
   },[]);
   // fin
-    
-    
-    const flag = useRef(false)
-    // pour une formation
-  
-
-    useEffect(()=>{
-      console.log('text 0')
-      
-      if(flag.current===false){
-        axios.get(`http://127.0.0.1:8000/formation/get/${slug}`)
-        .then(res => {
-          if(res.data.etat===true){
-  
-            console.log("Formation",res.data.donnee)
-            setName(res.data.donnee);
-          } else {
-            toast.error("Nom trouver");
-          }
-        })
-        .catch(err => console.log(err))
-      }
-      return () => flag.current = true;;;
-      
-    },[]);
-    // fin
-
-    // Pour user
-    useEffect(()=>{
-
-      if(flag.current===false){
-        accountService.getUser(userID)
-      .then(res => {
-          if(res.data.etat===true){
-              
-              setPost(res.data.donnee);
-              
-          } else {
-              toast.error("Les identifiants sont incorrects");
-          }
-      })
-      .catch(error => 
-          toast.error("Erreur connexion")
-          )
-      }
-  
-      return () => flag.current = true;;;
-  
-    },[]);
-    // fin
-
-    // Pour la recuperation de la clé etranger (sous-categorie)
-    useEffect(()=>{
-      const getPosts = async () =>{
-
-        sousCatService.allSousCat()
-        .then((res) => {
-          
-          setSouscat(res.data.donnee);
-          console.log("Sous-Cat",res.data)
-          // Faire quelque chose avec la réponse
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-
-      };
-      getPosts();
-  
-    },[]);
-    // fin
 
   // pour l'envoye du formulaire
   // const onChange = (e) => {
@@ -371,7 +321,7 @@ export default function FormationEdit({user}) {
   const onSubmitSousCat = (e) => {
     e.preventDefault();
 
-    console.log("SousCate ", scat)
+    // console.log("SousCate ", scat)
     scat["slug"]=slug
     formationService.updateFormation(scat)
       .then((response) => {
@@ -779,7 +729,7 @@ export default function FormationEdit({user}) {
                 <select class="form-select" name='sous_categorie_slug' onChange={onChangeScat} >
                     <option selected>SousCat</option>
                     <option >..</option>
-                    {souscat.map((post) => (
+                    {sous_categories.map((post) => (
 
                         <option value={post.slug}>{post.nom}</option>
                     ))}

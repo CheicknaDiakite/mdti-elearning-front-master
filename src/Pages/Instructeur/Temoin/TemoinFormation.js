@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import toast from 'react-hot-toast';
 import { temoinService } from '../../../_services';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button, ThemeProvider, createTheme } from '@mui/material';
+import FormationContext from '../../../components/UseContext/formation.context';
 
 const defaultTheme = createTheme();
 
@@ -43,8 +44,9 @@ const theme = createTheme({
   },
 });
 
-export default function TemoinFormation({user, slug}) {
+export default function TemoinFormation({slug}) {
     // pour Ajout des Temoignages
+    const { user } = useContext(FormationContext)
     const [temoin, setTemoin] = useState('');
     const sluger = {
       "formation_slug": slug

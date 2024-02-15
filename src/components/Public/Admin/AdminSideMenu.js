@@ -80,20 +80,20 @@ export default function AdminSideMenu() {
               </div>
             </li>
             {/* Nav item */}
-            {/* <li className="nav-item">
+            <li className="nav-item">
               <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navProject" aria-expanded="false" aria-controls="navProject">
                 <i className="nav-icon fe fe-file me-2" />
-                Project
+                Les anciens sujets
               </a>
               <div id="navProject" className="collapse" data-bs-parent="#sideNavbar">
                 <ul className="nav flex-column">
                   <li className="nav-item">
-                    <a className="nav-link" href="#">Grid</a>
+                    <a className="nav-link" href="/admin/ancien_sujet/type">Type</a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">List</a>
+                    <a className="nav-link" href="/admin/ancien_sujet/niveau">Niveau</a>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navprojectSingle" aria-expanded="false" aria-controls="navprojectSingle">Single</a>
                     <div id="navprojectSingle" className="collapse" data-bs-parent="#navProject">
                       <ul className="nav flex-column">
@@ -117,13 +117,13 @@ export default function AdminSideMenu() {
                         </li>
                       </ul>
                     </div>
-                  </li>
+                  </li> */}
                   <li className="nav-item">
-                    <a className="nav-link" href="#">Create Project</a>
+                    <a className="nav-link" href="#">Matiere</a>
                   </li>
                 </ul>
               </div>
-            </li> */}
+            </li>
             {/* Nav item */}
             {/* <li className="nav-item">
               <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navAuthentication" aria-expanded="false" aria-controls="navAuthentication">

@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import toast from 'react-hot-toast'
-import { accountService } from '../../_services'
+import { accountService, sousCatService } from '../../_services'
+import { useQuery } from '@tanstack/react-query'
 
 export default function Navbar({user}) {
 
@@ -38,6 +39,26 @@ export default function Navbar({user}) {
     return () => flag.current = true;;;
 
   },[]);
+  // fin
+
+  // Pour afficher les differents sous-categories
+  const {
+    data: sousCategorie,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["sousCategories"],
+    queryFn: () =>
+      sousCatService.allSousCat()
+      .then((res) => res.data),
+    onerror: (error) => console.log(error),
+  });
+  if (isLoading) {
+    return <div>Chargement...</div>;
+  }
+  const sous_categories = sousCategorie.donnee
+
+  // console.log("forma ...",sous_categories)
   // fin
   return (
     <>
@@ -190,8 +211,154 @@ export default function Navbar({user}) {
               
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-              
+            <a class="nav-link dropdown-toggle" href="#" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">categorie</a>
+              <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarPages">
+                  
+                  <li class="dropdown-submenu dropend">
+                  {sous_categories?.length > 0 ? 
+                    sous_categories.map((post)=> (
+                    <>
+                      <Link to={`/formation/categorie/${post.id}`} class="dropdown-item dropdown-list-group-item dropdown-toggle">{post.nom}</Link>
+                      
+                    </>
+                      ))
+                  : 'Pas de categorie'
+                  }
+                      
+                  </li>
+                  {/* <li class="dropdown-submenu dropend">
+                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Paths</a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a href="../pages/course-path.html" class="dropdown-item">Browse Path</a>
+                          </li>
+                          <li>
+                              <a href="../pages/course-path-single.html" class="dropdown-item">Path Single</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="dropdown-submenu dropend">
+                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Blog</a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a class="dropdown-item" href="../pages/blog.html">Listing</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/blog-single.html">Article</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/blog-category.html">Category</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/blog-sidebar.html">Sidebar</a>
+                          </li>
+                      </ul>
+                  </li>
+
+                  <li class="dropdown-submenu dropend">
+                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Career</a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a class="dropdown-item" href="../pages/career.html">Overview</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/career-list.html">Listing</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/career-single.html">Opening</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="dropdown-submenu dropend">
+                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Portfolio</a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a class="dropdown-item" href="../pages/portfolio.html">List</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/portfolio-single.html">Single</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="dropdown-submenu dropend">
+                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Job</a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a class="dropdown-item" href="../pages/landings/landing-job.html">Home</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/jobs/job-listing.html">List</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/jobs/job-grid.html">Grid</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/jobs/job-single.html">Single</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/jobs/company-list.html">Company List</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/jobs/company-about.html">Company Single</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="dropdown-submenu dropend">
+                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Specialty</a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a class="dropdown-item" href="../pages/coming-soon.html">Coming Soon</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/404-error.html">Error 404</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/maintenance-mode.html">Maintenance Mode</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/terms-condition-page.html">Terms & Conditions</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                      <hr class="mx-3" />
+                  </li>
+
+                  <li>
+                      <a class="dropdown-item" href="../pages/about.html">About</a>
+                  </li>
+
+                  <li class="dropdown-submenu dropend">
+                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Help Center</a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a class="dropdown-item" href="../pages/help-center.html">Help Center</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/help-center-faq.html">FAQ's</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/help-center-guide.html">Guide</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/help-center-guide-single.html">Guide Single</a>
+                          </li>
+                          <li>
+                              <a class="dropdown-item" href="../pages/help-center-support.html">Support</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                      <a class="dropdown-item" href="../pages/pricing.html">Pricing</a>
+                  </li>
+                  <li>
+                      <a class="dropdown-item" href="../pages/compare-plan.html">Compare Plan</a>
+                  </li>
+
+                  <li>
+                      <a class="dropdown-item" href="../pages/contact.html">Contact</a>
+                  </li> */}
+              </ul>
             </li>
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="navbarAccount" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a>

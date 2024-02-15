@@ -5,7 +5,7 @@ const Axios = await axios.create({
     baseURL: 'http://127.0.0.1:8000'
 })
 
-const Base = {
+export const Base = {
     baseURL: 'http://127.0.0.1:8000'
 }
 

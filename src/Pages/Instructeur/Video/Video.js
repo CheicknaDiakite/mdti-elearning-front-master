@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { videoService } from '../../../_services';
+import VideoCard from './VideoCard';
 
 export default function Videos() {
     let {id} = useParams()
@@ -81,38 +82,7 @@ export default function Videos() {
         <tbody>
         {videos?.length > 0 ? 
           videos?.map((post)=> (
-            <tr>
-            <td>
-                <div className="form-check">
-                <input type="checkbox" className="form-check-input" id="withdrawTwo" />
-                <label className="form-check-label" htmlFor="withdrawTwo" />
-                </div>
-            </td>
-            
-            <td>{post.nom}</td>
-            <td>
-                <span className="badge bg-warning">Pending</span>
-            </td>
-          
-            <td>
-                <span className="dropdown dropstart">
-                <a className="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" id="paymentDropdown" data-bs-toggle="dropdown" data-bs-offset="-20,20" aria-expanded="false">
-                    <i className="fe fe-more-vertical" />
-                </a>
-                <span className="dropdown-menu" aria-labelledby="paymentDropdown">
-                    <span className="dropdown-header">Setting</span>
-                    <a className="dropdown-item" href="#">
-                    <i className="fe fe-edit dropdown-item-icon" />
-                    Edit
-                    </a>
-                    <a className="dropdown-item" href="#">
-                    <i className="fe fe-trash dropdown-item-icon" />
-                    Remove
-                    </a>
-                </span>
-                </span>
-            </td>
-            </tr>
+            <VideoCard video={post} />
           ))
         : 'Pas de chapitre'
         }

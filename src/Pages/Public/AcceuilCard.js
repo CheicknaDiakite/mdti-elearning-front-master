@@ -5,9 +5,11 @@ import toast from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
 
 export default function AcceuilCard({post}) {
+    // console.log('aaa',post)
     // console.log("rrrr",post)
   return (
     <>
+    
         <div className="col-lg-3 col-md-6 col-12">
         {/* <!-- Card --> */}
         <div className="card mb-4 card-hover">
@@ -48,6 +50,8 @@ export default function AcceuilCard({post}) {
             </div>
         </div>
         </div>
+    
+        
     </>
   )
 }

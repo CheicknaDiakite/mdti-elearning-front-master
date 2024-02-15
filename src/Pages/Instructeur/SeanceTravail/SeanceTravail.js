@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { formationService, seanceTravail } from '../../../_services';
 import toast from 'react-hot-toast';
+import FormationContext from '../../../components/UseContext/formation.context';
 
-export default function SeanceTravail({user}) {
+export default function SeanceTravail() {
+  const { user } = useContext(FormationContext)
     let {slug} = useParams()
     const [nom, setName] = useState('');
     const [ok, setOk] = useState('');
@@ -69,7 +71,7 @@ export default function SeanceTravail({user}) {
     <div className="card-header d-lg-flex justify-content-between align-items-center">
         <div className="mb-3 mb-lg-0">
         <h3 className="mb-0">Pour prendre une seance de travail pour cet formation : {cour.nom}</h3>
-        <p className="mb-0">Here is list of package/product that you have subscribed.</p>
+        {/* <p className="mb-0">Here is list of package/product that you have subscribed.</p> */}
         </div>
         <div>
         <a href="pricing.html" className="btn btn-success btn-sm">Le prix de la formation ${cour.prix}</a>
@@ -84,7 +86,7 @@ export default function SeanceTravail({user}) {
                 <span className="h4">{cour.nom}</span>
                 {/* <span className="badge bg-success ms-2">Active</span> */}
             </span>
-            <p className="mb-0 fs-6">Subscription ID: #100010002</p>
+            {/* <p className="mb-0 fs-6">Subscription ID: #100010002</p> */}
             </div>
             <div className="col-lg-3 col-md-4 col-5 mb-2 mb-lg-0">
             {/* Custom Switch */}
@@ -138,8 +140,8 @@ export default function SeanceTravail({user}) {
                       <span className="text-danger">*</span>
                     </label>
                     <input type="text" name='nom' onChange={onChange} className="form-control" />
-                    <small>Field must contain a unique value</small>
-                    <div className="invalid-feedback">Please enter category.</div>
+                    {/* <small>Field must contain a unique value</small> */}
+                    {/* <div className="invalid-feedback">Please enter category.</div> */}
                   </div>
                   <div className="mb-3 mb-2">
                     <label className="form-label" htmlFor="title">
@@ -147,8 +149,8 @@ export default function SeanceTravail({user}) {
                       <span className="text-danger">*</span>
                     </label>
                     <input type="text" name='lien_de_la_reunion' onChange={onChange} className="form-control" />
-                    <small>Field must contain a unique value</small>
-                    <div className="invalid-feedback">Please enter category.</div>
+                    {/* <small>Field must contain a unique value</small> */}
+                    {/* <div className="invalid-feedback">Please enter category.</div> */}
                   </div>
                   <div className="mb-3 mb-2">
                   <label className="form-label" htmlFor="title">
@@ -157,12 +159,12 @@ export default function SeanceTravail({user}) {
                     </label>
                   <input type="date" name='date_de_la_reunion' onChange={onChange} className="form-control" />
             
-                      <div className="invalid-feedback">Please enter valid type_compte.</div>
+                      {/* <div className="invalid-feedback">Please enter valid type_compte.</div> */}
                   </div>
                   
                   <div>
-                    <button type="submit" className="btn btn-primary">Add New Category</button>
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" className="btn btn-primary">Add New Seance Travel</button>
+                    <button type="button" className="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
                   </div>
                 </form>
               </div>
