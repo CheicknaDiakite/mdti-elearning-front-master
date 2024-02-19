@@ -33,7 +33,7 @@ export default function SousModif() {
         error,
         isLoading,
       } = useQuery({
-        queryKey: ["categorie"],
+        queryKey: ["categorie", id],
         queryFn: () =>
         sousCatService.unSousCat(id)
         .then(res => {

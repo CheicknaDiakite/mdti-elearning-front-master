@@ -40,7 +40,7 @@ export default function Reponse() {
     // error,
     isLoading,
   } = useQuery({
-    queryKey: ["reponse"],
+    queryKey: ["reponse", slug],
     queryFn: () =>
     reponseService.allReponse(slug)
       .then((res) => res.data),

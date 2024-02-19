@@ -1,25 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React from 'react'
+import React, { useContext } from 'react'
 import { discutionService } from '../../../../_services';
 import toast from 'react-hot-toast';
+import FormationContext from '../../../../components/UseContext/formation.context';
 
 export default function ApChat({post}) {
-    const useQuery = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: (post) => {
-        return discutionService.deleteDiscution(post)
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue0");
-        },
-        onSuccess: () => {
-        useQuery.invalidateQueries("formations");
-        toast.success("formations supprimée avec succès");
-        },
-    });
-    const handleDelete = (post) => {
-        mutation.mutate(post);
-      };
+    const {deleteFormation} = useContext(FormationContext)
   return (
     <>
         <div className="d-flex w-lg-40 mb-4">
@@ -56,7 +42,7 @@ export default function ApChat({post}) {
                         <i className="fe fe-star dropdown-item-icon" />
                         Favourite
                     </a> */}
-                    <button className="dropdown-item" onClick={()=>handleDelete(post)}>
+                    <button className="dropdown-item" onClick={()=>deleteFormation(post)}>
                         <i className="fe fe-trash dropdown-item-icon" />
                         Delete
                     </button>

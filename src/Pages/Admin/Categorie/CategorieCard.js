@@ -1,18 +1,15 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
-import toast from 'react-hot-toast';
-import axios from 'axios';
 import { BASE } from '../../../_services/caller.service';
-import { categorieService } from '../../../_services';
+
 import FormationContext from '../../../components/UseContext/formation.context';
 
 export default function CategorieCard({categorie}) {
+    
     const { deleteFormation } = useContext(FormationContext)
-
       
-      let url = BASE(categorie.image)
+    let url = BASE(categorie.image)
   return (
     <>
     <tr>

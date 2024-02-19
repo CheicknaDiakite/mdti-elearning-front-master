@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function FormationCardQcm({qcm, slug}) {
-    console.log("qccmm",qcm)
+    // console.log("qccmm",qcm)
   return (
     <>
         <tr>

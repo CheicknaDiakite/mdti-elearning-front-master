@@ -19,7 +19,7 @@ export default function Videos() {
         // error,
         isLoading,
       } = useQuery({
-        queryKey: ["videos"],
+        queryKey: ["videos", top],
         queryFn: () =>
         videoService.getVideo(top)
           .then((res) => res.data),

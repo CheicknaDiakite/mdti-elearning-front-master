@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { categorieService } from '../../../_services';
 import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { BASE } from '../../../_services/caller.service';
+import FormationContext from '../../../components/UseContext/formation.context';
 
 export default function CateModif() {
 
     let {id} = useParams()
+    const { updateFormation }= useContext(FormationContext)
 
     console.log(id)
 
@@ -19,7 +21,7 @@ export default function CateModif() {
         error,
         isLoading,
       } = useQuery({
-        queryKey: ["categorie"],
+        queryKey: ["categorie", id],
         queryFn: () =>
         categorieService.getCategorie(id)
         .then(res => {
@@ -67,16 +69,8 @@ export default function CateModif() {
         }
         nom["id"]=id
 
-        console.log(nom)
-        categorieService.updateCategorie(nom)
-        .then((response) => {
-            console.log("UpdateForma",response.data);
-            toast.success("Modifications fait avec success");
-            // Faire quelque chose avec la réponse
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+        // console.log(nom)
+        updateFormation(nom)
     };
 
     let url = BASE(nom.image)

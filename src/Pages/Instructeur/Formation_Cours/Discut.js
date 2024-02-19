@@ -51,7 +51,7 @@ export default function Discut() {
         error,
         isLoading,
       } = useQuery({
-        queryKey: ["Discutions"],
+        queryKey: ["Discutions", top],
         queryFn: () =>
         discutionService.getDiscution(top)
           .then((res) => res.data),

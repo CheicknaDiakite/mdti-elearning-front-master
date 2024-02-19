@@ -16,7 +16,7 @@ export default function SeanceTravail() {
         error,
         isLoading,
       } = useQuery({
-        queryKey: ["formations"],
+        queryKey: ["formations", slug],
         queryFn: () =>
         formationService.unFormation(slug)
           .then((res) => res.data),

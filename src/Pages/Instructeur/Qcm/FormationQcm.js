@@ -58,7 +58,7 @@ export default function FormationQcm({slug}) {
 
     qc["formation_slug"]= slug
 
-    console.log(qc)
+    // console.log(qc)
     
     mutation.mutate(qc);
   };

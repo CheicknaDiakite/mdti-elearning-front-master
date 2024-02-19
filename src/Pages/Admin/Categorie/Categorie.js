@@ -1,18 +1,14 @@
 import React, { useContext, useState } from 'react'
 import CategorieCard from './CategorieCard'
-import { categorieService } from '../../../_services';
-import toast from 'react-hot-toast';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import EditorJsComponent from '../../../components/Editor';
+
 import FormationContext from '../../../components/UseContext/formation.context';
 
 export default function Categorie() {
 
-  const {categories}= useContext(FormationContext)
+  const { categories, create }= useContext(FormationContext)
     
     const [base64Image, setBase64Image] = useState('');
-    const [nom, setNom] = useState([]);
-    
+    const [nom, setNom] = useState([]);    
 
     const onChange = (e) => {
         setNom({
@@ -33,23 +29,6 @@ export default function Categorie() {
       reader.readAsDataURL(file);
     };
   
-  // pour l'ajout des categories
-  const useText = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: (data) => {
-      return categorieService.addCategorie(data)
-    },
-    onError: (error) => {
-      toast.error("Une erreur est survenue0");
-    },
-    onSuccess: () => {
-      
-      useText.invalidateQueries("categories");
-      toast.success("Publication ajoutée avec succès");
-    //   navigate('/admin/categorie/index')
-    },
-  });
 
   // fin ajout
   const onSubmit = (e) => {
@@ -62,7 +41,7 @@ export default function Categorie() {
       delete nom["image"]
     }
     // nom["image"]=base64Image
-    mutation.mutate(nom)
+    create(nom)
   };
   return (
     <>

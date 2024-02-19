@@ -51,7 +51,7 @@ export default function FormationList() {
     // error,
     isLoading,
   } = useQuery({
-    queryKey: ["formations"],
+    queryKey: ["formations", top],
     queryFn: () =>
       formationService.allFormation(top)
       .then((res) => res.data),

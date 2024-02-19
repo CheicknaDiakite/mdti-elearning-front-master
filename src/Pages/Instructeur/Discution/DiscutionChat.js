@@ -9,11 +9,13 @@ import InsAdm from './InstrucAdmin/InsAdm';
 import FormationContext from '../../../components/UseContext/formation.context';
 
 export default function DiscutionChat({slug}) {
-    const { user } = useContext(FormationContext)
+    
+    const { user, create } = useContext(FormationContext)
     const sluger = {
         "formation_slug": slug,
         "apprenant_id": user,
     }
+
 
     //Pour les Discutions
     // const [discutions, setDiscution] = useState([]);
@@ -45,35 +47,13 @@ export default function DiscutionChat({slug}) {
     
       },[]);
 
-      const useText = useQueryClient();
-      const mutation = useMutation({
-        mutationFn: (discut) => {
-          return discutionService.addDiscution(discut)
-          .then(res => {
-            if(res.data.etat===true){
-                useText.invalidateQueries("discuts");
-                toast.success(res.data.message);
-            } else {
-                toast.error(res.data.message);
-            }
-        })
-        },
-        onError: (error) => {
-          toast.error("Une erreur est survenue");
-        },
-        // onSuccess: () => {          
-        //   useText.invalidateQueries("discuts");
-        //   toast.success("Publication ajoutée avec succès");
-        // //   navigate('/admin/categorie/index')
-        // },
-      });
-
+      
     const {
         data: discuts,
         // error,
         isLoading,
       } = useQuery({
-        queryKey: ["discuts"],
+        queryKey: ["discuts", sluger],
         queryFn: () =>
         discutionService.getDiscution(sluger)
           .then((res) => res.data),
@@ -106,7 +86,7 @@ export default function DiscutionChat({slug}) {
         discut["apprenant_id"] = user
         discut["envoyer_par_apprenant"] = envoyer
     
-        mutation.mutate(discut)
+        create(discut)
     };
     // fin ajout
 

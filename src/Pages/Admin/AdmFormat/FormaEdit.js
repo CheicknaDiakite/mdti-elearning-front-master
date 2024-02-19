@@ -180,7 +180,7 @@ export default function FormaEdit() {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["formati"],
+    queryKey: ["formati", slug],
     queryFn: () =>
     formationService.unFormation(slug)
       .then((res) => res.data),

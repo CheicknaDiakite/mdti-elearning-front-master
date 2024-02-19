@@ -17,6 +17,7 @@ import Niveau from './Ancien_Sujet/Niveau/Niveau';
 import CateModif from './Categorie/CateModif';
 import SousModif from './Sous-Categorie/SousModif';
 import CateContext from './Categorie/CateContext';
+import ModifContext from './Categorie/ModifContext';
 
 export default function AdminRouter() {
   
@@ -32,7 +33,7 @@ export default function AdminRouter() {
           <Route path='slider' element={<Slider />} />
           <Route path='edit/:slug' element={<FormaEdit />} />
           <Route path='categorie' element={<CateContext />}/>
-          <Route path='categorie/:id' element={<CateModif />}/>
+          <Route path='categorie/:id' element={<ModifContext />}/>
           <Route path='sous-categorie/:slug' element={<SousCate />} />
           <Route path='sous/modif/:id' element={<SousModif />} />
         </Route>

@@ -9,28 +9,8 @@ import CatForma from './CatForma';
 import FormationContext from '../../../components/UseContext/formation.context';
 
 export default function FormatCard({formation}) {
-    const { user } = useContext(FormationContext)
-    const useQuery = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: (formation) => {
-        return formationService.deleteFormation(formation)
-        .then(res => {
-            if(res.data.etat!==true){
-              toast.error(res.data.message);
-            } 
-          })
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue",error);
-        },
-        onSuccess: () => {
-        useQuery.invalidateQueries("formations");
-        // toast.success("formations supprimée avec succès");
-        },
-    });
-    const handleDelete = (formation) => {
-        mutation.mutate(formation);
-      };
+    const { user, deleteFormation } = useContext(FormationContext)
+    
 
       let url = BASE(formation.miniature)
     //   let url = `http://127.0.0.1:8000/${formation.miniature}`
@@ -73,7 +53,7 @@ export default function FormatCard({formation}) {
                 <i className="fe fe-edit dropdown-item-icon"></i>
                 Edit
             </Link>
-            <button className="dropdown-item" onClick={()=>handleDelete(formation)}>
+            <button className="dropdown-item" onClick={()=>deleteFormation(formation)}>
                 <i className="fe fe-trash dropdown-item-icon" />
                 Remove
             </button>

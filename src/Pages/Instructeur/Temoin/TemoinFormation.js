@@ -5,6 +5,7 @@ import { temoinService } from '../../../_services';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button, ThemeProvider, createTheme } from '@mui/material';
 import FormationContext from '../../../components/UseContext/formation.context';
+import useTemoin from '../../../components/UseContext/useTemoin';
 
 const defaultTheme = createTheme();
 
@@ -48,9 +49,10 @@ export default function TemoinFormation({slug}) {
     // pour Ajout des Temoignages
     const { user } = useContext(FormationContext)
     const [temoin, setTemoin] = useState('');
+
     const sluger = {
       "formation_slug": slug
-  }
+    }
     const onChangeTemoin = (e) => {
         setTemoin({
         ...temoin,
@@ -79,14 +81,15 @@ export default function TemoinFormation({slug}) {
       // toast.success("Temoignage ajout avec succès");
       // },
     });
-
+    // const {temoin: to} = useTemoin(sluger)
+    // console.log("rrr",to)
     
     const {
         data: temoins,
         error,
         isLoading,
       } = useQuery({
-        queryKey: ["temoin"],
+        queryKey: ["temoin", sluger],
         queryFn: () =>
         temoinService.allTemoin(sluger)
           .then((res) => res.data),

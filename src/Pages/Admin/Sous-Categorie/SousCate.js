@@ -56,7 +56,7 @@ export default function SousCate() {
       error,
       isLoading,
     } = useQuery({
-      queryKey: ["sousCategories"],
+      queryKey: ["sousCategories", sluger],
       queryFn: () =>
         sousCatService.getSousCat(sluger)
         .then((res) => res.data),

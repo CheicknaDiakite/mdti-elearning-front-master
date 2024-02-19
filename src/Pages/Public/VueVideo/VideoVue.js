@@ -83,7 +83,7 @@ export default function VideoVue() {
         error,
         isLoading,
       } = useQuery({
-        queryKey: ["formation-vue"],
+        queryKey: ["formation-vue", slug],
         queryFn: () =>
         formationService.unFormation(slug)
           .then((res) => res.data),

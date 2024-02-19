@@ -36,7 +36,7 @@ export default function Question() {
     // error,
     isLoading,
   } = useQuery({
-    queryKey: ["question"],
+    queryKey: ["question", slug],
     queryFn: () =>
     questionService.allQuestion(slug)
       .then((res) => res.data),

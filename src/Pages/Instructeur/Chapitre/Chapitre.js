@@ -13,7 +13,7 @@ export default function Chapitre({slug}) {
         error,
         isLoading,
       } = useQuery({
-        queryKey: ["chapitre"],
+        queryKey: ["chapitre", sluger],
         queryFn: () =>
         formationChapitre.allChapitre(sluger)
           .then((res) => res.data),
@@ -23,7 +23,7 @@ export default function Chapitre({slug}) {
         return <div>Chargement...</div>;
       }
       const chapitres = chapitre.donnee
-      console.log("ddcha",chapitres)
+      
   return (
     <>
         <div>

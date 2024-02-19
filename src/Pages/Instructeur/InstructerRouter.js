@@ -39,7 +39,7 @@ export default function InstructerRouter() {
             </Route>
             <Route path='user'>
               <Route path='profil' element={<UserProfil />} />
-              <Route path='index' element={<Userlist/>} />
+              <Route path='index' element={<Userlist />} />
 
             </Route>
 

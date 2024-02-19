@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -10,7 +9,7 @@ import FormationContext from '../../../components/UseContext/formation.context';
 export default function FormationEdit() {
   let {slug} = useParams()
 
-  const {user, sous_categories} = useContext(FormationContext)
+  const {user, sous_categories, updateFormation} = useContext(FormationContext)
 
   
   const [ajout_terminer, setTerminer] = useState(false);
@@ -20,36 +19,8 @@ export default function FormationEdit() {
   }
 
   const [base64Image, setBase64Image] = useState('');
-  
-  // user
-  
   const [post, setPost] = useState([]);
-  // console.log("okkkkk",slug)
-  useEffect(()=>{
-
-    if(flag.current===false){
-      accountService.getUser(user)
-    .then(res => {
-        if(res.data.etat===true){
-            
-            setPost(res.data.donnee);
-            
-        } else {
-            toast.error("Les identifiants sont incorrects");
-        }
-    })
-    .catch(error => 
-        toast.error("Erreur connexion")
-        )
-    }
-
-    return () => flag.current = true;;;
-
-  },[]);
-
-    
-  // fin
-
+  
   // pour recuperer la formations
   const [nom, setName] = useState([]);
   
@@ -61,7 +32,7 @@ export default function FormationEdit() {
     console.log('text 0')
     
     if(flag.current===false){
-      axios.get(`http://127.0.0.1:8000/formation/get/${slug}`)
+      formationService.unFormation(slug)
       .then(res => {
         if(res.data.etat===true){
 
@@ -102,13 +73,6 @@ export default function FormationEdit() {
   },[]);
   // fin
 
-  // pour l'envoye du formulaire
-  // const onChange = (e) => {
-  //   setName({
-  //     ...nom,
-  //     [e.target.name]: e.target.value
-  //   })
-  // }
   const [yes, setYes] = useState([]);
   const onChange = (e) => {
     setYes({
@@ -194,90 +158,47 @@ export default function FormationEdit() {
       ajout_terminer: ajout_terminer
     };
     
-    formationService.updateFormation(data)
-      .then((response) => {
-        console.log("UpdateForma",response.data);
-        toast.success("Modifications fait avec success");
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    updateFormation(data)
+
   };
   const onSubmitNom = (e) => {
     e.preventDefault(); 
     
-    console.log("nom ", yes)
     yes["slug"]=slug
     
-    formationService.updateFormation(yes)
-      .then((response) => {
-        console.log("UpdateForma",response.data);
-        toast.success("Modifications fait avec success");
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    updateFormation(yes)
   };
   const onSubmitDesc = (e) => {
     e.preventDefault();
 
-    console.log("description ", desc)
+    // console.log("description ", desc)
     desc["slug"]=slug
-    formationService.updateFormation(desc)
-      .then((response) => {
-        console.log("UpdateForma",response.data);
-        toast.success("Modifications fait avec success");
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+
+    updateFormation(desc)
   };
   const onSubmitN_H = (e) => {
     e.preventDefault();
 
-    console.log("nombre_heure ", nbr)
+    // console.log("nombre_heure ", nbr)
     nbr["slug"]=slug
-    formationService.updateFormation(nbr)
-      .then((response) => {
-        console.log("UpdateForma",response.data);
-        toast.success("Modifications fait avec success");
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+
+    updateFormation(nbr)
   };
   const onSubmitObj = (e) => {
     e.preventDefault();
 
-    console.log("objectif ", obj)
     obj["slug"]=slug
-    formationService.updateFormation(obj)
-      .then((response) => {
-        console.log("UpdateForma",response.data);
-        toast.success("Modifications fait avec success");
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+
+    updateFormation(obj)
+
   };
   const onSubmitPrere = (e) => {
     e.preventDefault();
 
-    console.log("prerequis ", pre)
     pre["slug"]=slug
-    formationService.updateFormation(pre)
-      .then((response) => {
-        toast.success("Modifications fait avec success");
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+
+    updateFormation(pre)
+
   };
   const onSubmitPhoto = (e) => {
     e.preventDefault();
@@ -292,61 +213,31 @@ export default function FormationEdit() {
       delete pho["miniature"]
     }
 
+    updateFormation(pho)
 
-    formationService.updateFormation(pho)
-      .then((response) => {
-        toast.success("Modifications fait avec success");
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
   };
   const onSubmitPrix = (e) => {
     e.preventDefault();
 
-    console.log("prix ", prix)
+    // console.log("prix ", prix)
     prix["slug"]=slug
     
-    formationService.updateFormation(prix)
-      .then((response) => {
-        console.log("UpdateForma",response.data);
-        toast.success("Modifications fait avec success");
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    updateFormation(prix)
+
   };
   const onSubmitSousCat = (e) => {
     e.preventDefault();
 
     // console.log("SousCate ", scat)
     scat["slug"]=slug
-    formationService.updateFormation(scat)
-      .then((response) => {
-        console.log("UpdateForma",response.data);
-        toast.success("Modifications fait avec success");
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    updateFormation(scat)
+
   };
   const onSubmitPro_De = (e) => {
     e.preventDefault();
 
-    console.log("profil destiner ", pro)
-    
-    formationService.updateFormation(pro)
-      .then((response) => {
-        console.log("UpdateForma",response.data);
-        toast.success("Modifications fait avec success");
-        // Faire quelque chose avec la réponse
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    updateFormation(pro)
+
   };
   const onSubmit = (e) => {
     e.preventDefault();

@@ -2,21 +2,22 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast';
 import { Link, useParams } from 'react-router-dom';
-import { accountService, formationService } from '../../../_services';
+import { accountService } from '../../../_services';
 import DiscutionChat from '../Discution/DiscutionChat';
 import TemoinFormation from '../Temoin/TemoinFormation';
-import QcmDetail from '../Qcm/QcmDetail';
 
 import Chapitre from '../Chapitre/Chapitre';
-import { useQuery } from '@tanstack/react-query';
+
 import AbonCour from '../../Public/AbonCour/AbonCour';
 import FormationQcm from '../Qcm/FormationQcm';
-import FormationContext from '../../../components/UseContext/formation.context';
+import FormationContext, { DiscutionChatProvider } from '../../../components/UseContext/formation.context';
+import useForma from '../../../components/UseContext/useForma';
 
 export default function FormationDetail() {
     let {slug} = useParams()
 
     const { user } = useContext(FormationContext)
+    const {formati: cour} = useForma(slug)
 
     const [post, setPost] = useState([]);
     const flag = useRef(false)
@@ -42,25 +43,6 @@ export default function FormationDetail() {
   
     },[]);
     // pour une formation
-
-    const {
-        data: formation,
-        error,
-        isLoading,
-      } = useQuery({
-        queryKey: ["formations", slug],
-        queryFn: () =>
-        formationService.unFormation(slug)
-          .then((res) => res.data),
-        onerror: (error) => console.log(error),
-      });
-      if (isLoading) {
-        return <div>Chargement...</div>;
-      }
-      const cour = formation.donnee
-
-    //   console.log('ok je ',user)
-      // fin
     
   return (
     <>
@@ -76,6 +58,7 @@ export default function FormationDetail() {
                 <div>
                     <h1 className="text-white display-4 fw-semibold">{cour.nom}</h1>
                     <p className="text-white mb-6 lead">
+                        
                     JavaScript is the popular programming language which powers web pages and web
                     applications. This course will get you started coding in JavaScript.
                     </p>
@@ -138,13 +121,17 @@ export default function FormationDetail() {
                         <div className="mb-4">
                             <h3 className="mb-2">Course Descriptions</h3>
                             <p>
+                            {/* {cour.description} */}
                             {cour.description}
                             </p>
                             <h3 className="mb-2">Course prerequis</h3>
+                            {/* {cour.prerequis} */}
                             {cour.prerequis}
                             <h3 className="mb-2">Course profile_destine</h3>
+                            {/* {cour.profile_destine} */}
                             {cour.profile_destine}
                             <h3 className="mb-2">Course objectif_du_cours</h3>
+                            {/* {cour.objecti_du_cours} */}
                             {cour.objecti_du_cours}
                         </div>
                         <h4 className="mb-3">What you’ll learn</h4>
@@ -152,7 +139,9 @@ export default function FormationDetail() {
                         </div>
                         <div className="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                         {/* Discution */}
-                        <DiscutionChat slug={slug} />
+                        <DiscutionChatProvider value={{slug}}>
+                            <DiscutionChat slug={slug} />
+                        </DiscutionChatProvider>
                         <hr className="my-5" />
                         
                         </div>
