@@ -1,14 +1,14 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { ancienType } from '../../../../_services';
+import { ancienMatiere } from '../../../../_services';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
-export default function TypeCard({type}) {
+export default function MatiereCard({type}) {
     const useQuery = useQueryClient();
     const mutation = useMutation({
         mutationFn: (type) => {
-        return ancienType.deleteType(type)
+        return ancienMatiere.deleteMatiere(type)
         .then(res => {
             if(res.data.etat!==true){
               toast.error(res.data.message);
@@ -28,7 +28,7 @@ export default function TypeCard({type}) {
       };
   return (
     <>
-        <tr>
+    <tr>
             <td>
                 <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="withdrawTwo" />

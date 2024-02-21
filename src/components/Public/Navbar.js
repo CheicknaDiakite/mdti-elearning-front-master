@@ -364,7 +364,7 @@ export default function Navbar({user}) {
               <a className="nav-link dropdown-toggle" href="#" id="navbarAccount" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a>
               <ul className="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarAccount">
                 <li>
-                  <h4 className="dropdown-header">Accounts</h4>
+                  <h4 className="dropdown-header">Compte</h4>
                 </li>
                 
                 <li className="dropdown-submenu dropend">

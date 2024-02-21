@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useChapitre } from '../../../components/UseContext/useForma'
 
 export default function ChapitreCard({post}) {
-    console.log("ee",post)
+    const {deleteChapitre}= useChapitre(post)
   return (
     <>
     <tr>
@@ -30,10 +31,10 @@ export default function ChapitreCard({post}) {
                     <i className="fe fe-edit dropdown-item-icon" />
                     Edit
                     </a>
-                    <a className="dropdown-item" href="#">
+                    <button className="dropdown-item" onClick={()=>deleteChapitre(post)}>
                     <i className="fe fe-trash dropdown-item-icon" />
                     Remove
-                    </a>
+                    </button>
                 </span>
                 </span>
             </td>

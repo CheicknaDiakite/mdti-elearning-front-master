@@ -82,7 +82,7 @@ let updateChapitre = (user) => {
  * Suppression d'un utilsateur
  */
 let deleteChapitre = (categorie) => {
-    return Axios.post(`formation/chapitre/set`,categorie)
+    return Axios.post(`formation/del_chapitre/set`,categorie)
 }
 
 // Décaraltion des esrvices pour import

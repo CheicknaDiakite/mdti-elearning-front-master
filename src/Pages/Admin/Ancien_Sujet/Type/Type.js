@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ancienType } from '../../../../_services';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+
 import TypeCard from './TypeCard';
 import toast from 'react-hot-toast';
 

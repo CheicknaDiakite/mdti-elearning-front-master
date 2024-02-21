@@ -17,7 +17,7 @@ export default function FormationDetail() {
     let {slug} = useParams()
 
     const { user } = useContext(FormationContext)
-    const {formati: cour} = useForma(slug)
+    const {formation: cour} = useForma(slug)
 
     const [post, setPost] = useState([]);
     const flag = useRef(false)

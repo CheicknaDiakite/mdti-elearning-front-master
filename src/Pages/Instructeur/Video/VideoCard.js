@@ -5,8 +5,6 @@ import toast from 'react-hot-toast';
 
 export default function VideoCard({video}) {
 
-    console.log("viddd",video)
-
     const useQuery = useQueryClient();
     const mutation = useMutation({
         mutationFn: (video) => {

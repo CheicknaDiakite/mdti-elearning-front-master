@@ -22,13 +22,23 @@ export default function AjoutChapitre({slug}) {
     const mutation = useMutation({
         mutationFn: (chap) => {
         return formationChapitre.addChapitre(chap)
+        .then(res => {
+          if(res.data.etat===true){
+            useChap.invalidateQueries("chap");
+            console.log("Formation")
+            
+          } else {
+            toast.error("Nom trouver");
+          }
+        })
+        .catch(err => console.log(err))
         },
         onError: (error) => {
         toast.error("Une erreur est survenue0");
         },
         onSuccess: () => {
         useChap.invalidateQueries("chap");
-        toast.success("formations supprimée avec succès");
+        
         },
     });
 
@@ -37,7 +47,7 @@ export default function AjoutChapitre({slug}) {
         // error,
         isLoading,
       } = useQuery({
-        queryKey: ["chap"],
+        queryKey: ["chap", sluger],
         queryFn: () =>
         formationChapitre.allChapitre(sluger)
           .then((res) => res.data),

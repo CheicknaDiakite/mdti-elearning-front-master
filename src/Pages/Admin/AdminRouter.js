@@ -18,6 +18,8 @@ import CateModif from './Categorie/CateModif';
 import SousModif from './Sous-Categorie/SousModif';
 import CateContext from './Categorie/CateContext';
 import ModifContext from './Categorie/ModifContext';
+import TypeModif from './Ancien_Sujet/Type/TypeModif';
+import Matiere from './Ancien_Sujet/Matiere/Matiere';
 
 export default function AdminRouter() {
   
@@ -40,7 +42,11 @@ export default function AdminRouter() {
 
         <Route path='ancien_sujet'>
           <Route path='type' element={<Type />} />
+          <Route path='type/:id' element={<TypeModif />} />
           <Route path='niveau' element={<Niveau />} />
+          <Route path='niveau/:id' element={<Niveau />} />
+          <Route path='matiere' element={<Matiere />} />
+          <Route path='matiere/:id' element={<Niveau />} />
         </Route>
 
         <Route path='user'>

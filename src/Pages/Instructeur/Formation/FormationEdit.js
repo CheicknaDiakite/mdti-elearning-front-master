@@ -393,8 +393,8 @@ export default function FormationEdit() {
                 </div>
                 
                 <div>
-                  <button type="submit" className="btn btn-primary">Add New Category</button>
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Modifier</button>
+                  
                 </div>
               </form>
             </div>
@@ -422,8 +422,8 @@ export default function FormationEdit() {
                 </div>
                 
                 <div>
-                  <button type="submit" className="btn btn-primary">Add New Category</button>
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Modifier</button>
+                  
                 </div>
               </form>
             </div>
@@ -451,8 +451,8 @@ export default function FormationEdit() {
                 </div>
                 
                 <div>
-                  <button type="submit" className="btn btn-primary">Add New Category</button>
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Modifier</button>
+                  
                 </div>
               </form>
             </div>
@@ -480,8 +480,8 @@ export default function FormationEdit() {
                 </div>
                 
                 <div>
-                  <button type="submit" className="btn btn-primary">Add New Category</button>
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Modifier</button>
+                  
                 </div>
               </form>
             </div>
@@ -509,8 +509,8 @@ export default function FormationEdit() {
                 </div>
                 
                 <div>
-                  <button type="submit" className="btn btn-primary">Add New Category</button>
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Modifier</button>
+                  
                 </div>
               </form>
             </div>
@@ -538,8 +538,8 @@ export default function FormationEdit() {
                 </div>
                 
                 <div>
-                  <button type="submit" className="btn btn-primary">Add New Category</button>
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Modifier</button>
+                  
                 </div>
               </form>
             </div>
@@ -567,8 +567,8 @@ export default function FormationEdit() {
                 </div>
                 
                 <div>
-                  <button type="submit" className="btn btn-primary">Add New Category</button>
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Modifier</button>
+                  
                 </div>
               </form>
             </div>
@@ -597,8 +597,8 @@ export default function FormationEdit() {
                 </div>
                 
                 <div>
-                  <button type="submit" className="btn btn-primary">Add New Category</button>
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Modifier</button>
+                  
                 </div>
               </form>
             </div>
@@ -631,8 +631,8 @@ export default function FormationEdit() {
               </div>
 
               <div>
-                <button type="submit" className="btn btn-primary">Add New Category</button>
-                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Modifier</button>
+                
               </div>
             </form>
             </div>

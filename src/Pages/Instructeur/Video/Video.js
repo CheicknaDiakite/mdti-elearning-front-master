@@ -5,15 +5,12 @@ import { videoService } from '../../../_services';
 import VideoCard from './VideoCard';
 
 export default function Videos() {
-    let {id} = useParams()
-
-    
+    let {id} = useParams()    
 
     const top = {
         chapitre_id: id
     }
 
-    console.log("testtt",id)
     const {
         data: video,
         // error,
@@ -41,7 +38,7 @@ export default function Videos() {
             this.myWindow.close();
             }
         }
-      console.log()
+      
   return (
     <>
     <>

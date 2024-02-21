@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import VueChapitre from './VueChapitre';
 import Axios, { BASE, Base } from '../../../_services/caller.service';
 import FormationContext from '../../../components/UseContext/formation.context';
+import useForma, { useChapitre } from '../../../components/UseContext/useForma';
 
 export default function VideoVue() {
   let {slug} = useParams()
@@ -13,13 +14,16 @@ export default function VideoVue() {
   const sluger = {
     "formation_slug": slug
   }
-
+  const {chapitre: chapitres} = useChapitre(sluger)
+  const {formation: cour} = useForma(slug)
+  
     // let url = "";
     // let Introduction = "Introduction";
     const [post, setPost] = useState([]);
-    const [chapitres, setChapitres] = useState([]);
+    
     const [url, seturl] = useState('');
 
+    // pour annuler le click droit
     useEffect(() => {
       const handleContextMenu = (e) => {
         e.preventDefault();
@@ -32,6 +36,7 @@ export default function VideoVue() {
         document.removeEventListener('contextmenu', handleContextMenu, false);
       };
     }, []);
+    // fin
 
     const flag = useRef(false)
     useEffect(()=>{
@@ -55,45 +60,8 @@ export default function VideoVue() {
       return () => flag.current = true;;;
   
     },[]);
-    useEffect(()=>{
-  
-      if(flag.current===false){
-        formationChapitre.allChapitre(sluger)
-      .then(res => {
-          if(res.data.etat===true){
-              
-            setChapitres(res.data.donnee);
-              toast.success("Detail de la formation");
-          } else {
-              toast.error("Les identifiants sont incorrects");
-          }
-      })
-      .catch(error => 
-          toast.error("Erreur connexion")
-          )
-      }
-  
-      return () => flag.current = true;;;
-  
-    },[]);
-    // pour une formation
-
-    const {
-        data: formation,
-        error,
-        isLoading,
-      } = useQuery({
-        queryKey: ["formation-vue", slug],
-        queryFn: () =>
-        formationService.unFormation(slug)
-          .then((res) => res.data),
-        onerror: (error) => console.log(error),
-      });
-      if (isLoading) {
-        return <div>Chargement...</div>;
-      }
-      const cour = formation.donnee
-      // fin
+    
+    
   return (
     <>
     <main>
@@ -190,7 +158,7 @@ export default function VideoVue() {
               <>
                   {/* Toggle */}
               <Link to={`#${post.id}`} className="d-flex align-items-center h4 mb-0" data-bs-toggle="collapse"  role="button" aria-expanded="true" aria-controls={post.id}>
-                  <div className="me-auto">Introduction to {post.nom}</div>
+                  <div className="me-auto">{post.nom}</div>
                   {/* Chevron */}
                   <span className="chevron-arrow ms-4">
                   <i className="fe fe-chevron-down fs-4" />
@@ -223,10 +191,10 @@ export default function VideoVue() {
                         `;
                         // document.addEventListener('contextmenu', event => event.preventDefault());
                       }} className="icon-shape bg-light text-primary icon-sm rounded-circle me-2"><i className="fe fe-play fs-6" /></span>
-                      <span>Installing Development Software</span>
+                      <span>{post.nom}</span>
                       </div>
                       <div className="text-truncate">
-                      <span>3m 11s</span>
+                      <span>{post.nombre_heur}</span>
                       </div>
                   </a>
                   ))}

@@ -119,7 +119,7 @@ export default function AdminSideMenu() {
                     </div>
                   </li> */}
                   <li className="nav-item">
-                    <a className="nav-link" href="#">Matiere</a>
+                    <a className="nav-link" href="/admin/ancien_sujet/matiere">Matiere</a>
                   </li>
                 </ul>
               </div>
