@@ -14,6 +14,8 @@ import FormationContext from '../../../components/UseContext/formation.context';
 export default function QcmDetail() {
   const { user } = useContext(FormationContext)
   let {slug} = useParams()
+
+  // console.log("ok ..",slug)
   const [examen, setExamen] = useState([]);
   const [messa, setMessa] = useState([]);
 
@@ -43,7 +45,7 @@ export default function QcmDetail() {
     // messa = message
     // console.log('yyeess',message)
     setExamen(message)
-}
+  }
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);

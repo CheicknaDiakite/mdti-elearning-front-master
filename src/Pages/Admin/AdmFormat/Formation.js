@@ -79,17 +79,7 @@ export default function Formation() {
               <div className="mb-3 mb-md-0">
                 <h1 className="mb-1 h2 fw-bold">Liste des formations</h1>
                 {/* Breadcrumb */}
-                {/* <nav aria-label="breadcrumb">
-                  <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <a href="../dashboard/admin-dashboard.html">Dashboard</a>
-                    </li>
-                    <li className="breadcrumb-item">
-                      <a href="#">Courses</a>
-                    </li>
-                    <li className="breadcrumb-item active" aria-current="page">Courses Category</li>
-                  </ol>
-                </nav> */}
+                
               </div>
               <div>
                 <a href="#" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newFormat">Add New Category</a>
@@ -115,14 +105,12 @@ export default function Formation() {
               <div className="table-responsive border-0 overflow-y-hidden">
                 <table className="table mb-0 text-nowrap table-centered table-hover table-with-checkbox">
                   <thead className="table-light">
-                    <tr>
-                      
-                      <th>Nom</th>
-                      <th>Image</th>
-                      
-                      <th>Status</th>
-                      <th />
-                    </tr>
+                  <tr>
+                    <th>Formation</th>
+                    
+                    <th>Status (Publier/Non)</th>
+                    <th />
+                  </tr>
                   </thead>
                   <tbody>
      

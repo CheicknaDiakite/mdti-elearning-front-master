@@ -1,50 +1,29 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import React, { useState } from 'react'
-import { sliderService } from '../../../_services';
+import React, { useState } from 'react';
 import SliderCard from './SliderCard';
-import toast from 'react-hot-toast';
+import { useSlider } from '../../../components/UseContext/useForma';
 
 export default function Slider() {
     const [base64Image, setBase64Image] = useState('');
     const [nom, setNom] = useState([]);
-    
+
+    const {sliders, addSlider, isLoading} = useSlider()
 
     const onChange = (e) => {
-        setNom({
-            ...nom,
-            [e.target.name]: e.target.value
-        })
+      setNom({
+        ...nom,
+        [e.target.name]: e.target.value
+      })
     }
 
     const handleFileChange = (e) => {
-      const file = e.target.files[0];
-  
+      const file = e.target.files[0];  
       // Convertir l'image en base64
       const reader = new FileReader();
       reader.onloadend = () => {
         setBase64Image(reader.result);
-      };
-  
+      };  
       reader.readAsDataURL(file);
-    };
-  
-  // pour l'ajout des categories
-  const useText = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: (data) => {
-      return sliderService.addSlider(data)
-    },
-    onError: (error) => {
-      toast.error("Une erreur est survenue0");
-    },
-    onSuccess: () => {
-      
-      useText.invalidateQueries("slid");
-      toast.success("Publication ajoutée avec succès");
-    //   navigate('/admin/categorie/index')
-    },
-  });
+    };  
 
   // fin ajout
   const onSubmit = (e) => {
@@ -57,24 +36,13 @@ export default function Slider() {
       delete nom["image"]
     }
     // nom["image"]=base64Image
-    mutation.mutate(nom)
-  };
-
-  const {
-    data: slid,
-    error,
-    isLoading,
-  } = useQuery({
-    queryKey: ["slid"],
-    queryFn: () =>
-      sliderService.allSlider()
-      .then((res) => res.data),
-    onerror: (error) => console.log(error),
-  });
+    addSlider(nom)
+  }; 
+  
   if (isLoading) {
     return <div>Chargement...</div>;
   }
-  const sliders = slid.donnee
+  
   return (
     <>
     {/* Categorie */}
@@ -162,8 +130,8 @@ export default function Slider() {
                   </div>
                   
                   <div>
-                    <button type="submit" className="btn btn-primary">Add New Slide</button>
-                    <button type="button" className="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Add New Slide</button>
+                    
                   </div>
 
                   

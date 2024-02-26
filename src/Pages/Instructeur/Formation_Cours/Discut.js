@@ -1,14 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import React, { useState } from 'react'
-import { discutionService } from '../../../_services';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import toast from 'react-hot-toast';
+import { useDiscution } from '../../../components/UseContext/useForma';
 
 export default function Discut() {
     let {id, slug} = useParams()
-
-    console.log("recuppp",id,slug)
 
     const [envoyer, setEnvoyer] = useState(false);
     const Envoyer = () => {
@@ -23,46 +18,16 @@ export default function Discut() {
         })
     }
 
-    const useChap = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: (reponse) => {
-        return discutionService.addDiscution(reponse)
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue0");
-        },
-        onSuccess: () => {
-        useChap.invalidateQueries("Discutions");
-        toast.success("formations supprimée avec succès");
-        },
-    });
-
-    
-    // fin ajout
-
     // pour la recuperetion
     const top = {
       apprenant_id: id,        
       formation_slug: slug,        
     }
    
-    const {
-        data: discut,
-        error,
-        isLoading,
-      } = useQuery({
-        queryKey: ["Discutions", top],
-        queryFn: () =>
-        discutionService.getDiscution(top)
-          .then((res) => res.data),
-        onerror: (error) => console.log(error),
-      });
+    const {discuts, addDiscut, isLoading} = useDiscution(top)
       if (isLoading) {
         return <div>Chargement...</div>;
       }
-      const discuts = discut.donnee;
-      console.log("discution",discut.donnee)
-    //   fin
 
     const onDiscution = (e) => {
         e.preventDefault();
@@ -74,7 +39,7 @@ export default function Discut() {
 
         console.log("pour la disution",reponse)
     
-        mutation.mutate(reponse);
+        addDiscut(reponse);
     };
   return (
     <>
@@ -123,7 +88,7 @@ export default function Discut() {
         
         {/* media */}
         {discuts?.length > 0 ? 
-            discuts.map((post)=> (<>
+            discuts?.map((post)=> (<>
             {post.envoyer_par_apprenant!==true ? <>
                 <div className="d-flex w-lg-40 mb-4">
                 <img src="../../assets/images/avatar/avatar-4.jpg" alt className="rounded-circle avatar-md" />
@@ -136,36 +101,7 @@ export default function Discut() {
                         <p className="mb-0 text-dark">{post.message}</p>
                         </div>
                     </div>
-                    <div className="ms-2 mt-2">
-                        {/* dropdown */}
-                        <div className="dropdown dropend">
-                        <a className="text-link" href="#" role="button" id="dropdownMenuLinkThree" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i className="fe fe-more-vertical" />
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="dropdownMenuLinkThree">
-                            <a className="dropdown-item" href="#">
-                            <i className="fe fe-copy dropdown-item-icon" />
-                            Copy
-                            </a>
-                            <a className="dropdown-item" href="#">
-                            <i className="fe fe-corner-up-right dropdown-item-icon" />
-                            Reply
-                            </a>
-                            <a className="dropdown-item" href="#">
-                            <i className="fe fe-corner-up-left dropdown-item-icon" />
-                            Forward
-                            </a>
-                            <a className="dropdown-item" href="#">
-                            <i className="fe fe-star dropdown-item-icon" />
-                            Favourite
-                            </a>
-                            <a className="dropdown-item" href="#">
-                            <i className="fe fe-trash dropdown-item-icon" />
-                            Delete
-                            </a>
-                        </div>
-                        </div>
-                    </div>
+
                     </div>
                 </div>
                 </div>

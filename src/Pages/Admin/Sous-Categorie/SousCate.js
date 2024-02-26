@@ -43,7 +43,7 @@ export default function SousCate() {
     },
     onSuccess: () => {
       
-      useText.invalidateQueries("categories");
+      useText.invalidateQueries({queryKey: ["sousCategories"]});
       toast.success("Publication ajoutée avec succès");
     //   navigate('/admin/categorie/index')
     },

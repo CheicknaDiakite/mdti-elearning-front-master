@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createContext, useEffect, useRef, useState } from "react";
-import { accountService, categorieService, discutionService, formationService, sousCatService } from "../../_services";
+import { accountService, categorieService, discutionService, formationService, qcmService, sousCatService } from "../../_services";
 import toast from "react-hot-toast";
 
 const FormationContext = createContext({
@@ -43,7 +43,7 @@ const FormationContextProvider = ({children}) => {
         toast.error("Une erreur est survenue0");
       },
       onSuccess: () => {      
-        useQ.invalidateQueries("formations");
+        useQ.invalidateQueries({ queryKey: ["formations"] });
         toast.success("Publication ajoutée avec succès");
       
       },
@@ -69,9 +69,30 @@ const FormationContextProvider = ({children}) => {
 
     // pour la suppression des formations
     
-    const mutation = useMutation({
+    const del = useMutation({
         mutationFn: (formation) => {
         return formationService.deleteFormation(formation)
+        .then(res => {
+            if(res.data.etat!==true){
+              toast.error(res.data.message);
+            } 
+          })
+        },
+        onError: (error) => {
+        toast.error("Une erreur est survenue",error);
+        },
+        onSuccess: () => {
+        useQ.invalidateQueries({ queryKey: ["formation_instruct"] });
+        // toast.success("formations supprimée avec succès");
+        },
+    });
+    const handleDeleteForma = (formation) => {
+      del.mutate(formation);
+    };
+
+    const delQCM = useMutation({
+        mutationFn: (formation) => {
+        return qcmService.deleteQcm(formation)
         .then(res => {
             if(res.data.etat!==true){
               toast.error(res.data.message);
@@ -85,9 +106,9 @@ const FormationContextProvider = ({children}) => {
         useQ.invalidateQueries("formations");
         // toast.success("formations supprimée avec succès");
         },
-    });
-    const handleDeleteForma = (formation) => {
-        mutation.mutate(formation);
+    });    
+    const deleteQCM = (formation) => {
+        delQCM.mutate(formation);
       };
     // fin
 
@@ -111,7 +132,7 @@ const FormationContextProvider = ({children}) => {
     return (
         <FormationContext.Provider value={{
             formations,
-            deleteFormation: handleDeleteForma,
+            deleteFormation: handleDeleteForma, deleteQCM: deleteQCM,
             updateFormation: updateFormat,
             sous_categories, create: createFormation,
             user,
@@ -154,7 +175,7 @@ const CategorieContextProvider = ({children}) => {
       toast.error("Une erreur est survenue0");
     },
     onSuccess: () => {      
-      useQ.invalidateQueries("categories");
+      useQ.invalidateQueries({ queryKey: ["categories"] });
       toast.success("Publication ajoutée avec succès");
     
     },

@@ -61,7 +61,7 @@ let tousChapitre = () => {
  * Récupération d'un utilisateur
  */
 let getChapitre = (id) => {
-    return Axios.post('formation/chapitre/get/{id}')
+    return Axios.get(`formation/chapitre/get/${id}`)
 }
 
 /**
@@ -75,7 +75,7 @@ let addChapitre = (ajout) => {
  * Mise à jour d'un utilisateur
  */
 let updateChapitre = (user) => {
-    return Axios.post('formation/chapitre/set'+user.id, user)
+    return Axios.post('formation/chapitre/set',user)
 }
 
 /**

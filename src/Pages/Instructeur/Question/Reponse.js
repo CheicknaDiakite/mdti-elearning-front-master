@@ -30,7 +30,7 @@ export default function Reponse() {
     toast.error("Une erreur est survenue0");
     },
     onSuccess: () => {
-    useChap.invalidateQueries("reponse");
+    useChap.invalidateQueries({queryKey: ["reponse"]});
     toast.success("formations supprimée avec succès");
     },
   });

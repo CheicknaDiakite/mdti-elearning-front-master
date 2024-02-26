@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Slid from './Test/Slid'
-import { useQuery } from '@tanstack/react-query';
-import { sliderService } from '../../_services';
-import { Carousel } from 'react-responsive-carousel';
+
 
 export default function Slider() {
     // const [slides, setSlides] = useState([]);

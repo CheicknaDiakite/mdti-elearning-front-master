@@ -27,10 +27,10 @@ export default function ChapitreCard({post}) {
                 </a>
                 <span className="dropdown-menu" aria-labelledby="paymentDropdown">
                     <span className="dropdown-header">Setting</span>
-                    <a className="dropdown-item" href="#">
+                    <Link to={`/dashboard/formation/chapitre/modif/${post.id}`} className="dropdown-item">
                     <i className="fe fe-edit dropdown-item-icon" />
                     Edit
-                    </a>
+                    </Link>
                     <button className="dropdown-item" onClick={()=>deleteChapitre(post)}>
                     <i className="fe fe-trash dropdown-item-icon" />
                     Remove

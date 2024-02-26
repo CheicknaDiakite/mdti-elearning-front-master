@@ -16,7 +16,8 @@ export default function QcmReponse({question, enfant, qcm_id}) {
 
         enfant(message)
       }
-    //   console.log("ffffff",publier)
+    console.log("ffffff",correct)
+    
     const top = {
         question_id: question
     }

@@ -149,7 +149,6 @@ export default function FormationEdit() {
 
     reader.readAsDataURL(file);
   };
-
   const onSubmitAjout_T = (e) => {
     e.preventDefault();    
        

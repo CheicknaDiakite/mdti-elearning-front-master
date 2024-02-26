@@ -5,10 +5,11 @@ import QuestionCard from './QuestionCard';
 import { questionService } from '../../../_services';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { useQuestion } from '../../../components/UseContext/useForma';
 
 export default function Question() {
-    // pour l'envoye du formulaire
-    let {id} = useParams()
+  // pour l'envoye du formulaire
+  let {id} = useParams()
   const [nom, setName] = useState([]);
   // const [qcms, setQcms] = useState([]);
   console.log(id)
@@ -16,36 +17,12 @@ export default function Question() {
   const slug = {
     qcm_id: id
   }
-
-  const useChap = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (nom) => {
-    return questionService.addQuestion(nom)
-    },
-    onError: (error) => {
-    toast.error("Une erreur est survenue0");
-    },
-    onSuccess: () => {
-    useChap.invalidateQueries("question");
-    toast.success("formations supprimée avec succès");
-    },
-  });
-
-  const {
-    data: question,
-    // error,
-    isLoading,
-  } = useQuery({
-    queryKey: ["question", slug],
-    queryFn: () =>
-    questionService.allQuestion(slug)
-      .then((res) => res.data),
-    onerror: (error) => console.log(error),
-  });
+  const { questions, addQuestion, isLoading} = useQuestion(slug)
+  
   if (isLoading) {
     return <div>Chargement...</div>;
   }
-  const questions = question.donnee;
+  
 
   const onChange = (e) => {
   setName({
@@ -61,7 +38,7 @@ export default function Question() {
 
     console.log("eee",nom)
     
-    mutation.mutate(nom);
+    addQuestion(nom);
   };
   return (
     <>

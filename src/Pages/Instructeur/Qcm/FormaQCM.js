@@ -31,7 +31,7 @@ export default function FormaQCM({slug}) {
         toast.error("Une erreur est survenue0");
         },
         onSuccess: () => {
-        useChap.invalidateQueries("formaQcm");
+        useChap.invalidateQueries({queryKey: ["formaQcm"]});
         toast.success("formations supprimée avec succès");
         },
     });
@@ -150,8 +150,8 @@ export default function FormaQCM({slug}) {
             </div>
             
             <div>
-            <button type="submit" className="btn btn-primary">Add New Category</button>
-            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Add New Category</button>
+            
             </div>
         </form>
         </div>

@@ -202,13 +202,29 @@ export default function Navbar({user}) {
         {/* Collapse */}
         <div className="collapse navbar-collapse" id="navbar-default">
           <ul className="navbar-nav mt-3 mt-lg-0">
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarBrowse" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-display="static">Browse</a>
+            {/* <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarBrowse" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-display="static"></a>
               
-            </li>
-            <li className="nav-item dropdown">
+            </li> */}
+            {/* <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="navbarLanding" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Landings</a>
               
+            </li> */}
+            <li className="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Les anciens sujet</a>
+              <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarPages">
+                  
+                <li className="nav-item">
+                  <a className="nav-link" href="/admin/ancien_sujet/type">Type</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/admin/ancien_sujet/niveau">Niveau</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/admin/ancien_sujet/matiere">Matiere</a>
+                </li>
+                  
+              </ul>
             </li>
             <li className="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">categorie</a>
@@ -216,7 +232,7 @@ export default function Navbar({user}) {
                   
                   <li class="dropdown-submenu dropend">
                   {sous_categories?.length > 0 ? 
-                    sous_categories.map((post)=> (
+                    sous_categories?.map((post)=> (
                     <>
                       <Link to={`/formation/categorie/${post.id}`} class="dropdown-item dropdown-list-group-item dropdown-toggle">{post.nom}</Link>
                       
@@ -226,142 +242,11 @@ export default function Navbar({user}) {
                   }
                       
                   </li>
-                  {/* <li class="dropdown-submenu dropend">
-                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Paths</a>
-                      <ul class="dropdown-menu">
-                          <li>
-                              <a href="../pages/course-path.html" class="dropdown-item">Browse Path</a>
-                          </li>
-                          <li>
-                              <a href="../pages/course-path-single.html" class="dropdown-item">Path Single</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li class="dropdown-submenu dropend">
-                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Blog</a>
-                      <ul class="dropdown-menu">
-                          <li>
-                              <a class="dropdown-item" href="../pages/blog.html">Listing</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/blog-single.html">Article</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/blog-category.html">Category</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/blog-sidebar.html">Sidebar</a>
-                          </li>
-                      </ul>
-                  </li>
-
-                  <li class="dropdown-submenu dropend">
-                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Career</a>
-                      <ul class="dropdown-menu">
-                          <li>
-                              <a class="dropdown-item" href="../pages/career.html">Overview</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/career-list.html">Listing</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/career-single.html">Opening</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li class="dropdown-submenu dropend">
-                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Portfolio</a>
-                      <ul class="dropdown-menu">
-                          <li>
-                              <a class="dropdown-item" href="../pages/portfolio.html">List</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/portfolio-single.html">Single</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li class="dropdown-submenu dropend">
-                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Job</a>
-                      <ul class="dropdown-menu">
-                          <li>
-                              <a class="dropdown-item" href="../pages/landings/landing-job.html">Home</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/jobs/job-listing.html">List</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/jobs/job-grid.html">Grid</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/jobs/job-single.html">Single</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/jobs/company-list.html">Company List</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/jobs/company-about.html">Company Single</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li class="dropdown-submenu dropend">
-                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Specialty</a>
-                      <ul class="dropdown-menu">
-                          <li>
-                              <a class="dropdown-item" href="../pages/coming-soon.html">Coming Soon</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/404-error.html">Error 404</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/maintenance-mode.html">Maintenance Mode</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/terms-condition-page.html">Terms & Conditions</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li>
-                      <hr class="mx-3" />
-                  </li>
-
-                  <li>
-                      <a class="dropdown-item" href="../pages/about.html">About</a>
-                  </li>
-
-                  <li class="dropdown-submenu dropend">
-                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">Help Center</a>
-                      <ul class="dropdown-menu">
-                          <li>
-                              <a class="dropdown-item" href="../pages/help-center.html">Help Center</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/help-center-faq.html">FAQ's</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/help-center-guide.html">Guide</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/help-center-guide-single.html">Guide Single</a>
-                          </li>
-                          <li>
-                              <a class="dropdown-item" href="../pages/help-center-support.html">Support</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li>
-                      <a class="dropdown-item" href="../pages/pricing.html">Pricing</a>
-                  </li>
-                  <li>
-                      <a class="dropdown-item" href="../pages/compare-plan.html">Compare Plan</a>
-                  </li>
-
-                  <li>
-                      <a class="dropdown-item" href="../pages/contact.html">Contact</a>
-                  </li> */}
+                  
               </ul>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarAccount" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a>
+              <a className="nav-link dropdown-toggle" href="#" id="navbarAccount" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tableau de bord</a>
               <ul className="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarAccount">
                 <li>
                   <h4 className="dropdown-header">Compte</h4>

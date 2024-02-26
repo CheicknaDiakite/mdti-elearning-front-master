@@ -4,26 +4,13 @@ import React from 'react'
 import toast from 'react-hot-toast';
 import { BASE } from '../../../_services/caller.service';
 import { Link } from 'react-router-dom';
+import { useSlider } from '../../../components/UseContext/useForma';
 
 export default function SliderCard({slider}) {
-    const useQuery = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: (slider) => {
-        return axios.post(`http://localhost:8000/formation/categorie/del`,slider);
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue0");
-        },
-        onSuccess: () => {
-        useQuery.invalidateQueries("Categorie");
-        toast.success("Categorie supprimée avec succès");
-        },
-    });
-    const handleDelete = (slider) => {
-        mutation.mutate(slider);
-      };
 
-      let url = BASE(slider.image)
+    const {deleteSlider} = useSlider(slider)
+    
+    let url = BASE(slider.image)
   return (
     <>
     <tr>
@@ -49,11 +36,11 @@ export default function SliderCard({slider}) {
             </a>
             <span className="dropdown-menu" aria-labelledby="courseDropdown1">
             <span className="dropdown-header">Setting</span>
-            <a className="dropdown-item" href="#">
+            {/* <a className="dropdown-item" href="#">
                 <i className="fe fe-edit dropdown-item-icon" />
                 Edit
-            </a>
-            <button className="dropdown-item" onClick={()=>handleDelete(slider)}>
+            </a> */}
+            <button className="dropdown-item" onClick={()=>deleteSlider(slider)}>
                 <i className="fe fe-trash dropdown-item-icon" />
                 Remove
             </button>

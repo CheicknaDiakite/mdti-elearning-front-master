@@ -36,7 +36,7 @@ let updateQcm = (nom) => {
  * Suppression d'un utilsateur
  */
 let deleteQcm = (categorie) => {
-    return Axios.post(`formation/categorie/del`,categorie)
+    return Axios.post(`formation/qcm/del`,categorie)
 }
 
 // Décaraltion des esrvices pour import

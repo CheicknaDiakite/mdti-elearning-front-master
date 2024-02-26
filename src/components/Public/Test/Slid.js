@@ -1,25 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { useQuery } from '@tanstack/react-query';
-import { sliderService } from '../../../_services';
+import { useSlider } from '../../UseContext/useForma';
 
 export default function Slid() {
-
-    const [slides, setSlides] = useState([]);
-    const {
-        // data: categorie,
-        error,
-        isLoading,
-      } = useQuery({
-        queryKey: ["sliders"],
-        queryFn: () =>
-          sliderService.allSlider()
-          .then((res) => {
-            setSlides(res.data.donnee);
-          }),
-        onerror: (error) => console.log(error),
-      });
+    
+    const {sliders: slides, isLoading} = useSlider()
+    
       if (isLoading) {
         return <div>Chargement...</div>;
       }
@@ -35,7 +22,7 @@ export default function Slid() {
         thumbWidth={553*408}
         showThumbs={false}
         >
-        {slides.map((formation) => (
+        {slides?.map((formation) => (
             <section class="bg-primary">
                 <div class="container">
                 

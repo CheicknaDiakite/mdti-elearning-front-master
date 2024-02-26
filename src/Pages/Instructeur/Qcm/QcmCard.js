@@ -6,7 +6,7 @@ import QcmReponse from './QcmReponse';
 export default function QcmCard({index, petit}) {
 
     const [questions, setQcm] = useState([]);
-    console.log("dddd",index.id)
+    
     const top = {
         qcm_id: index.id
     }

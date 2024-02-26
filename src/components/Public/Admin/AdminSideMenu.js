@@ -93,31 +93,7 @@ export default function AdminSideMenu() {
                   <li className="nav-item">
                     <a className="nav-link" href="/admin/ancien_sujet/niveau">Niveau</a>
                   </li>
-                  {/* <li className="nav-item">
-                    <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navprojectSingle" aria-expanded="false" aria-controls="navprojectSingle">Single</a>
-                    <div id="navprojectSingle" className="collapse" data-bs-parent="#navProject">
-                      <ul className="nav flex-column">
-                        <li className="nav-item">
-                          <a className="nav-link active" href="#">Overview</a>
-                        </li>
-                        <li className="nav-item">
-                          <a className="nav-link" href="#">Task</a>
-                        </li>
-                        <li className="nav-item">
-                          <a className="nav-link" href="#">Budget</a>
-                        </li>
-                        <li className="nav-item">
-                          <a className="nav-link" href="#">Team</a>
-                        </li>
-                        <li className="nav-item">
-                          <a className="nav-link" href="#">Files</a>
-                        </li>
-                        <li className="nav-item">
-                          <a className="nav-link" href="#">Summary</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li> */}
+                  
                   <li className="nav-item">
                     <a className="nav-link" href="/admin/ancien_sujet/matiere">Matiere</a>
                   </li>

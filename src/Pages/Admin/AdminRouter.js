@@ -20,6 +20,7 @@ import CateContext from './Categorie/CateContext';
 import ModifContext from './Categorie/ModifContext';
 import TypeModif from './Ancien_Sujet/Type/TypeModif';
 import Matiere from './Ancien_Sujet/Matiere/Matiere';
+import FormQcmChapit from '../Instructeur/Formation/FormQcmChapit';
 
 export default function AdminRouter() {
   
@@ -33,6 +34,7 @@ export default function AdminRouter() {
         <Route path='formation'>
           <Route path='index' element={<Formation />} />
           <Route path='slider' element={<Slider />} />
+          <Route path='chapitre-qcm/:slug' element={<FormQcmChapit />} />
           <Route path='edit/:slug' element={<FormaEdit />} />
           <Route path='categorie' element={<CateContext />}/>
           <Route path='categorie/:id' element={<ModifContext />}/>

@@ -79,7 +79,7 @@ let updateSlider = (nom) => {
  * Suppression d'un utilsateur
  */
 let deleteSlider = (categorie) => {
-    return Axios.post(`formation/categorie/del`,categorie)
+    return Axios.post(`slider/del`,categorie)
 }
 
 // Décaraltion des esrvices pour import

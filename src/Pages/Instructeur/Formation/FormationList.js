@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 import FormationContext from '../../../components/UseContext/formation.context';
+import useForma from '../../../components/UseContext/useForma';
 
 export default function FormationList() {
   const { user, sous_categories } = useContext(FormationContext)
@@ -13,24 +14,6 @@ export default function FormationList() {
   
   const [sous_categorie_slug, setSouscat] = useState('');
   const [search, setSearch] = useState("");
-
-  const useText = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: (format) => {
-      return formationService.addFormation(format)
-    },
-    onError: (error) => {
-      toast.error("Une erreur est survenue0");
-    },
-    onSuccess: () => {
-      
-      useText.invalidateQueries("formations");
-      toast.success("Publication ajoutée avec succès");
-    //   navigate('/admin/categorie/index')
-    },
-  });
-  
 // fin
 
   // Pour recuperer tous les données de la formation
@@ -46,22 +29,7 @@ export default function FormationList() {
   const top = {
     instructeur_id : user,
   }
-  const {
-    data: formation,
-    // error,
-    isLoading,
-  } = useQuery({
-    queryKey: ["formations", top],
-    queryFn: () =>
-      formationService.allFormation(top)
-      .then((res) => res.data),
-    onerror: (error) => console.log(error),
-  });
-  if (isLoading) {
-    return <div>Chargement...</div>;
-  }
-  const formations = formation.donnee;
-
+  const {formaInstruc: formations, create} = useForma(top)
   
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -90,13 +58,25 @@ export default function FormationList() {
     format["instructeur_id"]=user
     format["sous_categorie_slug"]=sous_categorie_slug
 
-    mutation.mutate(format)
-
-  };
-  
+    create(format)
+  }; 
 
   return (
     <>
+
+    <div className="col-lg-4 col-md-12 col-12">
+          {/* Card */}
+          <div className="card mb-4">
+            <div className="p-4">
+              <span className="fs-6 text-uppercase fw-semibold">Le nombre formation</span>
+              <h2 className="mt-4 fw-bold mb-1 d-flex align-items-center h1 lh-1">{formations?.length}</h2>
+              {/* <span className="d-flex justify-content-between align-items-center">
+                <span>New this month</span>
+                <span className="badge bg-info ms-2">120+</span>
+              </span> */}
+            </div>
+          </div>
+    </div>
     {/* Formation */}
     <div className="card mb-4">
       {/* Card header */}

@@ -7,9 +7,12 @@ import FormationContext from '../../../components/UseContext/formation.context';
 
 export default function CategorieCard({categorie}) {
     
+    
     const { deleteFormation } = useContext(FormationContext)
       
     let url = BASE(categorie.image)
+    // console.log("categorie",url)
+
   return (
     <>
     <tr>

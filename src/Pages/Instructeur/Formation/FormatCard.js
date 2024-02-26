@@ -36,7 +36,7 @@ export default function FormatCard({formation}) {
         </div>
         </td>
         <td>
-            {formation.publier===true ? <span className="badge bg-info">Yes</span> : <span className="badge bg-danger">No</span>}
+            {formation.publier===true ? <span className="badge bg-info">Yes</span> : formation.ajout_terminer===true && <span className="badge bg-warning">No ...</span>}
         </td>
     
         {/* <CatForma formation={formation.sous_categorie_slug} /> */}

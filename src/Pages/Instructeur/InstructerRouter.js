@@ -15,6 +15,8 @@ import Reponse from './Question/Reponse';
 import QcmDetail from './Qcm/QcmDetail';
 import Videos from './Video/Video';
 import SeanceTravail from './SeanceTravail/SeanceTravail';
+import ChapitreModif from './Chapitre/ChapitreModif';
+import AutreQCM from './Qcm/Autre/AutreQCM';
 
 export default function InstructerRouter() {
   
@@ -29,12 +31,14 @@ export default function InstructerRouter() {
               <Route index element={<FormationList />}/>
               
               <Route path='chapitre-qcm/:slug' element={<FormQcmChapit />} />
+              <Route path='chapitre/modif/:id' element={<ChapitreModif />} />
               <Route path='video/:id' element={<Videos />} />
               <Route path='question/:id' element={<Question />} />
               <Route path='reponse/:id' element={<Reponse />} />
               <Route path='discution/:id/:slug' element={<Discut />} />
               <Route path='modif/:slug' element={<FormationEdit />} />
-              <Route path='qcm/detail/:slug' element={<QcmDetail />} />
+              <Route path='qcm/detail/:id' element={<AutreQCM />} />
+              {/* // QcmDetail */}
               <Route path='seanceTravail/:slug' element={<SeanceTravail />} />
             </Route>
             <Route path='user'>

@@ -13,7 +13,7 @@ export default function FormationCardQcm({qcm, slug}) {
                 </div>
             </td>
             
-            <td><Link to={`/dashboard/formation/qcm/detail/${slug}`}>{qcm.nom}</Link></td>
+            <td><Link to={`/dashboard/formation/qcm/detail/${qcm.id}`}>{qcm.nom}</Link></td>
             <td>
                 {qcm.description}
             </td>

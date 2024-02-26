@@ -1,27 +1,11 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React from 'react'
-import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom'
-import { questionService } from '../../../_services';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useQuestion } from '../../../components/UseContext/useForma';
 
 export default function QuestionCard({question}) {
+
+  const { deleteQuestion } = useQuestion(question)
     
-    const useQuery = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: (question) => {
-        return questionService.deleteQuestion(question)
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue0");
-        },
-        onSuccess: () => {
-        useQuery.invalidateQueries("question");
-        toast.success("formations supprimée avec succès");
-        },
-    });
-    const handleDelete = (question) => {
-        mutation.mutate(question);
-      };
   return (
     <>
         <tr>
@@ -48,7 +32,7 @@ export default function QuestionCard({question}) {
                     <i className="fe fe-edit dropdown-item-icon" />
                     Edit
                     </a>
-                    <button className="dropdown-item" onClick={()=>handleDelete(question)}>
+                    <button className="dropdown-item" onClick={()=>deleteQuestion(question)}>
                         <i className="fe fe-trash dropdown-item-icon" />
                         Delete
                     </button>

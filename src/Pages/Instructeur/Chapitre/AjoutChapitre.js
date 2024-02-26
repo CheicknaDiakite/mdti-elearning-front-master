@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import ChapitreCard from './ChapitreCard';
+import { useChapitre } from '../../../components/UseContext/useForma';
 
 export default function AjoutChapitre({slug}) {
 
@@ -18,53 +19,19 @@ export default function AjoutChapitre({slug}) {
     "formation_slug": slug
     }
 
-    const useChap = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: (chap) => {
-        return formationChapitre.addChapitre(chap)
-        .then(res => {
-          if(res.data.etat===true){
-            useChap.invalidateQueries("chap");
-            console.log("Formation")
-            
-          } else {
-            toast.error("Nom trouver");
-          }
-        })
-        .catch(err => console.log(err))
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue0");
-        },
-        onSuccess: () => {
-        useChap.invalidateQueries("chap");
-        
-        },
-    });
+    const {chapitre: chapitres, addChapitre, isLoading}= useChapitre(sluger)
 
-      const {
-        data: chapitre,
-        // error,
-        isLoading,
-      } = useQuery({
-        queryKey: ["chap", sluger],
-        queryFn: () =>
-        formationChapitre.allChapitre(sluger)
-          .then((res) => res.data),
-        onerror: (error) => console.log(error),
-      });
-      if (isLoading) {
-        return <div>Chargement...</div>;
-      }
-      const chapitres = chapitre.donnee;
+    if (isLoading) {
+      return <div>Chargement...</div>;
+    }
 
-      const onSubmit = (e) => {
-        e.preventDefault();
-        
-        chap["formation_slug"]= slug
-    
-        mutation.mutate(chap);
-      };
+    const onSubmit = (e) => {
+      e.preventDefault();
+      
+      chap["formation_slug"]= slug
+  
+      addChapitre(chap);
+    };
   return (
     <>
     <div className="card mb-4">
@@ -136,8 +103,8 @@ export default function AjoutChapitre({slug}) {
             </div>
         
             <div>
-                <button type="submit" className="btn btn-primary">Add New Category</button>
-                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Add New CHapitre</button>
+                
             </div>
             </form>
         </div>

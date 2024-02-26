@@ -1,17 +1,14 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react'
 
-import toast from 'react-hot-toast';
-import { courService } from '../../../_services';
 import CourCard from './CourCard';
 import FormationContext from '../../../components/UseContext/formation.context';
+import { useCour } from '../../../components/UseContext/useForma';
 
 
 export default function CourFormat({slug}) {
     const { user } = useContext(FormationContext)
      // pour ajouter
      const [post, setCour] = useState([])
-    const [delet, setPosts] = useState([]);
 
      const onChangeCour = (e) => {
          setCour({
@@ -20,55 +17,16 @@ export default function CourFormat({slug}) {
          })
      }
      // fin
-     const useText = useQueryClient();
-
-     const del = useMutation({
-        mutationFn: (post) => {
-        return courService.deleteCour(post)
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue0");
-        },
-        onSuccess: () => {
-            useText.invalidateQueries("publications");
-        toast.success("Publication supprimée avec succès");
-        },
-    });
-
-    const mutation = useMutation({
-        mutationFn: (post) => {
-        return courService.addCour(post)
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue0");
-        },
-        onSuccess: () => {
-        
-        useText.invalidateQueries("cours");
-        toast.success("Publication ajoutée avec succès");
-        //   navigate('/admin/categorie/index')
-        },
-    });
     // pour la recuperetion
     const top = {
         formation_slug : slug,
       }
-    const {
-        data: cour,
-        error,
-        isLoading,
-      } = useQuery({
-        queryKey: ["cours"],
-        queryFn: () =>
-          courService.allCour(top)
-          .then((res) => res.data),
-        onerror: (error) => console.log(error),
-      });
+    const {cours, addCour, isLoading} = useCour(top)
+    
       if (isLoading) {
         return <div>Chargement...</div>;
       }
-      const cours = cour.donnee;
-      console.log("ourssss",cours)
+    
     //   fin
 
     const onSubmitCour = (e) => {
@@ -77,14 +35,9 @@ export default function CourFormat({slug}) {
         post["formation_slug"]=slug
         post["apprenant_id"]=user
         
-        mutation.mutate(post)
+        addCour(post)
     
     };
-
-    
-    const handleDelete = (post) => {
-        del.mutate(post);
-      };
    
   return (
     <>
@@ -96,7 +49,7 @@ export default function CourFormat({slug}) {
             {/* heading */}
             <div className="d-flex justify-content-between align-items-center">
             <div>
-                <h1 className="mb-0 fw-bold h2">Chat</h1>
+                <h1 className="mb-0 fw-bold h2">Liste des personnes qui ont acheter ou lancer une discution</h1>
             </div>
             
             </div>
@@ -125,7 +78,7 @@ export default function CourFormat({slug}) {
             <ul className="list-unstyled contacts-list">
 
             {cours?.length > 0 ? 
-                cours.map((post, id)=> {
+                cours?.map((post, id)=> {
                     return <CourCard key={id} cour={post} slug={slug}/>
                 })
             : 'Pas de cours'

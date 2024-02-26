@@ -35,6 +35,26 @@ export default function SideMenu({user}) {
             {/* Collapse navbar */}
             <div className="collapse navbar-collapse" id="sidenav">
             <div className="navbar-nav flex-column">
+                <span className="navbar-header">Dashboard</span>
+                <ul className="list-unstyled ms-n2 mb-4">
+                
+                {/* Nav item */}
+                <li className="nav-item">
+                    <a className="nav-link" href="/dashboard">
+                    <i className="fe fe-credit-card nav-icon" />
+                    Accueil
+                    </a>
+                </li>
+                
+                {/* Nav item */}
+                {/* <li className="nav-item">
+                    <a className="nav-link" href="invoice.html">
+                    <i className="fe fe-clipboard nav-icon" />
+                    Invoice
+                    </a>
+                </li> */}
+                
+                </ul>
                 <span className="navbar-header">Formation</span>
                 <ul className="list-unstyled ms-n2 mb-4">
                 

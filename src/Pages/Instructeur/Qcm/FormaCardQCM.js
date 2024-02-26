@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import FormationContext from '../../../components/UseContext/formation.context'
 
 export default function FormaCardQCM({qcm}) {
-    console.log("qccmm",qcm)
+    // console.log("qccmm",qcm)
+    const { deleteQCM } = useContext(FormationContext)
   return (
     <>
         <tr>
@@ -30,10 +32,10 @@ export default function FormaCardQCM({qcm}) {
                     <i className="fe fe-edit dropdown-item-icon" />
                     Edit
                     </a>
-                    <a className="dropdown-item" href="#">
-                    <i className="fe fe-trash dropdown-item-icon" />
-                    Remove
-                    </a>
+                    <button className="dropdown-item" onClick={()=>deleteQCM(qcm)}>
+                        <i className="fe fe-trash dropdown-item-icon" />
+                        Remove
+                    </button>
                 </span>
                 </span>
             </td>

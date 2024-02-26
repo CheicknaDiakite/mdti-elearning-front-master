@@ -5,28 +5,15 @@ import toast from 'react-hot-toast';
 
 import { Link } from 'react-router-dom';
 import { BASE } from '../../../_services/caller.service';
+import { useCour } from '../../../components/UseContext/useForma';
 
 export default function CourCard({cour, slug}) {
     const top = {        
         apprenant_id : cour.apprenant_id,
     }
-    const useText = useQueryClient();
+    
+    const {deleteCour} = useCour(cour.id)
 
-    const del = useMutation({
-       mutationFn: (cour) => {
-       return courService.deleteCour(cour)
-       },
-       onError: (error) => {
-       toast.error("Une erreur est survenue0");
-       },
-       onSuccess: () => {
-        useText.invalidateQueries("cours");
-       toast.success("cours supprimée avec succès");
-       },
-   });
-    const handleDelete = (cour) => {
-        del.mutate(cour);
-      };
     let url = BASE(cour.apprenant_avatar)
   return (
     <>
@@ -63,22 +50,11 @@ export default function CourCard({cour, slug}) {
                     <i className="fe fe-more-horizontal fs-3" />
                 </a>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <a className="dropdown-item" href="#">
-                    <i className="bi-pin-angle dropdown-item-icon" />
-                    Pin
-                    </a>
-                    <a className="dropdown-item" href="#">
-                    <i className="bi-person-x dropdown-item-icon" />
-                    Mute
-                    </a>
-                    <a className="dropdown-item" href="#">
-                    <i className="bi-eye-slash dropdown-item-icon" />
-                    Hide
-                    </a>
-                    <a className="dropdown-item" href="#">
-                    <i className="bi-person-plus dropdown-item-icon" />
-                    Add to Favorite
-                    </a>
+                    <button className="dropdown-item" onClick={()=>deleteCour(cour)}>
+                        <i className="fe fe-trash dropdown-item-icon" />
+                        Remove
+                    </button>
+                    
                 </div>
                 </div>
             </div>
