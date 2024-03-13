@@ -45,6 +45,8 @@ export default function Categorie() {
   };
   return (
     <>
+    <section className="container-fluid p-4">
+
     {/* Categorie */}
     <div className="card mb-4">
       {/* Card header */}
@@ -131,6 +133,7 @@ export default function Categorie() {
             </div>
         </div>
     </div> 
+    </section>
     </>
   )
 }

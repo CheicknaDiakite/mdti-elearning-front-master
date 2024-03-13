@@ -66,6 +66,10 @@ export default function Formation() {
     mutation.mutate(format)
 
   };
+  const publishedPosts = formations.filter(post => post.ajout_terminer === true);
+    const nombre = publishedPosts?.length;
+
+  console.log("for",nombre)
 
   return (
     <>      
@@ -88,6 +92,19 @@ export default function Formation() {
           </div>
         </div>
         <div className="row">
+        <div className="col-lg-4 col-md-12 col-12">
+          {/* Card */}
+          <div className="card mb-4">
+            <div className="p-4">
+              <span className="fs-6 text-uppercase fw-semibold">Le nombre formation</span>
+              <h2 className="mt-4 fw-bold mb-1 d-flex align-items-center h1 lh-1">{nombre}</h2>
+              {/* <span className="d-flex justify-content-between align-items-center">
+                <span>New this month</span>
+                <span className="badge bg-info ms-2">120+</span>
+              </span> */}
+            </div>
+          </div>
+        </div>
           <div className="col-lg-12 col-md-12 col-12">
             {/* Card */}
             <div className="card mb-4">

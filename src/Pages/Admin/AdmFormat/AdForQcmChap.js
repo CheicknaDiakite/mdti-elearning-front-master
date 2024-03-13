@@ -1,16 +1,14 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import FormaQCM from '../Qcm/FormaQCM';
-
-import AjoutChapitre from '../Chapitre/AjoutChapitre';
 
 import { useQuery } from '@tanstack/react-query';
 import { courService } from '../../../_services';
-import CourFormat from '../Formation_Cours/CourFormat';
+import CourFormat from '../A_Format_Cours/CourFormat';
+import AjoutChapitre from '../AdmChapitre/AjoutChapitre';
+import FormaQCM from '../AdmQcm/FormaQCM';
 
 
-
-export default function FormQcmChapit() {
+export default function AdForQcmChap() {
   
     let {slug} = useParams()
 
@@ -32,9 +30,10 @@ export default function FormQcmChapit() {
       return <div>Chargement...</div>;
     }
     const cours = cour.donnee;
-    
+    // console.log("cours ..",cours)
   return (
     <>
+      <section className="container-fluid p-4">
 
       <div className="col-lg-4 col-md-12 col-12">
         {/* Card */}
@@ -49,14 +48,15 @@ export default function FormQcmChapit() {
           </div>
         </div>
       </div>
-    {/* Chapitre */}
-    <AjoutChapitre slug={slug}/>
+      {/* Chapitre */}
+      <AjoutChapitre slug={slug}/>
 
-    {/* QCM */}
-    <FormaQCM slug={slug} />
+      {/* QCM */}
+      <FormaQCM slug={slug} />
 
-    {/* Cour */}
-    <CourFormat slug={slug} />
+      {/* Cour */}
+      <CourFormat slug={slug} />
+      </section>
 
     </>
   )

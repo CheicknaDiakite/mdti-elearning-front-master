@@ -59,12 +59,37 @@ export default function SideMenu({user}) {
                 <ul className="list-unstyled ms-n2 mb-4">
                 
                 {/* Nav item */}
-                {post.type_compte==='instructeur' && <li className="nav-item">
+                {post.type_compte==='instructeur' && <>
+                <li className="nav-item">
                     <a className="nav-link" href="/dashboard/formation">
                     <i className="fe fe-credit-card nav-icon" />
                     Formation
                     </a>
-                </li>}
+                </li>
+
+                <li className="nav-item">
+                    <a className="nav-link" href="/dashboard/formation/examen">
+                    <i className="fe fe-credit-card nav-icon" />
+                    Examen
+                    </a>
+                </li>
+                </>
+
+                }
+                {post.type_compte==='apprenant' && <>
+                <li className="nav-item">
+                    <a className="nav-link" href="/dashboard/apprenant/cour">
+                    <i className="fe fe-credit-card nav-icon" />
+                    Cour suivis
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="/dashboard/apprenant/categorie">
+                    <i className="fe fe-credit-card nav-icon" />
+                    Mes categorie
+                    </a>
+                </li>
+                </>}
                 
                 {/* Nav item */}
                 {/* <li className="nav-item">

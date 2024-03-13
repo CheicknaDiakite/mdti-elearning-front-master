@@ -1,13 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import toast from 'react-hot-toast'
 import { accountService, sousCatService } from '../../_services'
 import { useQuery } from '@tanstack/react-query'
+import FormationContext from '../UseContext/formation.context'
 
 export default function Navbar({user}) {
 
   let navigate = useNavigate()
+  const {isLoading, sous_categories} = useContext(FormationContext)
+  const s_categories = sous_categories.slice(0, 3);
+ 
   const logout = () => {
     accountService.logout()
     toast.success("Déconneter");
@@ -41,24 +45,11 @@ export default function Navbar({user}) {
   },[]);
   // fin
 
-  // Pour afficher les differents sous-categories
-  const {
-    data: sousCategorie,
-    error,
-    isLoading,
-  } = useQuery({
-    queryKey: ["sousCategories"],
-    queryFn: () =>
-      sousCatService.allSousCat()
-      .then((res) => res.data),
-    onerror: (error) => console.log(error),
-  });
   if (isLoading) {
     return <div>Chargement...</div>;
   }
-  const sous_categories = sousCategorie.donnee
+  // const sous_categories = sousCategorie.donnee
 
-  // console.log("forma ...",sous_categories)
   // fin
   return (
     <>
@@ -227,12 +218,12 @@ export default function Navbar({user}) {
               </ul>
             </li>
             <li className="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">categorie</a>
+            <a class="nav-link dropdown-toggle" href="/formation/categorie" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">categorie</a>
               <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarPages">
                   
                   <li class="dropdown-submenu dropend">
-                  {sous_categories?.length > 0 ? 
-                    sous_categories?.map((post)=> (
+                  {s_categories?.length > 0 ? 
+                    s_categories?.map((post)=> (
                     <>
                       <Link to={`/formation/categorie/${post.id}`} class="dropdown-item dropdown-list-group-item dropdown-toggle">{post.nom}</Link>
                       
@@ -241,6 +232,10 @@ export default function Navbar({user}) {
                   : 'Pas de categorie'
                   }
                       
+                  </li>
+                  <li>
+                    <a class="nav-link" href="/formation/categorie"> ...Autre</a>
+
                   </li>
                   
               </ul>
@@ -255,7 +250,7 @@ export default function Navbar({user}) {
                 <li className="dropdown-submenu dropend">
                    {post.type_compte==="admin" && <a className="dropdown-item dropdown-list-group-item" href="/admin">admin</a>}
                    {post.type_compte==="instructeur" && <a className="dropdown-item dropdown-list-group-item" href="/dashboard">instructeur</a>}
-                   {post.type_compte==="apprenant" && <a className="dropdown-item dropdown-list-group-item" href="/apprenant">apprenant</a>}
+                   {post.type_compte==="apprenant" && <a className="dropdown-item dropdown-list-group-item" href="/dashboard">apprenant</a>}
                   
                 </li>
                 

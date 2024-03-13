@@ -69,7 +69,7 @@ export default function AjoutChapitre({slug}) {
         </thead>
         <tbody>
         {chapitres?.length > 0 ? 
-          chapitres.map((post)=> (
+          chapitres?.map((post)=> (
             <ChapitreCard post={post} />
           ))
         : 'Pas de chapitre'

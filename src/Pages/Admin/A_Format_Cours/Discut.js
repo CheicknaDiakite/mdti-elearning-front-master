@@ -24,8 +24,7 @@ export default function Discut() {
       formation_slug: slug,        
     }
    
-    const {discuts, addDiscut, deleteDiscut, isLoading} = useDiscution(top)
-    
+    const {discuts, addDiscut, isLoading} = useDiscution(top)
       if (isLoading) {
         return <div>Chargement...</div>;
       }
@@ -122,7 +121,7 @@ export default function Discut() {
                                 </a>
                                 {/* dropdown menu */}
                                 <div className="dropdown-menu" aria-labelledby="dropdownMenuLinkTwo">
-                                    {/* <a className="dropdown-item" href="#">
+                                    <a className="dropdown-item" href="#">
                                     <i className="fe fe-copy dropdown-item-icon" />
                                     Copy
                                     </a>
@@ -141,11 +140,11 @@ export default function Discut() {
                                     <a className="dropdown-item" href="#">
                                     <i className="fe fe-star dropdown-item-icon" />
                                     Favourite
-                                    </a> */}
-                                    <button className="dropdown-item" onClick={()=>deleteDiscut(post)}>
-                                        <i className="fe fe-trash dropdown-item-icon" />
-                                        Delete
-                                    </button>
+                                    </a>
+                                    <a className="dropdown-item" href="#">
+                                    <i className="fe fe-trash dropdown-item-icon" />
+                                    Delete
+                                    </a>
                                 </div>
                                 </div>
                             </div>

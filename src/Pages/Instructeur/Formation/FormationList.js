@@ -30,7 +30,7 @@ export default function FormationList() {
     instructeur_id : user,
   }
   const {formaInstruc: formations, create} = useForma(top)
-  
+  console.log("d",formations)
   const handleFileChange = (e) => {
     const file = e.target.files[0];
 

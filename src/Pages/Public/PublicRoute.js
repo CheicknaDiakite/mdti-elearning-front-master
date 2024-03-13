@@ -9,6 +9,8 @@ import VideoVue from './VueVideo/VideoVue';
 
 import VideoApp from '../../components/VideoApp';
 import NavCard from '../../components/Public/NavCard';
+import Categorie from './Categorie/Categorie';
+
 
 export default function PublicRoute() {
 
@@ -20,10 +22,18 @@ export default function PublicRoute() {
 
           <Route path='formation'>
             <Route path='detail/:slug' element={<FormationDetail />} />
+            <Route path='categorie' element={<Categorie />} />
+            <Route path='categorie/:slug' element={<NavCard />} />
+            <Route path='vue-video/:slug' element={<VideoVue />} />
+            <Route path='test' element={<VideoApp />} />
+          </Route>
+
+          {/* <Route path='apprenant'>
+            <Route path='detail/:slug' element={<FormationDetail />} />
             <Route path='categorie/:id' element={<NavCard />} />
             <Route path='vue-video/:slug' element={<VideoVue />} />
             <Route path='test' element={<VideoApp />} />
-          </Route>            
+          </Route>             */}
 
           <Route path='*' element={<Error/> }/>
         </Route>

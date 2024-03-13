@@ -3,47 +3,30 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast';
 import { accountService } from '../../_services';
 import FormationContext from '../../components/UseContext/formation.context';
+import useUtilisateur from '../../components/UseContext/useUtilisateur';
 
 
 export default function UserProfil() {
   // pour recuperer les infos de l'utilisateur
-  const [post, setPost] = useState([]);
+  const [p, setPost] = useState({});
   const { user } = useContext(FormationContext)
-  const flag = useRef(false)
   
-  useEffect(()=>{
-
-    if(flag.current===false){
-      accountService.getUser(user)
-    .then(res => {
-        if(res.data.etat===true){
-            console.log(res.data.donnee)
-            setPost(res.data.donnee);
-            toast.success("Connexion réussie");
-        } else {
-            toast.error("Les identifiants sont incorrects");
-        }
-    })
-    .catch(error => 
-        toast.error("Erreur connexion")
-        )
-    }
-
-    return () => flag.current = true;
-
-  },[]);
-  // fin
+  const {user: post} = useUtilisateur(user)
+  
+  
   // Gestion de la modification des champs du formulaire
   
   const onChange = (e) => {
     setPost({
-      ...post,
+      ...p,
       [e.target.name]: e.target.value
     })
   }
   // fin
   // pour le profil(photo)
   const [base64Image, setBase64Image] = useState('');
+  const [cv, setBase64CV] = useState('');
+  const [attestation, setBase64Attest] = useState('');
   const handleFileChange = (e) => {
     const file = e.target.files[0];
 
@@ -55,6 +38,28 @@ export default function UserProfil() {
 
     reader.readAsDataURL(file);
   };
+  const handleCV = (e) => {
+    const file = e.target.files[0];
+
+    // Convertir l'image en base64
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setBase64CV(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+  const handleAttest = (e) => {
+    const file = e.target.files[0];
+
+    // Convertir l'image en base64
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setBase64Attest(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
   // fin
   // pour modifier
   const onSubmit = (e) => {
@@ -62,21 +67,35 @@ export default function UserProfil() {
 
     // Créer un objet à envoyer au serveur
     
-    post["utilisateur_id"] = user
+    p["utilisateur_id"] = user
     
     if(base64Image.includes("base64"))
     {
-      post["avatar"] = base64Image
+      p["avatar"] = base64Image
     }else{
-      delete post["avatar"]
+      delete p["avatar"]
     }
-    // console.log("oooo",post)
+    // cv
+    if(cv.includes("base64"))
+    {
+      p["cv"] = cv
+    }else{
+      delete p["cv"]
+    }
+    // attestation
+    if(attestation.includes("base64"))
+    {
+      p["attestation"] = attestation
+    }else{
+      delete p["attestation"]
+    }
+    console.log("oooo",p)
 
-    const { data: res } = axios.post('http://127.0.0.1:8000/utilisateur/profile/set',post);
-        // setPosts(res.donnee);
-        console.log("modif user",res)
-        // navigate('/admin/sous-categorie/index')
-        toast.success("Modification de l'utilisateur' réussie");
+    const { data: res } = axios.post('http://127.0.0.1:8000/utilisateur/profile/set',p);
+      // setPosts(res.donnee);
+      console.log("modif user",res)
+      // navigate('/admin/sous-categorie/index')
+      // toast.success("Modification de l'utilisateur' réussie");
 
     // sousCatService.updateSousCat(data)
     //   .then((response) => {         
@@ -129,7 +148,7 @@ export default function UserProfil() {
             {/* Last name */}
             <div className="mb-3 col-12 col-md-6">
               <label className="form-label" htmlFor="lname">Last Name</label>
-              <input type="text"name="last_name" value={post.last_name} onChange={onChange} className="form-control" placeholder="last_name" />
+              <input type="text"name="last_name" onChange={onChange} className="form-control" placeholder={post.last_name} />
               <div className="invalid-feedback">Please enter last name.</div>
             </div>
             {/* First Name */}
@@ -193,6 +212,20 @@ export default function UserProfil() {
               </select>
               <div className="invalid-feedback">Please choose country.</div>
             </div>
+            {post.type_compte === "instructeur" && <>
+            
+            <div className="mb-3 col-12 col-md-6">
+              <label className="form-label" htmlFor="editCountry">Envoie de cv</label>
+              <h1 data-bs-toggle="modal" data-bs-target="#newMinCV">cv</h1>
+            </div>
+
+            <div className="mb-3 col-12 col-md-6">
+              <label className="form-label" htmlFor="editCountry">Envoie d'attestation</label>
+              <h1 data-bs-toggle="modal" data-bs-target="#newMinAttestation">Attestation</h1>
+            </div>
+
+            
+            </>}
             
             <div className="col-12">
               {/* Button */}
@@ -203,7 +236,7 @@ export default function UserProfil() {
       </div>
     </div>
 
-    {/* Miniature Photo */}
+    {/* Modal Miniature Photo */}
     <div className="modal fade" id="newMinCatgory" tabIndex={-1} role="dialog" aria-labelledby="newMinCatgoryLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content">
@@ -226,6 +259,68 @@ export default function UserProfil() {
                 
                 <div>
                   <button type="submit" className="btn btn-primary">Add New Category</button>
+                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    {/* Modal cv */}
+    <div className="modal fade" id="newMinCV" tabIndex={-1} role="dialog" aria-labelledby="newMinCVLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title mb-0" id="newCatgoryLabel">Create New CV</h4>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+            </div>
+            <div className="modal-body">
+              <form className="needs-validation" onSubmit={onSubmit}>
+                
+                <div className="mb-3 mb-2">
+                  <label className="form-label" htmlFor="title">
+                    Envoie de cv
+                    <span className="text-danger">*</span>
+                  </label>
+                  <input type="file" className="form-control" onChange={handleCV} placeholder="Write a Category"  />
+                  <small>Field must contain a unique value</small>
+                  <div className="invalid-feedback">Please enter category.</div>
+                </div>
+                
+                <div>
+                  <button type="submit" className="btn btn-primary">Add New CV</button>
+                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    {/* Modal attestation */}
+    <div className="modal fade" id="newMinAttestation" tabIndex={-1} role="dialog" aria-labelledby="newMinAttestationLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title mb-0" id="newCatgoryLabel">Create New attestation</h4>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+            </div>
+            <div className="modal-body">
+              <form className="needs-validation" onSubmit={onSubmit}>
+                
+                <div className="mb-3 mb-2">
+                  <label className="form-label" htmlFor="title">
+                    Envoie de attestation
+                    <span className="text-danger">*</span>
+                  </label>
+                  <input type="file" className="form-control" onChange={handleAttest} placeholder="Write a Category"  />
+                  <small>Field must contain a unique value</small>
+                  <div className="invalid-feedback">Please enter category.</div>
+                </div>
+                
+                <div>
+                  <button type="submit" className="btn btn-primary">Add New attestation</button>
                   <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
               </form>

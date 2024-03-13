@@ -8,7 +8,7 @@ let allQcm = (nom) => {
     return Axios.post('formation/qcm/get',nom)
 }
 let tousQcm = () => {
-    return Axios.post('formation/get-all')
+    return Axios.post('formation/qcm/get-all')
 }
 
 /**
@@ -16,6 +16,9 @@ let tousQcm = () => {
  */
 let getQcm = (id) => {
     return Axios.post('formation/qcm/get',id)
+}
+let getUnQcm = (id) => {
+    return Axios.get(`formation/qcm/get-detail/${id}`)
 }
 
 /**
@@ -41,7 +44,7 @@ let deleteQcm = (categorie) => {
 
 // Décaraltion des esrvices pour import
 export const qcmService = {
-    allQcm, getQcm, addQcm, updateQcm, deleteQcm, tousQcm
+    allQcm, getQcm, addQcm, updateQcm, deleteQcm, tousQcm, getUnQcm
 }
 
 
@@ -132,14 +135,14 @@ export const reponseService = {
     allReponse, getReponse, addReponse, updateReponse, deleteReponse, tousReponse
 }
 
-
+// Pour l'examen
 
 let allExamen = (id) => {
     
-    return Axios.post('formation/qcm/reponse/get',id)
+    return Axios.post('formation/examen/get',id)
 }
 let tousExamen = () => {
-    return Axios.post('formation/get-all')
+    return Axios.post('formation/examen/get-all')
 }
 
 /**
@@ -173,4 +176,47 @@ let deleteExamen = (categorie) => {
 // Décaraltion des esrvices pour import
 export const examenService = {
     allExamen, getExamen, addExamen, updateExamen, deleteExamen, tousExamen
+}
+
+// Pour la participation
+
+let allParticiper = (id) => {
+    
+    return Axios.post('formation/participer/get',id)
+}
+let tousParticiper = () => {
+    return Axios.post('formation/participer/get-all')
+}
+
+/**
+ * Récupération d'un utilisateur
+ */
+let getParticiper = (id) => {
+    return Axios.post('formation/participer/get',id)
+}
+
+/**
+ * Ajout d'un utilisateur
+ */
+let addParticiper = (nom) => {
+    return Axios.post('formation/participer/add',nom)
+}
+
+/**
+ * Mise à jour d'un utilisateur
+ */
+let updateParticiper = (nom) => {
+    return Axios.post('formation/set',nom)
+}
+
+/**
+ * Suppression d'un utilsateur
+ */
+let deleteParticiper = (categorie) => {
+    return Axios.post(`formation/participer/del`,categorie)
+}
+
+// Décaraltion des esrvices pour import
+export const participerService = {
+    allParticiper, getParticiper, addParticiper, updateParticiper, deleteParticiper, tousParticiper
 }

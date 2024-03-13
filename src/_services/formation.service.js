@@ -94,10 +94,10 @@ export const formationChapitre = {
 // Pour les chapitres
 
 let allSeance = (slug) => {
-    return Axios.post('formation/chapitre/get',slug)
+    return Axios.post('formation/seancetravail/get',slug)
 }
 let tousSeance = () => {
-    return Axios.get('formation/chapitre/get-all')
+    return Axios.get('formation/seancetravail/get-all')
 }
 
 /**

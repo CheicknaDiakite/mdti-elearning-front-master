@@ -9,7 +9,7 @@ export default function usePerson() {
     return useQuery({
       queryKey: ["sousCategories"],
       queryFn: () =>
-        sousCatService.getSousCat(sluger)
+        sousCatService.getSousCat()
         .then((res) => res.data),
       onerror: (error) => console.log(error),
     });

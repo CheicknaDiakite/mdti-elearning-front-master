@@ -21,6 +21,9 @@ import ModifContext from './Categorie/ModifContext';
 import TypeModif from './Ancien_Sujet/Type/TypeModif';
 import Matiere from './Ancien_Sujet/Matiere/Matiere';
 import FormQcmChapit from '../Instructeur/Formation/FormQcmChapit';
+import Discut from '../Instructeur/Formation_Cours/Discut';
+import AdForQcmChap from './AdmFormat/AdForQcmChap';
+import Fiche from './Fichier/Fiche';
 
 export default function AdminRouter() {
   
@@ -34,11 +37,12 @@ export default function AdminRouter() {
         <Route path='formation'>
           <Route path='index' element={<Formation />} />
           <Route path='slider' element={<Slider />} />
-          <Route path='chapitre-qcm/:slug' element={<FormQcmChapit />} />
+          <Route path='chapitre-qcm/:slug' element={<AdForQcmChap />} />
           <Route path='edit/:slug' element={<FormaEdit />} />
           <Route path='categorie' element={<CateContext />}/>
           <Route path='categorie/:id' element={<ModifContext />}/>
           <Route path='sous-categorie/:slug' element={<SousCate />} />
+          <Route path='discution/:id/:slug' element={<Discut />} />
           <Route path='sous/modif/:id' element={<SousModif />} />
         </Route>
 
@@ -54,6 +58,7 @@ export default function AdminRouter() {
         <Route path='user'>
           <Route path='index' element={<Userlist/>} />
           <Route path='profil' element={<UserProfil />} />
+          <Route path='profil/:id' element={<Fiche />} />
         </Route>
 
 

@@ -1,57 +1,45 @@
-import { useQuery } from '@tanstack/react-query';
-import React from 'react'
-import { Link, useParams } from 'react-router-dom';
-import { videoService } from '../../../_services';
-import VideoCard from './VideoCard';
+import React, { useState } from 'react'
 
-export default function Videos() {
-    let {id} = useParams()    
+import ChapitreCard from './ChapitreCard';
+import { useChapitre } from '../../../components/UseContext/useForma';
 
-    const top = {
-        chapitre_id: id
+export default function AjoutChapitre({slug}) {
+
+    const [chap, setchap] = useState([])
+    const onChange = (e) => {
+        setchap({
+            ...chap,
+            [e.target.name]: e.target.value
+        })
+    }
+    const sluger = {
+    "formation_slug": slug
     }
 
-    const {
-        data: video,
-        // error,
-        isLoading,
-      } = useQuery({
-        queryKey: ["videos", top],
-        queryFn: () =>
-        videoService.getVideo(top)
-          .then((res) => res.data),
-        onerror: (error) => console.log(error),
-      });
-      if (isLoading) {
-        return <div>Chargement...</div>;
-      }
-      const videos = video.donnee;
+    const {chapitre: chapitres, addChapitre, isLoading}= useChapitre(sluger)
 
-     let myWindow;
+    if (isLoading) {
+      return <div>Chargement...</div>;
+    }
 
-       const openWin = () => {
-            myWindow = window.open(`http://127.0.0.1:8000/formation/video/add/${id}`, '', 'width=auto,height=auto');
-        }
-
-       const closeWin = () => {
-            if (myWindow) {
-            this.myWindow.close();
-            }
-        }
+    const onSubmit = (e) => {
+      e.preventDefault();
       
+      chap["formation_slug"]= slug
+  
+      addChapitre(chap);
+    };
   return (
-    <>
     <>
     <div className="card mb-4">
     {/* Card header */}
     <div className="card-header border-bottom-0">
-        <h3 className="h4 mb-3">Listes des Videos (il faut actualiser la page une fois que les videos sont envoyer
-        )</h3>
+        <h3 className="h4 mb-3">Listes des chapitres</h3>
         <div className="row align-items-center">
         
         <div className="col-lg-2 col-md-6 text-lg-end">
             {/* Button */}
-            <button className="btn btn-outline-secondary btn-icon" onClick={openWin}>
+            <button className="btn btn-outline-secondary btn-icon" data-bs-toggle="modal" data-bs-target="#newCatgory">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
 
             </button>
@@ -60,7 +48,6 @@ export default function Videos() {
     </div>
     {/* Table */}
     <div className="table-responsive">
-      
         <table className="table mb-0 text-nowrap table-hover table-centered table-with-checkbox">
         <thead className="table-light">
             <tr>
@@ -78,9 +65,9 @@ export default function Videos() {
             </tr>
         </thead>
         <tbody>
-        {videos?.length > 0 ? 
-          videos?.map((post)=> (
-            <VideoCard video={post} />
+        {chapitres?.length > 0 ? 
+          chapitres.map((post)=> (
+            <ChapitreCard post={post} />
           ))
         : 'Pas de chapitre'
         }
@@ -101,20 +88,27 @@ export default function Videos() {
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
         </div>
         <div className="modal-body">
-        <iframe
-        width="860"
-        height="484"
-        src="http://127.0.0.1:8000/formation/video/add/11"
-        title="Introduction To WiseGPT"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
+            <form className="needs-validation" onSubmit={onSubmit}>
+            <div className="mb-3 mb-2">
+                <label className="form-label" htmlFor="title">
+                Nom
+                <span className="text-danger">*</span>
+                </label>
+                <input type="text" name='nom' onChange={onChange} className="form-control" placeholder="Write a Category" required />
+                <small>Field must contain a unique value</small>
+                <div className="invalid-feedback">Please enter category.</div>
+            </div>
+        
+            <div>
+                <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Add New CHapitre</button>
+                
+            </div>
+            </form>
         </div>
         </div>
     </div>
     </div> 
-    </>
+     
     </>
   )
 }

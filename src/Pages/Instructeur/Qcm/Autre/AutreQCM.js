@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast';
 import { examenService, qcmService, questionService } from '../../../../_services';
 import { useParams } from 'react-router-dom';
 import AutreCard from './AutreCard';
+import FormationContext from '../../../../components/UseContext/formation.context';
+import AutreQestion from './AutreQestion';
+import { useParticiper } from '../../../../components/UseContext/useForma';
 
 export default function AutreQCM() {
     let {id} = useParams()
-
+    const {user} = useContext(FormationContext)
     const [qcms, setQcm] = useState([]);
     const [answers, setAnswers] = useState({});
     const [examen, setExamen] = useState("");
@@ -15,10 +18,14 @@ export default function AutreQCM() {
     const slug = {
         qcm_id: id
     }
-
+    const top = {
+      qcm_id: id,
+      apprenant_id: user
+    }
+    const {addPartcip} = useParticiper(top)
     const pere = (message) => {
         // messa = message
-        console.log('yy ee ss',message)
+        // console.log('yy ee ss',message)
         setExamen(message)
       }
       useEffect(() => {
@@ -37,7 +44,7 @@ export default function AutreQCM() {
                 console.log("yy",res.data.donnee)
                 setQcm(res.data.donnee);
             } else {
-                toast.error("Ont n'arrivent pas recuperer les QCM ");
+                // toast.error("Ont n'arrivent pas recuperer les QCM ");
             }
         })
         .catch(error => 
@@ -49,39 +56,28 @@ export default function AutreQCM() {
     
     },[slug]);
 
-    const onChange = (e) => {
-        const { name, value, checked } = e.target;
-        setAnswers((prevAnswers) => ({
-            ...prevAnswers,
-            [name]: {
-            ...prevAnswers[name],
-            [value]: checked
-            }
-        }));
-      };
+    // const onChange = (e) => {
+    //     const { name, value, checked } = e.target;
+    //     setAnswers((prevAnswers) => ({
+    //         ...prevAnswers,
+    //         [name]: {
+    //         ...prevAnswers[name],
+    //         [value]: checked
+    //         }
+    //     }));
+    //   };
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-
-        answers['qcm_id']= id
-        answers['point']= 5
-        answers['duree']= 5
-        console.log('Réponses soumises :', answers);
-        examenService.addExamen(answers)
-        .then((response) => {
-          console.log("UpdateForma",response.data);
-          // Faire quelque chose avec la réponse
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-      };
-
-    //   console.log('Réponses soumises :', qcms);
+    
     
   return (
     <>
-    <form onSubmit={onSubmit}>
+      <button onClick={() => addPartcip(top) }>Participer cet examen</button>
+      {qcms.map((question, index) => {
+        return <AutreQestion key={index} id={id} user={user} question={question} petit={pere} />
+      })}
+      {/* <button type="submit">Soumettre</button> */}
+    
+    {/* <form onSubmit={onSubmit}>
       {qcms.map((question, index) => (
         <div key={index}>
           <p>{question.question}</p>
@@ -101,7 +97,7 @@ export default function AutreQCM() {
         </div>
       ))}
       <button type="submit">Soumettre</button>
-    </form>
+    </form> */}
 
     </>
   )

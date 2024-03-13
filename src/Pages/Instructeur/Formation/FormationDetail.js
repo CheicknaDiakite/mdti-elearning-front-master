@@ -29,7 +29,7 @@ export default function FormationDetail() {
           if(res.data.etat===true){
               
               setPost(res.data.donnee);
-              toast.success("Detail de la formation");
+            //   toast.success("Detail de la formation");
           } else {
               toast.error("Les identifiants sont incorrects");
           }
@@ -181,7 +181,7 @@ export default function FormationDetail() {
                         
                     </div>
                     <div className="d-grid">
-                        <Link to={`/dashboard/formation/seanceTravail/${slug}`} className="btn btn-primary mb-2">Seance de travail</Link>
+                        <Link to={`/dashboard/formation/seanceTravail/${cour.instructeur_id}/${slug}`} className="btn btn-primary mb-2">Seance de travail</Link>
                         <AbonCour slug={slug} cour={cour} />
                     </div>
                     </div>

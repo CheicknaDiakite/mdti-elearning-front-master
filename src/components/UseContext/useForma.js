@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { courService, discutionService, formationChapitre, formationService, questionService, sliderService } from '../../_services';
+import { courService, discutionService, examenService, formationChapitre, formationService, participerService, qcmService, questionService, seanceTravail, sliderService, sousCatService, suiveService } from '../../_services';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
@@ -74,7 +74,7 @@ export default function useForma(slug) {
     } 
 
     
-  return {formation, formaInstruc, create};
+  return {formation, formaInstruc, create, isLoading};
 }
 
 export function useChapitre (slug) {
@@ -442,7 +442,7 @@ export function useDiscution (slug) {
   // pour la suppression
   const del = useMutation({
     mutationFn: (post) => {
-    return courService.deleteCour(post)
+    return discutionService.deleteDiscution(post)
     .then(res => {
         if(res.data.etat!==true){
           toast.error(res.data.message);
@@ -508,4 +508,568 @@ export function useDiscution (slug) {
   // fin
 
   return {discuts, deleteDiscut, addDiscut, updateDiscut, isLoading}
+}
+
+export function useSousCat (slug) {
+
+  const useQ = useQueryClient();
+  // pour l'affichage
+  const {
+    data: sous_categorie,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["souscat", slug],
+    queryFn: () =>
+    sousCatService.unSousCat(slug)
+      .then((res) => res.data.donnee),
+    onerror: (error) => console.log(error),
+  });
+  // fin
+  // pour la suppression
+  const del = useMutation({
+    mutationFn: (post) => {
+    return discutionService.deleteDiscution(post)
+    .then(res => {
+        if(res.data.etat!==true){
+          toast.error(res.data.message);
+        } 
+      })
+    },
+    onError: (error) => {
+    toast.error("Une erreur est survenue",error);
+    },
+    onSuccess: () => {
+      useQ.invalidateQueries({queryKey: ["souscat"]});
+    // toast.success("formations supprimée avec succès");
+    },
+  });
+  const deleteSousCat = (post) => {
+    del.mutate(post);
+  };
+  // fin
+  // pour l'ajout
+  const add = useMutation({
+    mutationFn: (data) => {
+    return suiveService.addSuive(data)
+    .then(res => {
+      if(res.data.etat===true){
+        useQ.invalidateQueries({queryKey: ["souscat"]});
+        
+      } else {
+        toast.error("Nom trouver");
+      }
+    })
+    .catch(err => console.log(err))
+    },
+    onError: (error) => {
+    toast.error("Une erreur est survenue0");
+    }
+  });
+  const addSousCat = (chap) => {
+    add.mutate(chap);
+  };
+  // fin
+  // pour la modification
+  const modif = useMutation({
+        mutationFn: (data) => {
+        return courService.updateCour(data)
+        .then(res => {
+          if(res.data.etat===true){
+            toast.success("Modification reuissi");
+            useQ.invalidateQueries({queryKey: ["souscat"]});
+            
+          } else {
+            toast.error("Nom trouver");
+          }
+        })
+        .catch(err => console.log(err))
+        },
+        onError: (error) => {
+        toast.error("Une erreur est survenue0");
+        },        
+  });
+  const updateSousCat = (chap) => {
+    modif.mutate(chap);
+  };
+  // fin
+
+  return {sous_categorie, deleteSousCat, addSousCat, updateSousCat, isLoading}
+}
+
+export function useSuive (slug) {
+
+  const useQ = useQueryClient();
+  // pour l'affichage
+  const {
+    data: suives,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["suive", slug],
+    queryFn: () =>
+    suiveService.allSuive(slug)
+      .then((res) => res.data.donnee),
+    onerror: (error) => console.log(error),
+  });
+  // fin
+  // pour la suppression
+  const del = useMutation({
+    mutationFn: (post) => {
+    return suiveService.deleteSuive(post)
+    .then(res => {
+        if(res.data.etat!==true){
+          toast.error(res.data.message);
+        } 
+      })
+    },
+    onError: (error) => {
+    toast.error("Une erreur est survenue",error);
+    },
+    onSuccess: () => {
+      useQ.invalidateQueries({queryKey: ["suive"]});
+    // toast.success("formations supprimée avec succès");
+    },
+  });
+  const deletesuive = (post) => {
+    del.mutate(post);
+  };
+  // fin
+  // pour l'ajout
+  const add = useMutation({
+    mutationFn: (data) => {
+    return suiveService.addSuive(data)
+    .then(res => {
+      if(res.data.etat===true){
+        useQ.invalidateQueries({queryKey: ["suive"]});
+        
+      } else {
+        toast.error("Nom trouver");
+      }
+    })
+    .catch(err => console.log(err))
+    },
+    onError: (error) => {
+    toast.error("Une erreur est survenue0");
+    }
+  });
+  const addsuive = (chap) => {
+    add.mutate(chap);
+  };
+  // fin
+  // pour la modification
+  const modif = useMutation({
+        mutationFn: (data) => {
+        return courService.updateCour(data)
+        .then(res => {
+          if(res.data.etat===true){
+            toast.success("Modification reuissi");
+            useQ.invalidateQueries({queryKey: ["suive"]});
+            
+          } else {
+            toast.error("Nom trouver");
+          }
+        })
+        .catch(err => console.log(err))
+        },
+        onError: (error) => {
+        toast.error("Une erreur est survenue0");
+        },        
+  });
+  const updatesuive = (chap) => {
+    modif.mutate(chap);
+  };
+  // fin
+
+  return {suives, deletesuive, addsuive, updatesuive, isLoading}
+}
+
+export function useSeanceTravail (slug) {
+
+  const useQ = useQueryClient();
+  // pour l'affichage
+  const {
+    data: seance,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["suive", slug],
+    queryFn: () =>
+    seanceTravail.allSeance(slug)
+      .then((res) => res.data.donnee),
+    onerror: (error) => console.log(error),
+  });
+  // fin
+  // pour la suppression
+  const del = useMutation({
+    mutationFn: (post) => {
+    return discutionService.deleteDiscution(post)
+    .then(res => {
+        if(res.data.etat!==true){
+          toast.error(res.data.message);
+        } 
+      })
+    },
+    onError: (error) => {
+    toast.error("Une erreur est survenue",error);
+    },
+    onSuccess: () => {
+      useQ.invalidateQueries({queryKey: ["suive"]});
+    // toast.success("formations supprimée avec succès");
+    },
+  });
+  const deleteSeance = (post) => {
+    del.mutate(post);
+  };
+  // fin
+  // pour l'ajout
+  const add = useMutation({
+    mutationFn: (data) => {
+    return suiveService.addSuive(data)
+    .then(res => {
+      if(res.data.etat===true){
+        useQ.invalidateQueries({queryKey: ["suive"]});
+        
+      } else {
+        toast.error("Nom trouver");
+      }
+    })
+    .catch(err => console.log(err))
+    },
+    onError: (error) => {
+    toast.error("Une erreur est survenue0");
+    }
+  });
+  const addSeance = (chap) => {
+    add.mutate(chap);
+  };
+  // fin
+  // pour la modification
+  const modif = useMutation({
+        mutationFn: (data) => {
+        return courService.updateCour(data)
+        .then(res => {
+          if(res.data.etat===true){
+            toast.success("Modification reuissi");
+            useQ.invalidateQueries({queryKey: ["suive"]});
+            
+          } else {
+            toast.error("Nom trouver");
+          }
+        })
+        .catch(err => console.log(err))
+        },
+        onError: (error) => {
+        toast.error("Une erreur est survenue0");
+        },        
+  });
+  const updateSeance = (chap) => {
+    modif.mutate(chap);
+  };
+  // fin
+
+  return {seance, deleteSeance, addSeance, updateSeance, isLoading}
+}
+
+export function useExamen (slug) {
+
+  const useQ = useQueryClient();
+  // pour l'affichage
+  const {
+    data: examen,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["examen"],
+    queryFn: () =>
+    examenService.tousExamen()
+      .then((res) => res.data.donnee),
+    onerror: (error) => console.log(error),
+  });
+  // fin
+  // pour l'affichage
+  const {
+    data: exam,
+    
+    isLoading: isLoad,
+  } = useQuery({
+    queryKey: ["examen", slug],
+    queryFn: () =>
+    examenService.allExamen(slug)
+      .then((res) => res.data.donnee),
+    onerror: (error) => console.log(error),
+  });
+  // fin
+  // pour la suppression
+  const del = useMutation({
+    mutationFn: (post) => {
+    return discutionService.deleteDiscution(post)
+    .then(res => {
+        if(res.data.etat!==true){
+          toast.error(res.data.message);
+        } 
+      })
+    },
+    onError: (error) => {
+    toast.error("Une erreur est survenue",error);
+    },
+    onSuccess: () => {
+      useQ.invalidateQueries({queryKey: ["suive"]});
+    // toast.success("formations supprimée avec succès");
+    },
+  });
+  const deleteSeance = (post) => {
+    del.mutate(post);
+  };
+  // fin
+  // pour l'ajout
+  const add = useMutation({
+    mutationFn: (data) => {
+    return suiveService.addSuive(data)
+    .then(res => {
+      if(res.data.etat===true){
+        useQ.invalidateQueries({queryKey: ["suive"]});
+        
+      } else {
+        toast.error("Nom trouver");
+      }
+    })
+    .catch(err => console.log(err))
+    },
+    onError: (error) => {
+    toast.error("Une erreur est survenue0");
+    }
+  });
+  const addSeance = (chap) => {
+    add.mutate(chap);
+  };
+  // fin
+  // pour la modification
+  const modif = useMutation({
+        mutationFn: (data) => {
+        return courService.updateCour(data)
+        .then(res => {
+          if(res.data.etat===true){
+            toast.success("Modification reuissi");
+            useQ.invalidateQueries({queryKey: ["suive"]});
+            
+          } else {
+            toast.error("Nom trouver");
+          }
+        })
+        .catch(err => console.log(err))
+        },
+        onError: (error) => {
+        toast.error("Une erreur est survenue0");
+        },        
+  });
+  const updateSeance = (chap) => {
+    modif.mutate(chap);
+  };
+  // fin
+
+  return {examen, exam, deleteSeance, addSeance, updateSeance, isLoading}
+}
+
+export function useQcm (slug) {
+
+  const useQ = useQueryClient();
+  // pour l'affichage
+  const {
+    data: qcm_s,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["examen"],
+    queryFn: () =>
+    qcmService.allQcm()
+      .then((res) => res.data.donnee),
+    onerror: (error) => console.log(error),
+  });
+  // fin
+  // pour l'affichage
+  const {
+    data: qcm,
+    
+    isLoading: isLoad,
+  } = useQuery({
+    queryKey: ["examennn", slug],
+    queryFn: () =>
+    qcmService.getUnQcm(slug)
+      .then((res) => res.data.donnee),
+    onerror: (error) => console.log(error),
+  });
+  // fin
+  // pour la suppression
+  const del = useMutation({
+    mutationFn: (post) => {
+    return discutionService.deleteDiscution(post)
+    .then(res => {
+        if(res.data.etat!==true){
+          toast.error(res.data.message);
+        } 
+      })
+    },
+    onError: (error) => {
+    toast.error("Une erreur est survenue",error);
+    },
+    onSuccess: () => {
+      useQ.invalidateQueries({queryKey: ["suive"]});
+    // toast.success("formations supprimée avec succès");
+    },
+  });
+  const deleteSeance = (post) => {
+    del.mutate(post);
+  };
+  // fin
+  // pour l'ajout
+  const add = useMutation({
+    mutationFn: (data) => {
+    return suiveService.addSuive(data)
+    .then(res => {
+      if(res.data.etat===true){
+        useQ.invalidateQueries({queryKey: ["suive"]});
+        
+      } else {
+        toast.error("Nom trouver");
+      }
+    })
+    .catch(err => console.log(err))
+    },
+    onError: (error) => {
+    toast.error("Une erreur est survenue0");
+    }
+  });
+  const addSeance = (chap) => {
+    add.mutate(chap);
+  };
+  // fin
+  // pour la modification
+  const modif = useMutation({
+        mutationFn: (data) => {
+        return courService.updateCour(data)
+        .then(res => {
+          if(res.data.etat===true){
+            toast.success("Modification reuissi");
+            useQ.invalidateQueries({queryKey: ["suive"]});
+            
+          } else {
+            toast.error("Nom trouver");
+          }
+        })
+        .catch(err => console.log(err))
+        },
+        onError: (error) => {
+        toast.error("Une erreur est survenue0");
+        },        
+  });
+  const updateSeance = (chap) => {
+    modif.mutate(chap);
+  };
+  // fin
+
+  return {qcm_s, qcm, deleteSeance, addSeance, updateSeance, isLoading}
+}
+
+export function useParticiper (slug) {
+
+  const useQ = useQueryClient();
+  // pour l'affichage
+  const {
+    data: participers,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["participer"],
+    queryFn: () =>
+    participerService.tousParticiper()
+      .then((res) => res.data.donnee),
+    onerror: (error) => console.log(error),
+  });
+  // fin
+  // pour l'affichage
+  const {
+    data: qcm,
+    
+    isLoading: isLoad,
+  } = useQuery({
+    queryKey: ["participer", slug],
+    queryFn: () =>
+    qcmService.getUnQcm(slug)
+      .then((res) => res.data.donnee),
+    onerror: (error) => console.log(error),
+  });
+  // fin
+  // pour la suppression
+  const del = useMutation({
+    mutationFn: (post) => {
+    return participerService.deleteParticiper(post)
+    .then(res => {
+        if(res.data.etat!==true){
+          toast.error(res.data.message);
+        } else {
+          useQ.invalidateQueries({queryKey: ["participer"]});
+          
+        }
+      })
+    },
+    // onError: (error) => {
+    // toast.error("Une erreur est survenue",error);
+    // },
+    // onSuccess: () => {
+    //   useQ.invalidateQueries({queryKey: ["participer"]});
+    //   toast.danger("formations supprimée avec succès");
+    // },
+  });
+  const deletePartcip = (post) => {
+    del.mutate(post);
+  };
+  // fin
+  // pour l'ajout
+  const add = useMutation({
+    mutationFn: (data) => {
+    return participerService.addParticiper(data)
+    .then(res => {
+      if(res.data.etat===true){
+        useQ.invalidateQueries({queryKey: ["participer"]});
+        
+      } else {
+        toast.error("Nom trouver");
+      }
+    })
+    .catch(err => console.log(err))
+    },
+    onError: (error) => {
+    toast.error("Une erreur est survenue0");
+    }
+  });
+  const addPartcip = (chap) => {
+    add.mutate(chap);
+  };
+  // fin
+  // pour la modification
+  const modif = useMutation({
+        mutationFn: (data) => {
+        return participerService.updateParticiper(data)
+        .then(res => {
+          if(res.data.etat===true){
+            toast.success("Modification reuissi");
+            useQ.invalidateQueries({queryKey: ["participer"]});
+            
+          } else {
+            toast.error("Nom trouver");
+          }
+        })
+        .catch(err => console.log(err))
+        },
+        onError: (error) => {
+        toast.error("Une erreur est survenue0");
+        },        
+  });
+  const updatePartcip = (chap) => {
+    modif.mutate(chap);
+  };
+  // fin
+
+  return {participers, qcm, deletePartcip, addPartcip, updatePartcip, isLoading}
 }
