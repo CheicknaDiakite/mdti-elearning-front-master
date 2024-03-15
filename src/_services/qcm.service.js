@@ -206,7 +206,7 @@ let addParticiper = (nom) => {
  * Mise à jour d'un utilisateur
  */
 let updateParticiper = (nom) => {
-    return Axios.post('formation/set',nom)
+    return Axios.post('formation/participer/set',nom)
 }
 
 /**

@@ -1,18 +1,15 @@
 import React from 'react'
-import CardExamen from './CardExamen'
 import { useParticiper } from '../../../components/UseContext/useForma'
+import MesCardExa from './MesCardExa'
 
-export default function Examen() {
-
+export default function MesExamen() {
     const {participers} = useParticiper()
-
   return (
     <>
-    
     <div className="card mb-4">
     {/* Card header */}
     <div className="card-header border-bottom-0">
-        <h3 className="h4 mb-3">Listes de ceux qui participe a l'Examen</h3>
+        <h3 className="h4 mb-3">Listes de mes examens</h3>
         {/* <div className="row align-items-center">
         
         <div className="col-lg-2 col-md-6 text-lg-end">
@@ -37,6 +34,7 @@ export default function Examen() {
             
             <th>Nom</th>
             <th>Nom du QCM</th>
+            <th>Point</th>
             
             <th />
             </tr>
@@ -44,7 +42,7 @@ export default function Examen() {
         <tbody>
         {participers?.length > 0 ? 
           participers.map((post) => (
-            <CardExamen examen={post} />
+            <MesCardExa examen={post} />
           ))
           : 'Pas de QCM'
           }            
@@ -54,7 +52,6 @@ export default function Examen() {
         
     </div>
     </div>
-    
     </>
   )
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import { accountService } from '../../_services'
-import { useCour, useSuive } from '../../components/UseContext/useForma'
+import { useCour } from '../../components/UseContext/useForma'
 import CourCard from './CourCard'
-import { Link } from 'react-router-dom'
+
 
 export default function Cour() {
 

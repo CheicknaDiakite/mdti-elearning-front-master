@@ -1,15 +1,15 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
 import { useParticiper } from '../../../components/UseContext/useForma'
 import FormationContext from '../../../components/UseContext/formation.context'
+import { Link } from 'react-router-dom'
 
-
-export default function CardExamen({examen}) {
+export default function MesCardExa({examen}) {
     const {deletePartcip} = useParticiper(examen)
     const {user} = useContext(FormationContext)
-    
   return (
     <>
+    {examen.apprenant_id.toString() === user.toString() && <>
+    
     <tr>
         
         <td>
@@ -19,9 +19,12 @@ export default function CardExamen({examen}) {
             </div>
         </td>
         
-        <td><Link to={`/dashboard/formation/examen/code/${examen.apprenant_id}/${examen.qcm_id}/${examen.id}`}>{examen.apprenant_nom} {examen.apprenant_prenom}</Link></td>
+        <td><Link to={`/dashboard/formation/examen/code/${examen.apprenant_id}/${examen.qcm_id}`}>{examen.apprenant_nom} {examen.apprenant_prenom}</Link></td>
         <td>
             <span className="badge bg-secondary">{examen.qcm_nom}</span>
+        </td>
+        <td>
+            Nombre de point <span className="badge bg-secondary">{examen.point}</span>
         </td>
         
         <td>
@@ -43,6 +46,7 @@ export default function CardExamen({examen}) {
             </span>
         </td>
     </tr>
+    </>}
     </>
   )
 }

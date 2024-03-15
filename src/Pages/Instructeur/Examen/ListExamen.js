@@ -1,19 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useExamen } from '../../../components/UseContext/useForma'
+import { useExamen, useParticiper } from '../../../components/UseContext/useForma'
 import ListCard from './ListCard'
 import useUtilisateur from '../../../components/UseContext/useUtilisateur'
 
 export default function ListExamen() {
-    let {a_id, e_id} = useParams()
+    let {a_id, e_id, id} = useParams()
+    const [point, setFormat] = useState([])
     const top = {
         apprenant_id : a_id,
         qcm_id : e_id
+    }
+    console.log("az",id)
+
+    const {updatePartcip} = useParticiper()
+
+    const onChange = (e) => {
+      setFormat({
+          ...point,
+          [e.target.name]: e.target.value
+      })
     }
 
     const {exam} = useExamen(top)
     
     const {user} = useUtilisateur(a_id)
+
+    const onSubmit = (e) => {
+      e.preventDefault();
+  
+      point["apprenant_id"]=a_id
+      point["qcm_id"]=e_id
+      point["id"]=id
+
+      
+  
+      updatePartcip(point)
+    };
     
   return (
     <>
@@ -37,7 +60,13 @@ export default function ListExamen() {
     <div className="card-header border-bottom-0">
         <h3 className="h4 mb-3">Listes des QCM</h3>
         <div className="row align-items-center">
-       
+          <div className="col-lg-9 col-md-7 col-12 mb-lg-0 mb-2">
+            {/* <input type="search" className="form-control" placeholder="Search Your Courses" /> */}
+            <button className="btn btn-outline-secondary btn-icon" data-bs-toggle="modal" data-bs-target="#newFormat">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+
+            </button>
+          </div>
         
         </div>
     </div>
@@ -73,6 +102,37 @@ export default function ListExamen() {
         </table>
         
     </div>
+    </div>
+    {/* Modal Formation*/}
+    <div className="modal fade" id="newFormat" tabIndex={-1} role="dialog" aria-labelledby="newFormatLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered modal-lg">
+            <div className="modal-content">
+            <div className="modal-header">
+                <h4 className="modal-title mb-0" id="newCatgoryLabel">Donnez le point total</h4>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+            </div>
+            <div className="modal-body">
+            <form className="needs-validation" onSubmit={onSubmit}>
+              
+              <div className="mb-3 mb-2">
+                <label className="form-label" htmlFor="title">
+                  Point
+                  <span className="text-danger">*</span>
+                </label>
+                <input type="number" name='point' onChange={onChange} className="form-control" placeholder="point" required />
+                <small>Field must contain a unique value</small>
+                <div className="invalid-feedback">Please enter prix.</div>
+              </div>
+              
+              
+              <div>
+                <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Attribuer</button>
+                
+              </div>
+            </form>
+            </div>
+            </div>
+        </div>
     </div>
     </>
   )

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { formationService, seanceTravail } from '../../../_services';
+import { seanceTravail } from '../../../_services';
 import toast from 'react-hot-toast';
 import FormationContext from '../../../components/UseContext/formation.context';
-import useForma, { useSeanceTravail } from '../../../components/UseContext/useForma';
+import useForma from '../../../components/UseContext/useForma';
 
 export default function SeanceTravail() {
   const { user } = useContext(FormationContext)

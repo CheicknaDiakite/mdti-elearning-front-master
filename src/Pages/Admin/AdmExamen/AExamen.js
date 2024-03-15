@@ -1,14 +1,12 @@
 import React from 'react'
-import CardExamen from './CardExamen'
 import { useParticiper } from '../../../components/UseContext/useForma'
+import ExamCard from './ExamCard'
 
-export default function Examen() {
-
+export default function AExamen() {
     const {participers} = useParticiper()
-
   return (
     <>
-    
+    <section className="container-fluid p-4">
     <div className="card mb-4">
     {/* Card header */}
     <div className="card-header border-bottom-0">
@@ -44,7 +42,7 @@ export default function Examen() {
         <tbody>
         {participers?.length > 0 ? 
           participers.map((post) => (
-            <CardExamen examen={post} />
+            <ExamCard examen={post} />
           ))
           : 'Pas de QCM'
           }            
@@ -54,7 +52,7 @@ export default function Examen() {
         
     </div>
     </div>
-    
+    </section>
     </>
   )
 }

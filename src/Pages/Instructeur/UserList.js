@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { BASE } from '../../_services/caller.service';
+
 import UserCard from './UserCard';
 
 export default function Userlist() {

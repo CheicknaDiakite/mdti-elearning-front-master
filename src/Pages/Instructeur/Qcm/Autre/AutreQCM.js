@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast';
-import { examenService, qcmService, questionService } from '../../../../_services';
+import { questionService } from '../../../../_services';
 import { useParams } from 'react-router-dom';
-import AutreCard from './AutreCard';
+
 import FormationContext from '../../../../components/UseContext/formation.context';
 import AutreQestion from './AutreQestion';
 import { useParticiper } from '../../../../components/UseContext/useForma';
@@ -11,7 +11,7 @@ export default function AutreQCM() {
     let {id} = useParams()
     const {user} = useContext(FormationContext)
     const [qcms, setQcm] = useState([]);
-    const [answers, setAnswers] = useState({});
+    
     const [examen, setExamen] = useState("");
     const flag = useRef(false)
 

@@ -20,10 +20,13 @@ import CateContext from './Categorie/CateContext';
 import ModifContext from './Categorie/ModifContext';
 import TypeModif from './Ancien_Sujet/Type/TypeModif';
 import Matiere from './Ancien_Sujet/Matiere/Matiere';
-import FormQcmChapit from '../Instructeur/Formation/FormQcmChapit';
+
 import Discut from '../Instructeur/Formation_Cours/Discut';
 import AdForQcmChap from './AdmFormat/AdForQcmChap';
 import Fiche from './Fichier/Fiche';
+
+import AExamen from './AdmExamen/AExamen';
+import AListExa from './AdmExamen/AListExa';
 
 export default function AdminRouter() {
   
@@ -36,14 +39,16 @@ export default function AdminRouter() {
 
         <Route path='formation'>
           <Route path='index' element={<Formation />} />
+          <Route path='examen' element={<AExamen />} />
           <Route path='slider' element={<Slider />} />
           <Route path='chapitre-qcm/:slug' element={<AdForQcmChap />} />
           <Route path='edit/:slug' element={<FormaEdit />} />
           <Route path='categorie' element={<CateContext />}/>
           <Route path='categorie/:id' element={<ModifContext />}/>
           <Route path='sous-categorie/:slug' element={<SousCate />} />
-          <Route path='discution/:id/:slug' element={<Discut />} />
           <Route path='sous/modif/:id' element={<SousModif />} />
+          <Route path='discution/:id/:slug' element={<Discut />} />
+          <Route path='examen/code/:a_id/:e_id' element={<AListExa />} />
         </Route>
 
         <Route path='ancien_sujet'>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import FormationContext from '../../../components/UseContext/formation.context'
-import { Link } from 'react-router-dom'
+
 import CateCard from './CateCard'
 
 export default function Categorie() {

@@ -12,7 +12,6 @@ import FormationEdit from './Formation/FormationEdit';
 import UserProfil from './UserProfil';
 import Userlist from './UserList';
 import Reponse from './Question/Reponse';
-import QcmDetail from './Qcm/QcmDetail';
 import Videos from './Video/Video';
 import SeanceTravail from './SeanceTravail/SeanceTravail';
 import ChapitreModif from './Chapitre/ChapitreModif';
@@ -21,6 +20,7 @@ import Cour from '../Apprenant/Cour';
 import MesCategorie from '../Apprenant/MesCategorie/MesCategorie';
 import Examen from './Examen/Examen';
 import ListExamen from './Examen/ListExamen';
+import MesExamen from '../Apprenant/MesExamen/MesExamen';
 
 export default function InstructerRouter() {
   
@@ -35,6 +35,7 @@ export default function InstructerRouter() {
               <Route index element={<FormationList />}/>
               
               <Route path='examen' element={<Examen />} />
+              
               <Route path='chapitre-qcm/:slug' element={<FormQcmChapit />} />
               <Route path='chapitre/modif/:id' element={<ChapitreModif />} />
               <Route path='video/:id' element={<Videos />} />
@@ -44,12 +45,13 @@ export default function InstructerRouter() {
               <Route path='qcm/detail/:id' element={<AutreQCM />} />
               {/* // QcmDetail */}
               <Route path='discution/:id/:slug' element={<Discut />} />
-              <Route path='examen/code/:a_id/:e_id' element={<ListExamen />} />
+              <Route path='examen/code/:a_id/:e_id/:id' element={<ListExamen />} />
               <Route path='seanceTravail/:id/:slug' element={<SeanceTravail />} />
             </Route>
 
             <Route path='apprenant'>
               <Route path='cour' element={<Cour />} />
+              <Route path='examen' element={<MesExamen />} />
               <Route path='categorie' element={<MesCategorie />} />
               <Route path='index' element={<Userlist />} />
             </Route>

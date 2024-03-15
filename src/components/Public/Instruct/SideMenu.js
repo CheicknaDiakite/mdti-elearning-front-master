@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { accountService } from '../../../_services';
-import toast from 'react-hot-toast';
+
 import { useQuery } from '@tanstack/react-query';
 
 export default function SideMenu({user}) {
@@ -87,6 +87,12 @@ export default function SideMenu({user}) {
                     <a className="nav-link" href="/dashboard/apprenant/categorie">
                     <i className="fe fe-credit-card nav-icon" />
                     Mes categorie
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="/dashboard/apprenant/examen">
+                    <i className="fe fe-credit-card nav-icon" />
+                    Mes Examen
                     </a>
                 </li>
                 </>}

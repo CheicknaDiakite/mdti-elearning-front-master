@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-// import { PrismCode } from 'react-prism';
+
 import { Player, ControlBar } from 'video-react';
-// import { Button } from 'reactstrap';
+
 
 const sources = {
   sintelTrailer: 'http://media.w3.org/2010/05/sintel/trailer.mp4',

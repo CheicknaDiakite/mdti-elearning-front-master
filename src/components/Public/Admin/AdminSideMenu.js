@@ -67,10 +67,10 @@ export default function AdminSideMenu() {
                   <li className="nav-item">
                     <a className="nav-link active" href="/admin/formation/slider">Slider</a>
                   </li>
-                  {/* <li className="nav-item">
-                    <a className="nav-link" href="/admin/chapitre-0/index">Liste Pour modifier</a>
-                  </li>
                   <li className="nav-item">
+                    <a className="nav-link" href="/admin/formation/examen">Liste des examens</a>
+                  </li>
+                  {/* <li className="nav-item">
                     <a className="nav-link" href="#">New Post</a>
                   </li>
                   <li className="nav-item">

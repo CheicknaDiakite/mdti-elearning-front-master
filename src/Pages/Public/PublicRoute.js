@@ -10,6 +10,7 @@ import VideoVue from './VueVideo/VideoVue';
 import VideoApp from '../../components/VideoApp';
 import NavCard from '../../components/Public/NavCard';
 import Categorie from './Categorie/Categorie';
+import MesExamen from '../Apprenant/MesExamen/MesExamen';
 
 
 export default function PublicRoute() {
@@ -21,6 +22,7 @@ export default function PublicRoute() {
           <Route index element={<Accueil />} />
 
           <Route path='formation'>
+            
             <Route path='detail/:slug' element={<FormationDetail />} />
             <Route path='categorie' element={<Categorie />} />
             <Route path='categorie/:slug' element={<NavCard />} />

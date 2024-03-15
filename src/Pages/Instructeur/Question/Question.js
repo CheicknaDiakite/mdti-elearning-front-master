@@ -2,9 +2,7 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import QuestionCard from './QuestionCard';
-import { questionService } from '../../../_services';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
+
 import { useQuestion } from '../../../components/UseContext/useForma';
 
 export default function Question() {

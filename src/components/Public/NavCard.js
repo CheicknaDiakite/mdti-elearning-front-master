@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { sousCatService } from '../../_services';
-import { useQuery } from '@tanstack/react-query';
+
 import FormationContext from '../UseContext/formation.context';
 import { useSousCat, useSuive } from '../UseContext/useForma';
 import { BASE } from '../../_services/caller.service';

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import SousCard from './SousCard'
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { sousCatService } from '../../../_services';

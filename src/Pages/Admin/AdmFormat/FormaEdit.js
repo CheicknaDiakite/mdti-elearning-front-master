@@ -1,6 +1,6 @@
 
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import toast from 'react-hot-toast';
 import { accountService, formationChapitre, formationService } from '../../../_services';

@@ -1,7 +1,6 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import toast from 'react-hot-toast';
-import { accountService } from '../../_services';
+import React, { useContext, useState } from 'react'
+
 import FormationContext from '../../components/UseContext/formation.context';
 import useUtilisateur from '../../components/UseContext/useUtilisateur';
 

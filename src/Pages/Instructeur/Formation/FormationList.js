@@ -1,9 +1,6 @@
 import React, { useContext, useState } from 'react'
-import { formationService } from '../../../_services/formation.service';
-import FormatCard from './FormatCard';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
 
+import FormatCard from './FormatCard';
 import FormationContext from '../../../components/UseContext/formation.context';
 import useForma from '../../../components/UseContext/useForma';
 

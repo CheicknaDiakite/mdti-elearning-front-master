@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { accountService, formationChapitre, formationService } from '../../../_services';
+import { accountService } from '../../../_services';
 import toast from 'react-hot-toast';
-import { useQuery } from '@tanstack/react-query';
-import VueChapitre from './VueChapitre';
-import Axios, { BASE, Base } from '../../../_services/caller.service';
+
+import { Base } from '../../../_services/caller.service';
 import FormationContext from '../../../components/UseContext/formation.context';
 import useForma, { useChapitre } from '../../../components/UseContext/useForma';
 

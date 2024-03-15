@@ -1,8 +1,7 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
-import QuestionCard from './QuestionCard';
-import { questionService, reponseService } from '../../../_services';
+
+import { reponseService } from '../../../_services';
 import ReponseCard from './ReponseCard';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
