@@ -11,8 +11,7 @@ export default function ListExamen() {
         apprenant_id : a_id,
         qcm_id : e_id
     }
-    console.log("az",id)
-
+    
     const {updatePartcip} = useParticiper()
 
     const onChange = (e) => {
@@ -32,8 +31,6 @@ export default function ListExamen() {
       point["apprenant_id"]=a_id
       point["qcm_id"]=e_id
       point["id"]=id
-
-      
   
       updatePartcip(point)
     };
@@ -58,7 +55,7 @@ export default function ListExamen() {
     <div className="card mb-4">
     {/* Card header */}
     <div className="card-header border-bottom-0">
-        <h3 className="h4 mb-3">Listes des QCM</h3>
+        <h3 className="h4 mb-3">Pour ajouter le nombre de point que cet apprenant a eu</h3>
         <div className="row align-items-center">
           <div className="col-lg-9 col-md-7 col-12 mb-lg-0 mb-2">
             {/* <input type="search" className="form-control" placeholder="Search Your Courses" /> */}
@@ -120,8 +117,7 @@ export default function ListExamen() {
                   <span className="text-danger">*</span>
                 </label>
                 <input type="number" name='point' onChange={onChange} className="form-control" placeholder="point" required />
-                <small>Field must contain a unique value</small>
-                <div className="invalid-feedback">Please enter prix.</div>
+                
               </div>
               
               

@@ -1,10 +1,10 @@
 import axios from "axios";
 import { accountService } from "./account.service";
 
+// https://mdti.djigifa.com/
 const Axios = await axios.create({
     baseURL: 'http://127.0.0.1:8000'
 })
-
 export const Base = {
     baseURL: 'http://127.0.0.1:8000'
 }

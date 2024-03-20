@@ -12,7 +12,7 @@ export default function ListCard({qcm}) {
                 </div>
             </td>
             
-            <td><Link to={`/dashboard/formation/qcm/detail/${qcm.id}`}>{qcm.nom}</Link></td>
+            <td> {qcm.nom}</td>
             <td>
                 {qcm.point}
             </td>
@@ -42,7 +42,7 @@ export default function ListCard({qcm}) {
                 </span>
                 </span>
             </td>
-        </tr>
+    </tr>
     </>
   )
 }

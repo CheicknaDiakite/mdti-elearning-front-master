@@ -18,6 +18,9 @@ export default function ExamCard({examen}) {
             <td>
                 <span className="badge bg-secondary">{examen.qcm_nom}</span>
             </td>
+            <td>
+                <span className="badge bg-info">{examen.point=== null ? "Pas encore corrigé..." : examen.point}</span>
+            </td>
            
             <td>
                 <span className="dropdown dropstart">

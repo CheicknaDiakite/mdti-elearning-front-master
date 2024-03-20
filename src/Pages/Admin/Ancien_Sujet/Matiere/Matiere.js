@@ -1,8 +1,7 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react'
-import { ancienMatiere } from '../../../../_services';
-import toast from 'react-hot-toast';
+
 import MatiereCard from './MatiereCard';
+import { useAnc_Matiere } from '../../../../components/UseContext/useAncien';
 
 export default function Matiere() {
     const [type, setType] = useState([])
@@ -11,47 +10,15 @@ export default function Matiere() {
             ...type,
             [e.target.name]: e.target.value
         })
+    }    
+    const {matiere: types, addMatiere, isLoading} = useAnc_Matiere()
+    if (isLoading) {
+    return <div>Chargement...</div>;
     }
-
-    const useChap = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: (type) => {
-        return ancienMatiere.addMatiere(type)
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue0");
-        },
-        onSuccess: () => {
-        useChap.invalidateQueries("Type");
-        toast.success("Type supprimée avec succès");
-        },
-    });
-
-      const {
-        data: Type,
-        error,
-        isLoading,
-      } = useQuery({
-        queryKey: ["Type"],
-        queryFn: () =>
-        ancienMatiere.allMatiere()
-          .then((res) => res.data),
-        onerror: (error) => console.log(error),
-      });
-      if (isLoading) {
-        return <div>Chargement...</div>;
-      }
-      const types = Type.donnee
-      
-
-      const onSubmitQcm = (e) => {
+    const onSubmitQcm = (e) => {
         e.preventDefault();       
     
-        // qc["formation_slug"]= slug
-    
-        // console.log("type ...",type)
-        
-        mutation.mutate(type);
+        addMatiere(type);
       };
   return (
     <>

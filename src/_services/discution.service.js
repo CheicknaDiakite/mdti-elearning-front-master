@@ -81,7 +81,7 @@ let updateCour = (nom) => {
  * Suppression d'un utilsateur
  */
 let deleteCour = (post) => {
-    console.log("hhhhh",post)
+    
     return Axios.post(`formation/cour/del`,post)
 }
 

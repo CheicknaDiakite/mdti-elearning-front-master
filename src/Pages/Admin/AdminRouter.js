@@ -3,30 +3,27 @@ import { Route, Routes } from 'react-router-dom';
 import Error from '../../_utils/Error';
 import ALayout from './ALayout';
 import AdminDash from '../../components/Public/Admin/AdminDash';
-import FormationList from '../Instructeur/Formation/FormationList';
-import { accountService } from '../../_services';
 import Formation from './AdmFormat/Formation';
 import FormaEdit from './AdmFormat/FormaEdit';
 import Userlist from '../Instructeur/UserList';
-import Categorie from './Categorie/Categorie';
 import SousCate from './Sous-Categorie/SousCate';
 import UserProfil from '../Instructeur/UserProfil';
 import Slider from './Slider/Slider';
 import Type from './Ancien_Sujet/Type/Type';
 import Niveau from './Ancien_Sujet/Niveau/Niveau';
-import CateModif from './Categorie/CateModif';
 import SousModif from './Sous-Categorie/SousModif';
 import CateContext from './Categorie/CateContext';
 import ModifContext from './Categorie/ModifContext';
 import TypeModif from './Ancien_Sujet/Type/TypeModif';
 import Matiere from './Ancien_Sujet/Matiere/Matiere';
-
 import Discut from '../Instructeur/Formation_Cours/Discut';
 import AdForQcmChap from './AdmFormat/AdForQcmChap';
 import Fiche from './Fichier/Fiche';
 
 import AExamen from './AdmExamen/AExamen';
 import AListExa from './AdmExamen/AListExa';
+import Document from './Ancien_Sujet/Document/Document';
+import Pay from './Ancien_Sujet/Pays/Pay';
 
 export default function AdminRouter() {
   
@@ -53,11 +50,13 @@ export default function AdminRouter() {
 
         <Route path='ancien_sujet'>
           <Route path='type' element={<Type />} />
+          <Route path='pays' element={<Pay />} />
           <Route path='type/:id' element={<TypeModif />} />
           <Route path='niveau' element={<Niveau />} />
           <Route path='niveau/:id' element={<Niveau />} />
           <Route path='matiere' element={<Matiere />} />
           <Route path='matiere/:id' element={<Niveau />} />
+          <Route path='document' element={<Document />} />
         </Route>
 
         <Route path='user'>

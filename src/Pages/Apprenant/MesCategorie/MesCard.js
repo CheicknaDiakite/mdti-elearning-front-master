@@ -6,7 +6,7 @@ import { useSuive } from '../../../components/UseContext/useForma'
 export default function MesCard({post}) {
 
   // console.log("hh", post.souscategorie_slug)
-  const {deletesuive} = useSuive(post)
+  const {deletesuive} = useSuive()
     
     let url = BASE(post.image)
   return (

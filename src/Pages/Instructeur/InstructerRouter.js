@@ -57,6 +57,7 @@ export default function InstructerRouter() {
             </Route>
 
             <Route path='user'>
+              <Route path='seanceTravail' element={<UserProfil />} />
               <Route path='profil' element={<UserProfil />} />
               <Route path='index' element={<Userlist />} />
 

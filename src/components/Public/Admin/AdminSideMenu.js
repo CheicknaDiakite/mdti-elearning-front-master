@@ -97,6 +97,13 @@ export default function AdminSideMenu() {
                   <li className="nav-item">
                     <a className="nav-link" href="/admin/ancien_sujet/matiere">Matiere</a>
                   </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/admin/ancien_sujet/pays">Pay</a>
+                  </li>
+
+                  <li className="nav-item">
+                    <a className="nav-link" href="/admin/ancien_sujet/document">Document</a>
+                  </li>
                 </ul>
               </div>
             </li>

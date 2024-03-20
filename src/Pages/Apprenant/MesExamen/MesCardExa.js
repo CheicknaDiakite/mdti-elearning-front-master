@@ -19,12 +19,12 @@ export default function MesCardExa({examen}) {
             </div>
         </td>
         
-        <td><Link to={`/dashboard/formation/examen/code/${examen.apprenant_id}/${examen.qcm_id}`}>{examen.apprenant_nom} {examen.apprenant_prenom}</Link></td>
+        <td>{examen.apprenant_nom} {examen.apprenant_prenom}</td>
         <td>
-            <span className="badge bg-secondary">{examen.qcm_nom}</span>
+            <span className="badge bg-primary">{examen.qcm_nom}</span>
         </td>
         <td>
-            Nombre de point <span className="badge bg-secondary">{examen.point}</span>
+            <span className="badge bg-info">{examen.point=== null ? "Pas encore corrigé..." : examen.point}</span>
         </td>
         
         <td>
@@ -34,10 +34,6 @@ export default function MesCardExa({examen}) {
             </a>
             <span className="dropdown-menu" aria-labelledby="paymentDropdown">
                 {/* <span className="dropdown-header">Setting</span> */}
-                <a className="dropdown-item" href="#">
-                <i className="fe fe-edit dropdown-item-icon" />
-                Edit
-                </a>
                 <button className="dropdown-item" onClick={()=> deletePartcip(examen)}>
                     <i className="fe fe-trash dropdown-item-icon" />
                     Delete

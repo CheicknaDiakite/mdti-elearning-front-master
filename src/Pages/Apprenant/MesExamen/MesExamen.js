@@ -9,7 +9,7 @@ export default function MesExamen() {
     <div className="card mb-4">
     {/* Card header */}
     <div className="card-header border-bottom-0">
-        <h3 className="h4 mb-3">Listes de mes examens</h3>
+        <h3 className="h4 mb-3">Liste de mes examens</h3>
         {/* <div className="row align-items-center">
         
         <div className="col-lg-2 col-md-6 text-lg-end">
@@ -34,7 +34,7 @@ export default function MesExamen() {
             
             <th>Nom</th>
             <th>Nom du QCM</th>
-            <th>Point</th>
+            <th>Nombre de point</th>
             
             <th />
             </tr>

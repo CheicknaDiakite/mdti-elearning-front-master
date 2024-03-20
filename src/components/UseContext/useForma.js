@@ -131,7 +131,7 @@ export function useChapitre (slug) {
     onError: (error) => {
     toast.error("Une erreur est survenue0");
     }
-});
+  });
   const addChapitre = (chap) => {
     add.mutate(chap);
   };
@@ -345,7 +345,7 @@ export function useCour (slug) {
     error,
     isLoading,
   } = useQuery({
-    queryKey: ["cours"],
+    queryKey: ["cours", slug],
     queryFn: () =>
     courService.allCour(slug)
       .then((res) => res.data.donnee),
@@ -359,7 +359,10 @@ export function useCour (slug) {
     .then(res => {
         if(res.data.etat!==true){
           toast.error(res.data.message);
-        } 
+        } else {
+          useQ.invalidateQueries({queryKey: ["cours"]});
+          // toast.success("formations supprimée avec succès")
+        }
       })
     },
     onError: (error) => {

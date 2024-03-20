@@ -3,11 +3,13 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ancienNiveau, ancienType } from '../../../../_services';
 import toast from 'react-hot-toast';
+import { useAnc_Niveau } from '../../../../components/UseContext/useAncien';
 
 export default function NiveauCard({niveau}) {
     const sluger = {
     "id": niveau.id
     }
+    const {deleteNiveau} = useAnc_Niveau()
     const [nom, setType] = useState([])
     const onChangeQcm = (e) => {
         setType({
@@ -30,28 +32,6 @@ export default function NiveauCard({niveau}) {
     });
 
     
-    const mutation = useMutation({
-        mutationFn: (niveau) => {
-        return ancienNiveau.deleteNiveau(niveau)
-        .then(res => {
-            if(res.data.etat!==true){
-              toast.error(res.data.message);
-            } 
-          })
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue",error);
-        },
-        onSuccess: () => {
-        useQuery.invalidateQueries("Niveau");
-        // toast.success("formations supprimée avec succès");
-        },
-    });
-    const handleDelete = (niveau) => {
-        console.log("del",niveau)
-        mutation.mutate(niveau);
-      };
-
       const onSubmitQcm = (e) => {
         e.preventDefault();       
     
@@ -88,7 +68,7 @@ export default function NiveauCard({niveau}) {
                     <i className="fe fe-edit dropdown-item-icon" />
                     Edit
                     </a>
-                    <button className="dropdown-item"onClick={()=>handleDelete(niveau)}>
+                    <button className="dropdown-item"onClick={()=>deleteNiveau(niveau)}>
                     <i className="fe fe-trash dropdown-item-icon" />
                     Remove
                     </button>

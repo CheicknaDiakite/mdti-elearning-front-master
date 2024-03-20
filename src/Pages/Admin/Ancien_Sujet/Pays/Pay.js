@@ -1,45 +1,30 @@
 import React, { useState } from 'react'
-import { ancienType } from '../../../../_services';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {useAnc_Pays } from '../../../../components/UseContext/useAncien';
+import PayCard from './PayCard';
 
-import TypeCard from './TypeCard';
-import toast from 'react-hot-toast';
-import useAnc_Type from '../../../../components/UseContext/useAncien';
-
-export default function Type() {
-    // const sluger = {
-    //     "formation_slug": slug
-    //   }
+export default function Pay() {
     const [type, setType] = useState([])
-    const onChangeQcm = (e) => {
+    const onChange = (e) => {
         setType({
             ...type,
             [e.target.name]: e.target.value
         })
-    }
-
-    const {Type: types, addType, isLoading} = useAnc_Type()
-
+    }    
+    const {pays, addPay, isLoading} = useAnc_Pays()
     if (isLoading) {
     return <div>Chargement...</div>;
     }
-      
-
-    const onSubmitQcm = (e) => {
-    e.preventDefault();       
-
-    // qc["formation_slug"]= slug
-
-    // console.log("type ...",type)
-    
-    addType(type);
-    };
+    const onSubmit = (e) => {
+        e.preventDefault();       
+        console.log("pay",type)
+        addPay(type);
+      };
   return (
     <>
     <div className="card mb-4 mx-3 my-3">
         {/* Card header */}
         <div className="card-header border-bottom-0">
-            <h3 className="h4 mb-3">Listes des Types</h3>
+            <h3 className="h4 mb-3">Listes des Pays</h3>
             <div className="row align-items-center">
             
             <div className="col-lg-2 col-md-6 text-lg-end">
@@ -70,11 +55,11 @@ export default function Type() {
                 </tr>
             </thead>
             <tbody>
-            {types?.length > 0 ? 
-            types.map((post) => (
-                <TypeCard type={post} />
+            {pays?.length > 0 ? 
+            pays.map((post) => (
+                <PayCard type={post} />
             ))
-            : 'Pas de type'
+            : 'Pas de QCM'
             }            
                 
             </tbody>
@@ -89,17 +74,17 @@ export default function Type() {
     <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content">
         <div className="modal-header">
-            <h4 className="modal-title mb-0" id="newCatgoryLabel">Create New Type</h4>
+            <h4 className="modal-title mb-0" id="newCatgoryLabel">Create New Matiere</h4>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
         </div>
         <div className="modal-body">
-        <form className="needs-validation" onSubmit={onSubmitQcm}>
+        <form className="needs-validation" onSubmit={onSubmit}>
             <div className="mb-3 mb-2">
                 <label className="form-label" htmlFor="title">
                     Nom
                     <span className="text-danger">*</span>
                 </label>
-                <input type="text" name='nom' onChange={onChangeQcm} className="form-control" placeholder="Write a Category" required />
+                <input type="text" name='nom' onChange={onChange} className="form-control" placeholder="Write a Category" required />
                 <small>Field must contain a unique value</small>
                 <div className="invalid-feedback">Please enter category.</div>
             </div>
@@ -123,8 +108,8 @@ export default function Type() {
             </div> */}
             
             <div>
-            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Add New Type</button>
-            
+            <button type="submit" className="btn btn-primary">Add New Type</button>
+            <button type="button" className="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
             </div>
         </form>
         </div>

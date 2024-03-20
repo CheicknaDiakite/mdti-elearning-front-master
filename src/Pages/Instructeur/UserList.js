@@ -1,26 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
 import UserCard from './UserCard';
+import { accountService } from '../../_services';
 
 export default function Userlist() {
   
     let navigate = useNavigate()
-
-    const [posts, setPosts] = useState([]);
-
-    useEffect(()=>{
-      const getPosts = async () =>{
-          const { data: res } = await axios.post('http://127.0.0.1:8000/utilisateur/get');
-          setPosts(res.donnee);
-          console.log(res)
-      };
-      getPosts();
-  
-    },[]);
 
     const [all] = useState('post');
     const { register, handleSubmit } = useForm();
@@ -28,7 +15,7 @@ export default function Userlist() {
 
     const onSubmit = (e) => {
   
-       axios.post('http://127.0.0.1:8000/utilisateur/get',e)
+       accountService.allUsers(e)
         .then((response) => {
           console.log(response.data);
           setTous(response.data.donnee);
@@ -47,7 +34,7 @@ export default function Userlist() {
         all,
       };
   
-       axios.post('http://127.0.0.1:8000/utilisateur/get',data)
+       accountService.allUsers(data)
         .then((response) => {
           console.log(response.data);
           setTous(response.data.donnee);

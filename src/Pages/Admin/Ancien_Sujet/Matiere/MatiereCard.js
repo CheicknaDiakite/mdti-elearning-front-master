@@ -3,29 +3,12 @@ import { ancienMatiere } from '../../../../_services';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { useAnc_Matiere } from '../../../../components/UseContext/useAncien';
 
 export default function MatiereCard({type}) {
-    const useQuery = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: (type) => {
-        return ancienMatiere.deleteMatiere(type)
-        .then(res => {
-            if(res.data.etat!==true){
-              toast.error(res.data.message);
-            } 
-          })
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue",error);
-        },
-        onSuccess: () => {
-        useQuery.invalidateQueries("Type");
-        // toast.success("formations supprimée avec succès");
-        },
-    });
-    const handleDelete = (type) => {
-        mutation.mutate(type);
-      };
+    
+    const {deleteMatiere} = useAnc_Matiere()
+    
   return (
     <>
     <tr>
@@ -53,7 +36,7 @@ export default function MatiereCard({type}) {
                     <i className="fe fe-edit dropdown-item-icon" />
                     Edit
                     </Link>
-                    <button className="dropdown-item"onClick={()=>handleDelete(type)}>
+                    <button className="dropdown-item"onClick={()=>deleteMatiere(type)}>
                     <i className="fe fe-trash dropdown-item-icon" />
                     Remove
                     </button>

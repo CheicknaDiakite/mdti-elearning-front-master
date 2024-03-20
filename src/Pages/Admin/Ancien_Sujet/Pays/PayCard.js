@@ -1,16 +1,17 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { ancienType } from '../../../../_services';
+import { ancienMatiere } from '../../../../_services';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import useAnc_Type from '../../../../components/UseContext/useAncien';
+import { Link } from 'react-router-dom';
+import { useAnc_Matiere, useAnc_Pays } from '../../../../components/UseContext/useAncien';
 
-export default function TypeCard({type}) {
-
-    const {deleteType} = useAnc_Type()
+export default function PayCard({type}) {
+    
+    const {deletePay} = useAnc_Pays()
+    
   return (
     <>
-        <tr>
+    <tr>
             <td>
                 <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="withdrawTwo" />
@@ -35,7 +36,7 @@ export default function TypeCard({type}) {
                     <i className="fe fe-edit dropdown-item-icon" />
                     Edit
                     </Link>
-                    <button className="dropdown-item"onClick={()=>deleteType(type)}>
+                    <button className="dropdown-item"onClick={()=>deletePay(type)}>
                     <i className="fe fe-trash dropdown-item-icon" />
                     Remove
                     </button>

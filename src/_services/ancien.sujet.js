@@ -122,3 +122,94 @@ let deleteMatiere = (categorie) => {
 export const ancienMatiere = {
     allMatiere, getMatiere, addMatiere, updateMatiere, deleteMatiere
 }
+
+
+/**
+ * Récupératoin de la liste des utilisateurs
+ */
+let allDocument = () => {
+    return Axios.post('ancien-sujet/document/get')
+}
+
+let tousDocument = () => {
+    return Axios.post('ancien-sujet/document/get-all')
+}
+
+/**
+ * Récupération d'un utilisateur
+ */
+let getDocument = (id) => {
+    return Axios.get(`ancien-sujet/document/get/${id}`)
+}
+
+/**
+ * Ajout d'un utilisateur
+ */
+let addDocument = (data) => {
+    return Axios.post('ancien-sujet/document/add', data)
+}
+
+/**
+ * Mise à jour d'un utilisateur
+ */
+let updateDocument = (nom) => {
+    console.log('rr',nom)
+    return Axios.post(`ancien-sujet/document/set`,nom)
+}
+
+/**
+ * Suppression d'un utilsateur
+ */
+let deleteDocument = (categorie) => {
+    return Axios.post(`ancien-sujet/document/del`,categorie)
+}
+
+// Décaraltion des esrvices pour import
+export const ancienDocument = {
+    allDocument, getDocument, tousDocument, addDocument, updateDocument, deleteDocument
+}
+
+/**
+ * Récupératoin de la liste des utilisateurs
+ */
+let allPay = () => {
+    return Axios.post('ancien-sujet/pays/get')
+}
+
+let tousPay = () => {
+    return Axios.post('ancien-sujet/document/get-all')
+}
+
+/**
+ * Récupération d'un utilisateur
+ */
+let getPay = (id) => {
+    return Axios.get(`ancien-sujet/pays/get/${id}`)
+}
+
+/**
+ * Ajout d'un utilisateur
+ */
+let addPay = (data) => {
+    return Axios.post('ancien-sujet/pays/add', data)
+}
+
+/**
+ * Mise à jour d'un utilisateur
+ */
+let updatePay = (nom) => {
+    console.log('rr',nom)
+    return Axios.post(`ancien-sujet/document/set`,nom)
+}
+
+/**
+ * Suppression d'un utilsateur
+ */
+let deletePay = (categorie) => {
+    return Axios.post(`ancien-sujet/pays/del`,categorie)
+}
+
+// Décaraltion des esrvices pour import
+export const ancienPay = {
+    allPay, getPay, tousPay, addPay, updatePay, deletePay
+}

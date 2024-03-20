@@ -35,6 +35,7 @@ export default function AExamen() {
             
             <th>Nom</th>
             <th>Nom du QCM</th>
+            <th>Nombre de point</th>
             
             <th />
             </tr>

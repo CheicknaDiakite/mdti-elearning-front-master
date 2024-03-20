@@ -15,8 +15,8 @@ let unUser = (credentials) => {
     return Axios.get('utilisateur/profile/get/',credentials)
 }
 
-let allUsers = () => {
-    return Axios.get('utilisateur/get')
+let allUsers = (data) => {
+    return Axios.post('utilisateur/get',data)
 }
 
 let updateUser = (post) => {

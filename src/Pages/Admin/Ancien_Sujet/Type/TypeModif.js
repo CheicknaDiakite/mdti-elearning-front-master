@@ -1,65 +1,25 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { useEffect, useRef, useState } from 'react'
-import { ancienType } from '../../../../_services';
-import toast from 'react-hot-toast';
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
+import useAnc_Type from '../../../../components/UseContext/useAncien';
 
 export default function TypeModif() {
     let {id} = useParams()
     console.log(id)
     const [type, setType] = useState([])
-    const [typ, setTyp] = useState([])
-    const flag = useRef(false)
 
-    useEffect(()=>{
-        console.log('text 0')
-        
-        if(flag.current===false){
-            ancienType.getType(id)
-          .then(res => {
-            if(res.data.etat===true){
+    const {Ty: typ, updateType} = useAnc_Type(id)    
     
-              console.log("typreee",res.data.donnee)
-              setTyp(res.data.donnee);
-            } else {
-              toast.error("Nom trouver");
-            }
-          })
-          .catch(err => console.log(err))
-        }
-        return () => flag.current = true;;;
-        
-    },[id]);
-
-    console.log(typ)
-
     const onChangeQcm = (e) => {
         setType({
             ...type,
             [e.target.name]: e.target.value
         })
     }
-    const useChap = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: (type) => {
-        return ancienType.updateType(type)
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue0");
-        },
-        onSuccess: () => {
-        useChap.invalidateQueries("Type");
-        toast.success("Type supprimée avec succès");
-        },
-    });
+    
     const onSubmitQcm = (e) => {
         e.preventDefault();       
     
-        // qc["formation_slug"]= slug
-    
-        // console.log("type ...",type)
-        
-        mutation.mutate(type);
+        updateType(type);
       };
   return (
     <>

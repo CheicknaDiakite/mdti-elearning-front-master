@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { ancienNiveau } from '../../../../_services';
 import NiveauCard from './NiveauCard';
+import { useAnc_Niveau } from '../../../../components/UseContext/useAncien';
 
 export default function Niveau() {
     const [nom, setType] = useState([])
@@ -12,46 +13,16 @@ export default function Niveau() {
             [e.target.name]: e.target.value
         })
     }
-
-    const useChap = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: (nom) => {
-        return ancienNiveau.addNiveau(nom)
-        },
-        onError: (error) => {
-        toast.error("Une erreur est survenue0");
-        },
-        onSuccess: () => {
-        useChap.invalidateQueries("Niveau");
-        toast.success("niveau supprimée avec succès");
-        },
-    });
-
-      const {
-        data: niveau,
-        error,
-        isLoading,
-      } = useQuery({
-        queryKey: ["Niveau"],
-        queryFn: () =>
-        ancienNiveau.allNiveau()
-          .then((res) => res.data),
-        onerror: (error) => console.log(error),
-      });
+    
+      const {niveau: types, addNiveau, isLoading} = useAnc_Niveau()
       if (isLoading) {
         return <div>Chargement...</div>;
       }
-      const types = niveau.donnee
-      
-
+    
       const onSubmitQcm = (e) => {
         e.preventDefault();       
     
-        // qc["formation_slug"]= slug
-    
-        // console.log("type ...",type)
-        
-        mutation.mutate(nom);
+        addNiveau(nom);
       };
   return (
     <>
@@ -142,8 +113,8 @@ export default function Niveau() {
             </div> */}
             
             <div>
-            <button type="submit" className="btn btn-primary">Add New Type</button>
-            <button type="button" className="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Add New Type</button>
+            
             </div>
         </form>
         </div>

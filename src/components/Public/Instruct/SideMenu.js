@@ -68,6 +68,13 @@ export default function SideMenu({user}) {
                 </li>
 
                 <li className="nav-item">
+                    <a className="nav-link" href="/dashboard/user/seanceTravail">
+                    <i className="fe fe-credit-card nav-icon" />
+                    Seance de Travail
+                    </a>
+                </li>
+
+                <li className="nav-item">
                     <a className="nav-link" href="/dashboard/formation/examen">
                     <i className="fe fe-credit-card nav-icon" />
                     Examen
