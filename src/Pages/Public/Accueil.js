@@ -1,54 +1,30 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 
 import Slider from '../../components/Public/Slider';
-
 import AcceuilCard from './AcceuilCard';
-import FormationContext from '../../components/UseContext/formation.context';
+import useForma from '../../components/UseContext/useForma';
 
 export default function Accueil() {
-    const { formations } = useContext(FormationContext)
+
+    const {formations, isLoad} = useForma()    
     
     const [formas, setFormations] = useState(formations);
     
-    
+    if (isLoad) {
+       return <div>Chargement...</div>;
+    }
+
     const filterType = (nom) => {
         setFormations(
             formas.filter((item) => {
-                return item.nom === nom;
-              })
+               return item.nom === nom;
+            })
         );
     
       };
     
       // fin
-    const styles = {
-        container: {
-            height: '5px',
-        },
-        container_1: {
-            width: '75%',
-        },
-        container_2: {
-            height: '300px',
-        },
-        container_3: {
-            background: 'url(../assets/images/background/profile-bg.jpg) no-repeat; background-size: cover; height: 100px',
-        },
-        
-        container_5: {
-            width: '45%',
-        },
-        
-        container_7: {
-            width: '95%',
-        },
-        
-        container_9: {
-            width: '65%',
-        },
-
-        // ... d'autres objets de style
-      };
+    
   return (
     <>
     {/* Navbar */}

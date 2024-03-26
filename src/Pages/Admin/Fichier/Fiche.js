@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import useUtilisateur from '../../../components/UseContext/useUtilisateur'
 import { BASE } from '../../../_services/caller.service'
+import PDFCompo from './PDFCompo'
 
 export default function Fiche() {
     let {id} = useParams()
@@ -165,7 +166,7 @@ export default function Fiche() {
                 <button onClick={downloadAttest}>Télécharger le PDF</button>
               </div>
             </div>
-            
+            {/* <PDFCompo /> */}
             </>}
             
             <div className="col-12">

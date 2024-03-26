@@ -10,6 +10,7 @@ export default function Document() {
     const {pays} = useAnc_Pays()
 
     const [base64Image, setBase64Image] = useState('');
+    const [base64Doc, setBase64Doc] = useState('');
     const [doc, setType] = useState([])
     const onChange = (e) => {
         setType({
@@ -28,13 +29,13 @@ export default function Document() {
 
     reader.readAsDataURL(file);
     };
-    const handleDocChange = (e) => {
+    const DocumentChange = (e) => {
     const file = e.target.files[0];
 
     // Convertir l'image en base64
     const reader = new FileReader();
     reader.onloadend = () => {
-        setBase64Image(reader.result);
+        setBase64Doc(reader.result);
     };
 
     reader.readAsDataURL(file);
@@ -43,9 +44,9 @@ export default function Document() {
     const onSubmit = (e) => {
         e.preventDefault();
         
-        if(base64Image.includes("base64"))
+        if(base64Doc.includes("base64"))
         {
-            doc['document'] = base64Image
+            doc['document'] = base64Doc
         }else{
         delete doc['document']
         }
@@ -56,8 +57,6 @@ export default function Document() {
         }else{
         delete doc['miniature']
         }
-    
-        console.log("ff",doc)
         
         addDocument(doc);
       };
@@ -101,9 +100,9 @@ export default function Document() {
             <tbody>
             {documents?.length > 0 ? 
             documents.map((post) => (
-                <DocumentCard type={post} />
+                <DocumentCard document={post} />
             ))
-            : 'Pas de QCM'
+            : 'Pas de Document'
             }            
                 
             </tbody>
@@ -135,11 +134,15 @@ export default function Document() {
             </div>
 
             <div className="mb-3 mb-2">
+            <label className="form-label" htmlFor="title">
+                Choisissez le Type
+                
+            </label>
             <select class="form-select " name='type_id' onChange={onChange} aria-label="Default select example">
                 <option selected>Choisissez un type</option>
                 {Type?.length > 0 ? 
                 Type.map((post) => (
-                    <option value={post.id}>One</option>
+                    <option value={post.id}>{post.nom}</option>
                 ))
                 : 'Pas de Type'
                 } 
@@ -148,11 +151,15 @@ export default function Document() {
             </div>
 
             <div className="mb-3 mb-2">
+            <label className="form-label" htmlFor="title">
+                Choisissez le Niveau
+                
+            </label>
             <select class="form-select " name='niveau_id' onChange={onChange} aria-label="Default select example">
                 <option selected>Choisissez un type</option>
                 {niveau?.length > 0 ? 
                 niveau.map((post) => (
-                    <option value={post.id}>One</option>
+                    <option value={post.id}>{post.nom}</option>
                 ))
                 : 'Pas de Type'
                 } 
@@ -161,12 +168,15 @@ export default function Document() {
             </div>
 
             <div className="mb-3 mb-2">
-
+            <label className="form-label" htmlFor="title">
+                Choisissez le Matiere
+                
+            </label>
             <select class="form-select " name='matiere_id' onChange={onChange} aria-label="Default select example">
                 <option selected>Choisissez un type</option>
                 {matiere?.length > 0 ? 
                 matiere.map((post) => (
-                    <option value={post.id}>One</option>
+                    <option value={post.id}>{post.nom}</option>
                 ))
                 : 'Pas de Type'
                 } 
@@ -175,7 +185,10 @@ export default function Document() {
             </div>
 
             <div className="mb-3 mb-2">
-
+            <label className="form-label" htmlFor="title">
+                Choisissez le Pay
+                
+            </label>
             <select class="form-select " name='pays_id' onChange={onChange} aria-label="Default select example">
                 <option selected>Choisissez un type</option>
                 {pays?.length > 0 ? 
@@ -209,17 +222,17 @@ export default function Document() {
             </div>
 
             <div class="mb-3">
-                <label for="formFileSm" class="form-label">Small file input example</label>
-                <input class="form-control form-control-sm" onChange={handleDocChange} type="file"/>
+                <label for="formFileSm" class="form-label">Le Document de l'ancien sujet</label>
+                <input class="form-control form-control-sm" onChange={DocumentChange} type="file"/>
             </div>
             <div class="mb-3">
-                <label for="formFileSm" class="form-label">Small file input example</label>
+                <label for="formFileSm" class="form-label">Une Image de l'ancien sujet</label>
                 <input class="form-control form-control-sm" onChange={handleMinChange} type="file"/>
             </div>
             
             <div>
-            <button type="submit" className="btn btn-primary">Add New Type</button>
-            <button type="button" className="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Add New Type</button>
+            
             </div>
         </form>
         </div>

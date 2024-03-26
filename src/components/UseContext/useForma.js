@@ -6,17 +6,17 @@ import toast from 'react-hot-toast';
 export default function useForma(slug) {
   const useQ = useQueryClient();
     // alert(slug)
-    // const {
-    //   data: formation,
-    //   error,
-    //   isLoading,
-    // } = useQuery({
-    //   queryKey: ["formation-vue", slug],
-    //   queryFn: () =>
-    //   formationService.unFormation(slug)
-    //     .then((res) => res.data),
-    //   onerror: (error) => console.log(error),
-    // });
+    const {
+      data: formations,
+      error,
+      isLoading: isLoad,
+    } = useQuery({
+      queryKey: ["formations"],
+      queryFn: () =>
+      formationService.tousFormation()
+        .then((res) => res.data.donnee),
+      onerror: (error) => console.log(error),
+    });
     // if (isLoading) {
     //   return <div>Chargement...</div>;
     // }
@@ -44,6 +44,7 @@ export default function useForma(slug) {
         
     },[slug]);
 
+    console.log("vbvb", slug)
     const {
       data: formaInstruc,
       // error,
@@ -74,7 +75,7 @@ export default function useForma(slug) {
     } 
 
     
-  return {formation, formaInstruc, create, isLoading};
+  return {formation, formations, isLoad, formaInstruc, create, isLoading};
 }
 
 export function useChapitre (slug) {

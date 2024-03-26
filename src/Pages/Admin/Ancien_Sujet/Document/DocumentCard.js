@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useAnc_Document } from '../../../../components/UseContext/useAncien'
 
-export default function DocumentCard({type}) {
+export default function DocumentCard({document}) {
+    const {deleteDocument} = useAnc_Document()
   return (
     <>
     <tr>
@@ -12,12 +14,12 @@ export default function DocumentCard({type}) {
                 </div>
             </td>
             
-            <td>{type.nom}</td>
+            <td>{document.nom}</td>
             <td>
-                {type.prix}
+                {document.prix}
             </td>
             <td>
-                {type.annee}
+                {document.annee}
             </td>
             
             
@@ -28,11 +30,11 @@ export default function DocumentCard({type}) {
                 </a>
                 <span className="dropdown-menu" aria-labelledby="paymentDropdown">
                     <span className="dropdown-header">Setting</span>
-                    <Link to={`/admin/ancien_sujet/type/${type.id}`} className="dropdown-item" >
+                    <Link to={`/admin/ancien_sujet/type/${document.id}`} className="dropdown-item" >
                     <i className="fe fe-edit dropdown-item-icon" />
                     Edit
                     </Link>
-                    <button className="dropdown-item"onClick={()=> (type)}>
+                    <button className="dropdown-item" onClick={ ()=> deleteDocument(document)}>
                     <i className="fe fe-trash dropdown-item-icon" />
                     Remove
                     </button>

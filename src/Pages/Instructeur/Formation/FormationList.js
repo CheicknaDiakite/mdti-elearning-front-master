@@ -125,7 +125,7 @@ export default function FormationList() {
                 
                 return <FormatCard formation={post} />
               })
-              : 'Pas de chapitre'
+              : 'Pas de formation'
               }
                 
           </tbody>

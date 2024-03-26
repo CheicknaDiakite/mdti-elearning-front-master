@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ancienDocument, ancienMatiere, ancienNiveau, ancienPay, ancienType } from "../../_services";
+import { ancienDocument, ancienMatiere, ancienNiveau, ancienPaieDoc, ancienPay, ancienType, documentPaiement, formationPaiement } from "../../_services";
 import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 
@@ -386,13 +386,25 @@ export function useAnc_Document(slug) {
     onerror: (error) => console.log(error),
     });
 
-    const [Ty, setTyp] = useState([])
+    
+    // const {
+    // data: document,    
+    // } = useQuery({
+    // queryKey: ["DocumentUn", slug],
+    // queryFn: () =>
+    
+    // ancienDocument.getDocument(slug)
+    //   .then((res) => res.data.donnee),
+    // onerror: (error) => console.log(error),
+    // });
+
+    const [document, setTyp] = useState([])
     const flag = useRef(false)
     useEffect(()=>{
         console.log('text 0')
         
         if(flag.current===false){
-            ancienType.getType(slug)
+          ancienDocument.getDocument(slug)
           .then(res => {
             if(res.data.etat===true){
               setTyp(res.data.donnee);
@@ -437,7 +449,7 @@ export function useAnc_Document(slug) {
 
     const del = useMutation({
         mutationFn: (data) => {
-        return ancienMatiere.deleteMatiere(data)
+        return ancienDocument.deleteDocument(data)
         .then(res => {
             if(res.data.etat!==true){
               toast.error(res.data.message);
@@ -490,7 +502,7 @@ export function useAnc_Document(slug) {
     // fin
     
       
-    return {documents, Ty, addDocument, deleteDocument, updateDocument, isLoading};
+    return {documents, document, addDocument, deleteDocument, updateDocument, isLoading};
   }
 export function useAnc_Pays(slug) {
     const useQ = useQueryClient();
@@ -613,4 +625,157 @@ export function useAnc_Pays(slug) {
     
       
     return {pays, Ty, addPay, deletePay, updatePay, isLoading};
+  }
+export function useAnc_PaieDoc(slug) {
+    const useQ = useQueryClient();
+
+    //   pour la recuperation de tous les gens qui ont payer
+    const {
+    data: payer,
+    error,
+    isLoading,
+    } = useQuery({
+    queryKey: ["Payer", slug],
+    queryFn: () =>
+    documentPaiement.allDocuPaiement(slug)
+    .then((res) => res.data.donnee),
+    onerror: (error) => console.log(error),
+    });
+      
+    // fin
+
+    // pour l'ajout
+
+    const add = useMutation({
+    mutationFn: (data) => {
+    return documentPaiement.payerDocument(data)
+    .then(res => {
+      if(res.data.etat===true){
+        useQ.invalidateQueries({queryKey: ["Payer"]});
+          
+      } else {
+        toast.error("Nom trouver");
+      }
+      })
+      .catch(err => console.log(err))
+    },
+    onError: (error) => {
+      toast.error("Une erreur est survenue0");
+    },
+    });
+    const addPay = (data) => {
+    add.mutate(data);
+    };
+
+    // fin
+
+    // Verification
+
+    const modif = useMutation({
+        mutationFn: (data) => {
+        return documentPaiement.verifierDocuPaiement(data)
+        .then(res => {
+            if(res.data.etat===true){
+              toast.success("Modification reuissi");
+              console.log("Formation")
+              
+            } else {
+              toast.error("Nom trouver");
+            }
+          })
+          .catch(err => console.log(err))
+        },
+        onError: (error) => {
+        toast.error("Une erreur est survenue0");
+        },
+        // onSuccess: () => {
+        // useQ.invalidateQueries("Type");
+        // toast.success("Type supprimée avec succès");
+        // },
+    });
+    const verifierPay = (data) => {
+    modif.mutate(data);
+    };
+
+    // fin
+    
+      
+    return {payer, addPay, verifierPay, isLoading};
+  }
+
+export function useAnc_PaieForm(slug) {
+    const useQ = useQueryClient();
+
+    //   pour la recuperation de tous les gens qui ont payer
+    const {
+    data: payer,
+    error,
+    isLoading,
+    } = useQuery({
+    queryKey: ["PayerFormation", slug],
+    queryFn: () =>
+    formationPaiement.allPaiement(slug)
+    .then((res) => res.data.donnee),
+    onerror: (error) => console.log(error),
+    });
+      
+    // fin
+
+    // pour l'ajout
+
+    const add = useMutation({
+    mutationFn: (data) => {
+    return formationPaiement.payerFormation(data)
+    .then(res => {
+      if(res.data.etat===true){
+        useQ.invalidateQueries({queryKey: ["PayerFormation"]});
+          
+      } else {
+        toast.error("Nom trouver");
+      }
+      })
+      .catch(err => console.log(err))
+    },
+    onError: (error) => {
+      toast.error("Une erreur est survenue0");
+    },
+    });
+    const addPay = (data) => {
+    add.mutate(data);
+    };
+
+    // fin
+
+    // Verification
+
+    const modif = useMutation({
+        mutationFn: (data) => {
+        return formationPaiement.verifierPaiement(data)
+        .then(res => {
+            if(res.data.etat===true){
+              toast.success("Modification reuissi");
+              console.log("Formation")
+              
+            } else {
+              toast.error("Nom trouver");
+            }
+          })
+          .catch(err => console.log(err))
+        },
+        onError: (error) => {
+        toast.error("Une erreur est survenue0");
+        },
+        // onSuccess: () => {
+        // useQ.invalidateQueries("Type");
+        // toast.success("Type supprimée avec succès");
+        // },
+    });
+    const verifierPay = (data) => {
+    modif.mutate(data);
+    };
+
+    // fin
+    
+      
+    return {payer, addPay, verifierPay, isLoading};
   }

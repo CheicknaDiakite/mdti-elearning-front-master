@@ -1,10 +1,17 @@
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
+import { pdfjs } from 'react-pdf';
 import AuthGuard from './_helpers/AuthGuard';
 import AdminRouter from './Pages/Admin/AdminRouter';
 import PublicRoute from './Pages/Public/PublicRoute';
 import AuthRouter from './Pages/Auth/AuthRouter';
 import InstructerRouter from './Pages/Instructeur/InstructerRouter';
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
+
 function App() {
   return (
     <>

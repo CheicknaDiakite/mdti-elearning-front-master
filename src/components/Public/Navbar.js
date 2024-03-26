@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { accountService, sousCatService } from '../../_services'
 import { useQuery } from '@tanstack/react-query'
 import FormationContext from '../UseContext/formation.context'
+import { BASE } from '../../_services/caller.service'
 
 export default function Navbar({user}) {
 
@@ -48,7 +49,8 @@ export default function Navbar({user}) {
   if (isLoading) {
     return <div>Chargement...</div>;
   }
-  // const sous_categories = sousCategorie.donnee
+  
+  let url = BASE(post.avatar)
 
   // fin
   return (
@@ -92,7 +94,7 @@ export default function Navbar({user}) {
               <a className="rounded-circle" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                 <div className="avatar avatar-md avatar-indicators avatar-online">
                 {connect ? <>
-                  <img alt="avatar" src={`http://127.0.0.1:8000/${post.avatar}`} className="rounded-circle" />
+                  <img alt="avatar" src={url} className="rounded-circle" />
                 </> 
                 :
                 <>
@@ -106,7 +108,7 @@ export default function Navbar({user}) {
                   <div className="d-flex">
                   {connect ? <>
                     <div className="avatar avatar-md avatar-indicators avatar-online">
-                      <img alt="avatar" src="./assets/images/avatar/avatar-1.jpg" className="rounded-circle" />
+                      <img alt="avatar" src={url} className="rounded-circle" />
                     </div>
                     <div className="ms-3 lh-1">
                       <h5 className="mb-1">{post.last_name} {post.first_name}</h5>
@@ -202,20 +204,8 @@ export default function Navbar({user}) {
               
             </li> */}
             <li className="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Les anciens sujet</a>
-              <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarPages">
-                  
-                <li className="nav-item">
-                  <a className="nav-link" href="/admin/ancien_sujet/type">Type</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/admin/ancien_sujet/niveau">Niveau</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/admin/ancien_sujet/matiere">Matiere</a>
-                </li>
-                  
-              </ul>
+            <Link class="nav-link" to={'/formation/ancien-sujet'} >Les anciens sujets</Link>
+              
             </li>
             <li className="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="/formation/categorie" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">categorie</a>

@@ -4,7 +4,7 @@ import Axios from './caller.service'
  * Récupératoin de la liste des utilisateurs
  */
 let allFormation = (user) => {
-    return Axios.post('formation/un',user)
+    return Axios.post('formation/get',user)
 }
 let tousFormation = () => {
     return Axios.post('formation/get-all')

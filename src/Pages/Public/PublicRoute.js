@@ -11,6 +11,8 @@ import VideoApp from '../../components/VideoApp';
 import NavCard from '../../components/Public/NavCard';
 import Categorie from './Categorie/Categorie';
 import MesExamen from '../Apprenant/MesExamen/MesExamen';
+import ListDocument from '../Admin/Ancien_Sujet/Document/ListDocument';
+import Detail from '../Admin/Ancien_Sujet/Document/Detail';
 
 
 export default function PublicRoute() {
@@ -23,8 +25,10 @@ export default function PublicRoute() {
 
           <Route path='formation'>
             
-            <Route path='detail/:slug' element={<FormationDetail />} />
             <Route path='categorie' element={<Categorie />} />
+            <Route path='ancien-sujet' element={<ListDocument />} />
+            <Route path='ancien-sujet/:id' element={<Detail />} />
+            <Route path='detail/:slug' element={<FormationDetail />} />
             <Route path='categorie/:slug' element={<NavCard />} />
             <Route path='vue-video/:slug' element={<VideoVue />} />
             <Route path='test' element={<VideoApp />} />

@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { accountService } from '../../_services';
-import toast from 'react-hot-toast';
-import { useQuery } from '@tanstack/react-query';
+
+import { BASE } from '../../_services/caller.service';
 
 export default function AcceuilCard({post}) {
+    let url = BASE(post.miniature)
+    let ava = BASE(post.instructeur_avatar)
     
   return (
     <>
@@ -12,7 +13,7 @@ export default function AcceuilCard({post}) {
         <div className="col-lg-3 col-md-6 col-12">
         {/* <!-- Card --> */}
         <div className="card mb-4 card-hover">
-            <Link to={`/formation/detail/${post.slug}`}><img src={`http://127.0.0.1:8000/${post.miniature}`} alt="course" className="card-img-top"/></Link>
+            <Link to={`/formation/detail/${post.slug}`}><img src={url} alt="course" className="card-img-top"/></Link>
             {/* <!-- Card body --> */}
             <div className="card-body">
                 <h3 className="h4 mb-2 text-truncate-line-2"><a href="#" className="text-inherit">{post.nom}</a></h3>
@@ -39,7 +40,7 @@ export default function AcceuilCard({post}) {
             <div className="card-footer">
                 <div className="row align-items-center g-0">
                     <div className="col-auto">
-                        <img src={`http://127.0.0.1:8000/${post.instructeur_avatar}`} className="rounded-circle avatar-xs" alt="avatar"/>
+                        <img src={ava} className="rounded-circle avatar-xs" alt="avatar"/>
                     </div>
                     <div className="col ms-2">
                         <span>{post.instructeur_last_name} {post.instructeur_first_name}</span>

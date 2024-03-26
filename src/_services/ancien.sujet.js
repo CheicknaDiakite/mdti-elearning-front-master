@@ -139,6 +139,7 @@ let tousDocument = () => {
  * Récupération d'un utilisateur
  */
 let getDocument = (id) => {
+    
     return Axios.get(`ancien-sujet/document/get/${id}`)
 }
 
@@ -153,7 +154,7 @@ let addDocument = (data) => {
  * Mise à jour d'un utilisateur
  */
 let updateDocument = (nom) => {
-    console.log('rr',nom)
+    
     return Axios.post(`ancien-sujet/document/set`,nom)
 }
 
